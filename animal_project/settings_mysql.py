@@ -25,13 +25,15 @@ SECRET_KEY = '4k)*(mf%vd)thj3^2eox%s*#7&-p9rnuhh(civf%akxq9yz7ol'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'animal_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 変更
-        'NAME': 'database_adopt_animals', 
+        'NAME': 'adopt_animals', 
         'USER': 'root', # パソコンにインストールしたMySQLのユーザー名
         'PASSWORD': '', # 同上。そのパスワード
         'PORT': 3306 # はも追記 
