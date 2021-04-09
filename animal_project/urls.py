@@ -20,6 +20,6 @@ from django.views.generic import TemplateView
 index_view = TemplateView.as_view(template_name='index.html')
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include("adopt_animals.urls"))
 ]
