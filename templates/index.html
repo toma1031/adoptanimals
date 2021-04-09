@@ -1,0 +1,21 @@
+<!-- {% extends 'base.html' %}
+{% block main %}
+
+<form action="{% url 'login' %}" method="POST" novalidate class="form w-100 text-center">
+
+  {% if user.is_authenticated %}
+    <h1>Welcome {{ user.get_username }}!</h1>
+    {% if user.is_employee %}
+    <a href="{% url 'employee' %}">Go to Employee page</a>
+    {% endif %}
+    {% if user.is_supervisor %}
+    <a href="{% url 'supervisor' %}">Go to Supervisor page</a>
+    {% endif %}
+    {% if user.is_hr %}
+    <a href="{% url 'hr' %}">Go to HR page</a>
+    {% endif %}
+  {% endif %}
+
+
+</form>
+{% endblock main %} -->

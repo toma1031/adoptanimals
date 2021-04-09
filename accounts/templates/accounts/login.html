@@ -1,0 +1,3 @@
+<form action="{% url 'login' %}" method="POST" novalidate>
+  {% include "accounts/_form.html" with submit_label="Login" %}
+</form>

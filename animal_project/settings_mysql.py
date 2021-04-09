@@ -126,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = '/' # ログイン後のデフォルト遷移ページ
+LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログインページへのリダイレクト先
