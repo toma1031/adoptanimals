@@ -1,0 +1,11 @@
+Dear {{user.username}}, Thank you for sign up. 
+You sign up with {{user.email}}.
+
+The membership registration procedure has not been completed yet.
+Please access the following URL and complete registration. 
+
+URL for main registration.
+{{protocol}}://{{domain}}{% url 'accounts:accounts_signup_complete' token%}
+
+Kindest Regards,
+Adopt Animals

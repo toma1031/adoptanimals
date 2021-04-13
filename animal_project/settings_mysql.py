@@ -130,3 +130,13 @@ STATIC_URL = '/static/'
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = '/' # ログイン後のデフォルト遷移ページ
 LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログインページへのリダイレクト先
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'testoma1212@gmail.com'
+EMAIL_HOST_PASSWORD = 'gkqcxweapsekkojn'

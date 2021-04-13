@@ -1,0 +1,10 @@
+
+<nav>
+  <a href="/" >Adopt Animals</a>
+    <ul>
+      <li><a class="login" href="{% url 'login' %}">Login</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="logout" href="{% url 'logout' %}">Logout</a></li>
+      {% endif %}
+    </ul>
+</nav>
