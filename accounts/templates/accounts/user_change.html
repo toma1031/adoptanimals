@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main %}
+<div>
+  <div class="header"><h3>Change User Info</h3></div>
+  <form class="ui form" action="" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button class="" type="submit">Update</button>
+  </form>
+  <a href="/">TOP</a>
+</div>
+{% endblock %}

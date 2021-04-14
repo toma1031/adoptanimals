@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render, reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from accounts.models import User
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -15,8 +15,9 @@ from django.conf import settings
 from django.http import Http404, HttpResponseBadRequest
 from django.views import generic
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView, DeleteView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 
 User = get_user_model()
@@ -103,3 +104,29 @@ class UserDeleteView(OnlyYouMixin, DeleteView):
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+class UserChangeView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'accounts/user_change.html'
+    form_class = UserChangeForm
+    success_url = reverse_lazy('index')
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    
+    def form_valid(self, form):
+        #formのupdateメソッドにログインユーザーを渡して更新
+        form.update(user=self.request.user)
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # 更新前のユーザー情報をkwargsとして渡す
+        kwargs.update({
+            'username' : self.request.user.username,
+            'email' : self.request.user.email,
+            'state' : self.request.user.state,
+            'city' : self.request.user.city,
+            'zipcode' : self.request.user.zipcode,
+            'phone_number' : self.request.user.phone_number,
+        })
+        return kwargs

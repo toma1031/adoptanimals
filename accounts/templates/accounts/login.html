@@ -2,9 +2,14 @@
 
 {% block main %}
 
-<h2>Login with usermail</h2>
+<h2>Login with Email Address</h2>
 <form action="{% url 'login' %}" method="POST" novalidate>
   {% include "accounts/_form.html" with submit_label="Login" %}
 </form>
+
+<h2>Login with Socail Media Account</h2>
+<ul>
+  <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google Account Login</a></li>
+</ul>
 
 {% endblock %}
