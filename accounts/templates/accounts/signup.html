@@ -14,4 +14,10 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
   </form>
+
+  <h2>Socail media SignUp</h2>
+    <ul>
+    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google Signup</a></li>
+    </ul>
+  <a href="{% url 'index' %}">Home</a>
 {% endblock %}

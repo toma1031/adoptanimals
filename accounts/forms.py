@@ -10,7 +10,17 @@ class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)
 
-class SignUpForm(UserCreationForm):
+class SignUpForm(UserCreationForm, forms.ModelForm):
+
+    state = forms.ModelChoiceField(
+                          queryset=State.objects.all(),
+                          widget=forms.Select, label="State:", required=True)
+
+    city = forms.CharField(
+                          label="City:", required=True)
+
+    zipcode = forms.CharField(
+                          label="Zip Code:", required=True)
 
     class Meta:
         model = User

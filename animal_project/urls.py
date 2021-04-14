@@ -22,8 +22,9 @@ index_view = TemplateView.as_view(template_name='index.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login_required(index_view), name='index'),
     path('', include("adopt_animals.urls")),
     path('accounts/', include('accounts.urls')), 
     path('accounts/', include('django.contrib.auth.urls')),
+
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, reverse
@@ -14,7 +15,9 @@ from django.conf import settings
 from django.http import Http404, HttpResponseBadRequest
 from django.views import generic
 from django.contrib.auth import get_user_model
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 User = get_user_model()
 
@@ -84,4 +87,19 @@ class SignupCompleteView(TemplateView):
 
         return HttpResponseBadRequest()
 
-    
+
+
+
+class OnlyYouMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self):
+        user = self.request.user
+        return user.username == self.kwargs['username'] or user.is_superuse
+
+class UserDeleteView(OnlyYouMixin, DeleteView):
+    template_name = "accounts/delete_user.html"
+    success_url = reverse_lazy("index")
+    model = User
+    slug_field = 'username'
+    slug_url_kwarg = 'username'

@@ -1,6 +1,6 @@
 from django.urls import path
 from accounts import views
-from accounts.views import (LoginView, SignupView, SignupDoneView, SignupCompleteView)
+from accounts.views import (LoginView, SignupView, SignupDoneView, SignupCompleteView, UserDeleteView)
 
 app_name = 'accounts'
 
@@ -10,4 +10,6 @@ urlpatterns = [
     path('signup/', SignupView.as_view(), name='accounts_signup'),
     path('signup/done/', SignupDoneView.as_view(), name='accounts_signup_done'),
     path('signup/complete/<token>/', SignupCompleteView.as_view(), name='accounts_signup_complete'),
+
+    path('<str:username>/delete/', UserDeleteView.as_view(), name='accounts_delete_user'),
 ]

@@ -3,6 +3,10 @@
   <a href="/" >Adopt Animals</a>
     <ul>
       <li><a class="login" href="{% url 'login' %}">Login</a></li>
+      <li><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="delete_user" href="{% url 'accounts:accounts_delete_user' user.username %}">Quit</a></li>
+      {% endif %}
       {% if user.is_authenticated %}
       <li><a class="logout" href="{% url 'logout' %}">Logout</a></li>
       {% endif %}

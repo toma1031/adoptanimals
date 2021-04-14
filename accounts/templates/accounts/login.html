@@ -1,3 +1,10 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<h2>Login with usermail</h2>
 <form action="{% url 'login' %}" method="POST" novalidate>
   {% include "accounts/_form.html" with submit_label="Login" %}
 </form>
+
+{% endblock %}
