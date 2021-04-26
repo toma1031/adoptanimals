@@ -7,6 +7,8 @@
       {{form.as_p}}
       <button class="" type="submit">Update</button>
   </form>
+  <a class="" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
   <a href="/">TOP</a>
+
 </div>
 {% endblock %}

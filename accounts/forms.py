@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .models import (User, State, get_user_model)
 from django import forms
 from phone_field import PhoneField
@@ -79,3 +79,11 @@ class UserChangeForm(ModelForm):
         user.zipcode = self.cleaned_data['zipcode']
         user.phone_number = self.cleaned_data['phone_number']
         user.save()
+
+class MyPasswordChangeForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = [
+            'password1', 
+            'password2',
+        ]

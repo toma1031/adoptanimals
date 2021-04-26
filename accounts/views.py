@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from accounts.models import User
-from .forms import LoginForm, SignUpForm, UserChangeForm
+from .forms import LoginForm, SignUpForm, UserChangeForm, MyPasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -17,6 +17,7 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 
 
@@ -130,3 +131,16 @@ class UserChangeView(LoginRequiredMixin, UpdateView):
             'phone_number' : self.request.user.phone_number,
         })
         return kwargs
+
+
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    model = User
+    template_name = 'accounts/password_change.html'
+    form_class = MyPasswordChangeForm
+    success_url = reverse_lazy('accounts:password_change_done')
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+
+class PasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
+    template_name = 'accounts/password_change_done.html'
+
