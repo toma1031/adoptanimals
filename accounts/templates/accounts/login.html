@@ -12,4 +12,9 @@
   <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google Account Login</a></li>
 </ul>
 
+<h2>Forget Password?</h2>
+<ul>
+  <a href="{% url 'accounts:password_reset' %}" class="btn btn-success btn-lg btn-block" >Reset Password</a>
+</ul>
+
 {% endblock %}

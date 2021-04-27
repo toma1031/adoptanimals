@@ -1,0 +1,6 @@
+{{ user.username }},
+
+Please access to the URL below and reset your password.
+
+Password Reset URL
+{{ protocol}}://{{ domain }}{% url 'accounts:password_reset_confirm' uid token %}
