@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'adopt_animals',
     'phone_field',
     'social_django', 
+    'cloudinary_storage',
+    'cloudinary',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -170,3 +173,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ycXM_SLQeYHZZVOxeW2YcBS4' # クライアン�
 # Twitter
 # SOCIAL_AUTH_TWITTER_KEY = 'PxtrK2mNfK3kFdFioJg27U2LK'
 # SOCIAL_AUTH_TWITTER_SECRET = 'JAQloWLxYtoAfpTlUXd8MOorT7wVx5Fv9TfB74iSGWPvLXovbR'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dl2blqao5',
+    'API_KEY': '813939149428973',
+    'API_SECRET': 'lvXOZK0nJpwNC7_VmqV-dyd1T64'
+}
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
