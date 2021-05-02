@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from imagekit.models import ImageSpecField, ProcessedImageField
-from imagekit.processors import ResizeToFill
 
 class Tag(models.Model):
   category = models.CharField(verbose_name='Animal Category', max_length=20, null=False, blank=False)
@@ -26,27 +24,6 @@ class Post(models.Model):
   user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='user')
   category = models.ForeignKey(Tag, verbose_name='Category', on_delete=models.CASCADE)
 
-# 下記で写真のサイズを表示時にリサイズする
-  photo_resize = ImageSpecField(source="photo",
-                      processors=[ResizeToFill(800, 800)],
-                      format='JPEG'
-                      )
-  photo_resize2 = ImageSpecField(source="photo2",
-                      processors=[ResizeToFill(800, 800)],
-                      format='JPEG'
-                      )
-  photo_resize3 = ImageSpecField(source="photo3",
-                      processors=[ResizeToFill(800, 800)],
-                      format='JPEG'
-                      )
-  photo_resize4 = ImageSpecField(source="photo4",
-                      processors=[ResizeToFill(800, 800)],
-                      format='JPEG'
-                      )
-  photo_resize5 = ImageSpecField(source="photo5",
-                      processors=[ResizeToFill(800, 800)],
-                      format='JPEG'
-                      )
 # 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.title

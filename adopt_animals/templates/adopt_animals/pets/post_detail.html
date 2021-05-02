@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block main %}
+{% if user.is_authenticated %}
+<h1>Hello</h1>
+<h2 class="">{{ user.get_username }}!</h2>
+{% endif %}
+<div class="card mb-4">
+  <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="500">
+  {% if post.photo2 %}
+  <img src="{{ post.photo2.url }}" alt="" class="card-img-top index-img" width="500">
+  {% endif %}
+  {% if post.photo3 %}
+  <img src="{{ post.photo3.url }}" alt="" class="card-img-top index-img" width="500">
+  {% endif %}
+  {% if post.photo4 %}
+  <img src="{{ post.photo4.url }}" alt="" class="card-img-top index-img" width="500">
+  {% endif %}
+  {% if post.photo5 %}
+  <img src="{{ post.photo5.url }}" alt="" class="card-img-top index-img" width="500">
+  {% endif %}
+</div>
+<div class="card-body">
+  <h2 class="card-title">Title: {{ post.title }}</h2>
+  <p class="card-text">Name: {{ post.name }}</p>
+  <p class="card-text">Age: {{ post.age }}</p>
+  <p class="card-text">Weight: {{ post.weight }}</p>
+  <p class="card-text">Sex:
+    {% if post.sex == 1 %}
+    Male
+    {% else %}
+    Female
+    {% endif %}
+  </p>
+  <p class="card-text">Name: {{ post.category }}</p>
+  <p class="card-text">State: {{ user.state }}</p>
+  <p class="card-text">Zipcode: {{ user.zipcode }}</p>
+  <p class="card-text">Story: {{ post.story }}</p>
+  <p class="card-text">Owener: {{ post.user }}</p>
+  <a class="btn btn-primary" href="" >Message to {{ user.get_username }}</a><br>
+  <a class="btn btn-primary" href="/" >Top</a>
+</div>
+{% endblock main %}

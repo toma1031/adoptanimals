@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Tag
 from .forms import PostForm
@@ -8,8 +8,12 @@ from accounts.models import User
 
 
 # Create your views here.
-class IndexView(TemplateView):
+class IndexView(ListView):
   template_name = "index.html"
+  model = Post
+  context_object_name = 'post_list'
+  paginate_by = 8
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
   model = Post
@@ -34,8 +38,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class PostDoneView(LoginRequiredMixin, TemplateView):
     template_name = 'adopt_animals/pets/post_done.html'
 
-# class PostListView(ListView):
-#     context_object_name = 'post_list'
-#     model = Post
-#     paginate_by = 8
-#     template_name = "index.html"
+class PostDetailView(DetailView):
+    template_name = "adopt_animals/pets/post_detail.html"
+    model = Post
+    context_object_name = 'post'

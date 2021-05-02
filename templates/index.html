@@ -4,16 +4,28 @@
 <h1>Hello</h1>
 <h2 class="">{{ user.get_username }}!</h2>
 {% endif %}
-<!-- {% for post in post_list %}
+{% for post in post_list %}
     <div class="card mb-4">
-      <img src="{{ post.photo_resize.url }}" alt="" class="card-img-top index-img">
+      <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
       <div class="card-body">
         <h2 class="card-title">{{ post.title }} <span class="small"> - {{ post.category }}</span></h2>
-        <p class="card-text">{{ post.story|truncatechars:100 }}</p>
-        <div class="btn btn-warning">Detail</div>
+        <p class="card-text">Name: {{ post.name }}</p>
+        <p class="card-text">Age: {{ post.age }}</p>
+        <p class="card-text">Weight: {{ post.weight }}</p>
+        <p class="card-text">Sex:
+          {% if post.sex == 1 %}
+          Male
+          {% else %}
+          Female
+          {% endif %}
+        </p>
+        <p class="card-text">State: {{ user.state }}</p>
+        <p class="card-text">Zipcode: {{ user.zipcode }}</p>
+        <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p>
+        <a class="btn btn-primary" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
       </div>
       <div class="card-footer text-muted">
        <p>by {{ post.user}}</p>
       </div>
-{% endfor %} -->
+{% endfor %}
 {% endblock main %}
