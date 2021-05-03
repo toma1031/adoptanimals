@@ -50,3 +50,5 @@ class PostForm(forms.ModelForm):
           'story',
           'category',
       ]
+
+

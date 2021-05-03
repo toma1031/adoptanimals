@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Tag
 from .forms import PostForm
@@ -42,3 +42,14 @@ class PostDetailView(DetailView):
     template_name = "adopt_animals/pets/post_detail.html"
     model = Post
     context_object_name = 'post'
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'adopt_animals/pets/post_update_form.html'
+    model = Post
+    form_class = PostForm
+    success_url = reverse_lazy('adopt_animals:post_detail')
+    context_object_name = 'post'
+
+    # 引数が必要になる(今回の場合<pk: id)URLにリダイレクトさせる時は別途get_success_urlを継承してあげる必要があります。
+    def get_success_url(self):
+        return reverse('adopt_animals:post_detail', kwargs={'pk': self.object.id})

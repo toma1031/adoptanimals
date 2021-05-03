@@ -37,6 +37,7 @@
   <p class="card-text">Story: {{ post.story }}</p>
   <p class="card-text">Owener: {{ post.user }}</p>
   <a class="btn btn-primary" href="" >Message to {{ user.get_username }}</a><br>
+  <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}" >Edit this post</a><br>
   <a class="btn btn-primary" href="/" >Top</a>
 </div>
 {% endblock main %}

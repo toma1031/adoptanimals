@@ -102,7 +102,7 @@ class OnlyYouMixin(UserPassesTestMixin):
 
 class UserDeleteView(OnlyYouMixin, DeleteView):
     template_name = "accounts/delete_user.html"
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("adopt_animals:index")
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
@@ -111,27 +111,14 @@ class UserChangeView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'accounts/user_change.html'
     form_class = UserChangeForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy("adopt_animals:index")
+    # モデルのフィールドの名前
+    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_field = 'username'
+    # urls.pyでのキーワードの名前
+    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_url_kwarg = 'username'
-    
-    def form_valid(self, form):
-        #formのupdateメソッドにログインユーザーを渡して更新
-        form.update(user=self.request.user)
-        return super().form_valid(form)
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        # 更新前のユーザー情報をkwargsとして渡す
-        kwargs.update({
-            'username' : self.request.user.username,
-            'email' : self.request.user.email,
-            'state' : self.request.user.state,
-            'city' : self.request.user.city,
-            'zipcode' : self.request.user.zipcode,
-            'phone_number' : self.request.user.phone_number,
-        })
-        return kwargs
 
 
 class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
@@ -139,7 +126,11 @@ class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'accounts/password_change.html'
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('accounts:password_change_done')
+    # モデルのフィールドの名前
+    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_field = 'username'
+    # urls.pyでのキーワードの名前
+    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_url_kwarg = 'username'
 
 
