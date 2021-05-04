@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -53,3 +53,17 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     # 引数が必要になる(今回の場合<pk: id)URLにリダイレクトさせる時は別途get_success_urlを継承してあげる必要があります。
     def get_success_url(self):
         return reverse('adopt_animals:post_detail', kwargs={'pk': self.object.id})
+
+    def get(self, request, *args, **kwargs):
+      # Postオブジェクトを取得する
+      # 該当のPostオブジェクトが存在しない場合HTTPのステータスが404になるのでページが存在しないことになります。
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        # 投稿したユーザーとログイン中のユーザーが一致すれば
+        if self.request.user == post.user:
+          # アクセスさせる
+            return super().get(request, **kwargs)
+        else:
+          # それ以外はindexへ
+            return redirect('adopt_animals:index')
+
+

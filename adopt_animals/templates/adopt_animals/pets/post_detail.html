@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block main %}
 {% if user.is_authenticated %}
-<h1>Hello</h1>
-<h2 class="">{{ user.get_username }}!</h2>
+<h2 class="">Hello {{ user.get_username }}!</h2>
 {% endif %}
 <div class="card mb-4">
   <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="500">
@@ -36,8 +35,14 @@
   <p class="card-text">Zipcode: {{ user.zipcode }}</p>
   <p class="card-text">Story: {{ post.story }}</p>
   <p class="card-text">Owener: {{ post.user }}</p>
-  <a class="btn btn-primary" href="" >Message to {{ user.get_username }}</a><br>
+  <!-- ユーザーが投稿者でない場合表示する -->
+  {% if not user == post.user %}
+  <a class="btn btn-primary" href="" >Message to {{ post.user }}</a><br>
+  {% endif %}
+  <!-- もしユーザーが投稿者だった場合表示する  -->
+  {% if user == post.user %}
   <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}" >Edit this post</a><br>
+  {% endif %}
   <a class="btn btn-primary" href="/" >Top</a>
 </div>
 {% endblock main %}
