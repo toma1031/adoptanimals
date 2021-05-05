@@ -42,6 +42,7 @@
   <!-- もしユーザーが投稿者だった場合表示する  -->
   {% if user == post.user %}
   <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}" >Edit this post</a><br>
+  <a class="btn btn-danger" href="{% url 'adopt_animals:post_delete' post.id %}" >Delete</a><br>
   {% endif %}
   <a class="btn btn-primary" href="/" >Top</a>
 </div>

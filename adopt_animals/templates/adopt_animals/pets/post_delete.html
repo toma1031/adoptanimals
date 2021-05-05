@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main %}
+<h2 class="">Hello {{ user.get_username }}!</h2>
+<div class="my-4">
+  <h2>Delete the post?</h2>
+  <hr>
+</div>
+<h2 class="card-title">Title: {{ post.title }}</h2>
+<p class="card-text">Name: {{ post.name }}</p>
+<p class="card-text">Age: {{ post.age }}</p>
+<p class="card-text">Weight: {{ post.weight }}</p>
+<p class="card-text">Sex:
+  {% if post.sex == 1 %}
+  Male
+  {% else %}
+  Female
+  {% endif %}
+</p>
+<p class="card-text">Name: {{ post.category }}</p>
+<p class="card-text">State: {{ user.state }}</p>
+<p class="card-text">Zipcode: {{ user.zipcode }}</p>
+<p class="card-text">Story: {{ post.story }}</p>
+<p class="card-text">Owener: {{ post.user }}</p>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+{% endblock %}

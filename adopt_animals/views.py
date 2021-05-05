@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Tag
 from .forms import PostForm
 from accounts.models import User
+from django.contrib import messages
 
 
 # Create your views here.
@@ -54,6 +55,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('adopt_animals:post_detail', kwargs={'pk': self.object.id})
 
+    # def get()関数 というのを継承してページにアクセスできるユーザーに制限をかける
+    # requestにはurlなどの情報が入っています。
+    # アクセス先のurlやメタ情報など様々な情報が含まれています。
     def get(self, request, *args, **kwargs):
       # Postオブジェクトを取得する
       # 該当のPostオブジェクトが存在しない場合HTTPのステータスが404になるのでページが存在しないことになります。
@@ -61,9 +65,33 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         # 投稿したユーザーとログイン中のユーザーが一致すれば
         if self.request.user == post.user:
           # アクセスさせる
+          # super()はUpdateView。
+          # 親クラスは継承元のことを言うのでPostUpdateViewのことでは無い。
+          # requestにはurlなどの情報が入っている。
+          # アクセス先のurlやメタ情報など様々な情報が含まれている。
+          # kwargsにはアクセス時に送信されたキーワード引数が含まれる。
+          # こちらの解説が詳しいので参考にしてみてください
+          # https://teratail.com/questions/299155
             return super().get(request, **kwargs)
         else:
           # それ以外はindexへ
             return redirect('adopt_animals:index')
 
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'adopt_animals/pets/post_delete.html'
+    model = Post
+    success_url = reverse_lazy('adopt_animals:index')
+
+class MyPostListView(LoginRequiredMixin, ListView):
+    template_name = 'adopt_animals/pets/my_post_list.html'
+    model = Post
+    ontext_object_name = 'post_list'
+    success_url = reverse_lazy('adopt_animals:index')
+    paginate_by = 8
+
+# get_queryset(self) を使用して、ページにアクセスできるユーザーは投稿者のみにする
+    def get_queryset(self):
+      # Postの中でログインユーザーが投稿したもののみ表示する
+        return Post.objects.filter(user_id=self.request.user.id)
+  
 

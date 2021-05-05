@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'social_django', 
     'cloudinary_storage',
     'cloudinary',
-    'imagekit',
+    # 投稿に紐付けされている写真を削除
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
