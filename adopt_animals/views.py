@@ -5,8 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Tag
 from .forms import PostForm
 from accounts.models import User
-from django.contrib import messages
-
+from django.db.models import Q
 
 # Create your views here.
 class IndexView(ListView):
@@ -14,6 +13,36 @@ class IndexView(ListView):
   model = Post
   context_object_name = 'post_list'
   paginate_by = 8
+
+# get_queryset関数で検索機能を実装
+  def get_queryset(self):
+    # 全Postオブジェクトを取得し、object_list変数に代入
+      object_list = Post.objects.all()
+    # query_category が空っぽ(= html側のvalueがvalue=""の時)にはq_categoryをNoneにするが、html側のvalueに何か入っている時は
+    # q_categoryにそれを代入する。以下同様
+      q_category = self.request.GET.get('query_category', None)
+      q_sex = self.request.GET.get('query_sex', None)
+      q_state = self.request.GET.get('query_state', None)
+      q_zipcode = self.request.GET.get('query_zipcode', None)
+
+    # もしcategoryになにかある場合（html側のvalueに何か入っている時）、
+      if q_category:
+        # PostモデルのcategoryフィールドはTagモデルに紐づいており、Tagモデルのcategoryフィールドを取得しobject_list変数に代入
+          object_list = object_list.filter(category__category=q_category)
+    # もしsexになにかある場合（html側のvalueに何か入っている時）、
+      if q_sex:
+        # Postモデルのsexフィールドを取得しobject_list変数に代入
+          object_list = object_list.filter(sex=q_sex)
+    # もしstateになにかある場合（html側のvalueに何か入っている時）、
+      if q_state:
+        # １番目のuserはUserモデルのuserフィールド、２番目のstateはUserモデルstateフィールド、３番目はUserモデルにはStateモデルがForeginKey紐づいているのでStateモデルのstateフィールドを表す。それを取得しobject_list変数に代入
+          object_list = object_list.filter(user__state__state=q_state)
+    # もしzipcodeになにかある場合（html側のvalueに何か入っている時）、
+      if q_zipcode:
+        # １番目のuserはUserモデルのuserフィールド、２番目のzipcodeはUserモデルzipcodeフィールド、３番目はicontainsは入力された文字列。それを取得しobject_list変数に代入
+          object_list = object_list.filter(user__zipcode__icontains=q_zipcode)
+    # 最後に取得されたオブジェクトのリスト（Post）を返す
+      return object_list
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):

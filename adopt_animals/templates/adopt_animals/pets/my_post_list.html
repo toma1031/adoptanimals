@@ -22,8 +22,8 @@
           Female
           {% endif %}
         </p>
-        <p class="card-text">State: {{ user.state }}</p>
-        <p class="card-text">Zipcode: {{ user.zipcode }}</p>
+        <p class="card-text">State: {{ post.user.state }}</p>
+        <p class="card-text">Zipcode: {{ post.user.zipcode }}</p>
         <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p>
         <a class="btn btn-primary" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
       </div>

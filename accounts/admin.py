@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from accounts.models import User
+from accounts.models import User, State
 # Register your models here.
 
 @admin.register(User)
@@ -20,3 +20,5 @@ class UserAdmin(UserAdmin):
             'fields': ('username', 'email', 'password1', 'password2', 'state', 'city', 'zipcode'),
         }),
     )
+
+    admin.site.register(State)

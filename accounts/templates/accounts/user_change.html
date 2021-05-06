@@ -12,7 +12,7 @@
   {% if user.has_usable_password %}
   <a class="" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
   {% endif %}
+  <a class="delete_user" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel Membership</a><br>
   <a href="/">TOP</a>
-
 </div>
 {% endblock %}
