@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/like.js' %}"></script>
+{% endblock %}
 {% block main %}
 {% if user.is_authenticated %}
 <h1>Hello</h1>
@@ -29,6 +33,9 @@
       </div>
       <div class="card-footer text-muted">
        <p>by {{ post.user}}</p>
+      </div>
+      <div class="like-outer">
+        {% include 'adopt_animals/pets/like.html' %}
       </div>
 {% endfor %}
 {% endif %}

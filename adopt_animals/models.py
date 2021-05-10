@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 class Tag(models.Model):
   category = models.CharField(verbose_name='Animal Category', max_length=20, null=False, blank=False)
@@ -27,3 +28,13 @@ class Post(models.Model):
 # 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.title
+
+
+class Like(models.Model):
+  post = models.ForeignKey(Post, on_delete=models.CASCADE)
+  user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+  timestamp = models.DateTimeField(default=timezone.now)
+
+# 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
+  def __str__(self):
+    return self.post

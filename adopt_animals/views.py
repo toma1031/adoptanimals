@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Tag
+from .models import Post, Tag, Like
 from .forms import PostForm
 from accounts.models import User
-from django.db.models import Q
+from django.http import JsonResponse
 
 # Create your views here.
 class IndexView(ListView):
@@ -44,6 +44,35 @@ class IndexView(ListView):
     # 最後に取得されたオブジェクトのリスト（Post）を返す
       return object_list
 
+# いいね機能の部分
+# contextは辞書型のデータ。そしてcontextという変数にデータが入る。
+# context = super().get_context_data(**kwargs) は先日もsuper().get() でお話しした通り、親クラスから継承するよという意味になります。
+# IndexViewはListViewを継承しているのでpaginatorのデータが格納されています。(IndexViewでpaginate_by使ってますよね)
+# さらにはpage_objにはpaginate_byで指定した分だけのPostオブジェクトが格納されています。
+# ここまではListViewが勝手に処理をしてくれますが、これ以外にもtemplate側にデータを渡すときにはget_context_dataを使います。
+# ここでcontextに入れているのはpaginate_byで指定した分だけのPostオブジェクトが格納されています。
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # post_listへPostオブジェクトを代入
+    post_list = Post.objects.all()
+    # Liked_listというスタックを用意する
+    liked_list = []
+    # ユーザーがログインしていなければ、このfor文を回さない
+    if self.request.user.is_authenticated:
+      for post in post_list:
+        # like_setでpostに紐づく全てのいいねを取得し、閲覧しているユーザーでフィルターをかけている
+          # 今回の場合LikeモデルにPostモデルと、Userモデルを外部キーで連携させています。
+          # LikeモデルのLikeオブジェクトからPostモデルの情報を引っ張ってくるときを参照といいます(Like.objects.filter(post=Post_object) )
+          # が逆にPostモデルもしくはUserモデルからLikeモデルの情報を引っ張ってくるときのことを逆参照といいます。
+          # 逆参照の時はオブジェクト.モデル名_set とすることでPostオブジェクトに紐づくLikeオブジェクトを取得することが可能になります。
+          liked = post.like_set.filter(user=self.request.user)
+          # いいねされていたらliked_list スタックの中にそのいいねされたPostを入れていく
+          if liked.exists():
+              liked_list.append(post.id)
+    # contextのliked_listリストにliked_listを代入
+    context['liked_list'] = liked_list
+    # contextを返す
+    return context
 
 class CreatePostView(LoginRequiredMixin, CreateView):
   model = Post
@@ -111,6 +140,15 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('adopt_animals:index')
 
+    # ２、class MyPostListView(LoginRequiredMixin, ListView)　と　class PostDetailView(DetailView)
+    # にはdef get_context_dataを記載していませんが、
+    # なぜ動くのでしょうか？
+    # MyPostListViewとPostDetailViewは両方model = 'Post' としていますね。
+    # これはListViewを継承している場合、Post.objects.all() が、DetailViewを継承している場合はPost.objects.get(id=pk) が自動的に実行されるようになっています。
+    # get_context_dataでは上記のmodel='Post' 以外で何かtemplate側にデータを持っていきたい場合に使用します。
+    # こんかいの場合、liked_listというログイン中のユーザーがいいねしたPostオブジェクトのIDを格納したリストをtemplate側に渡していましたね。
+
+
 class MyPostListView(LoginRequiredMixin, ListView):
     template_name = 'adopt_animals/pets/my_post_list.html'
     model = Post
@@ -122,5 +160,32 @@ class MyPostListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
       # Postの中でログインユーザーが投稿したもののみ表示する
         return Post.objects.filter(user_id=self.request.user.id)
-  
 
+    # ２、class MyPostListView(LoginRequiredMixin, ListView)　と　class PostDetailView(DetailView)
+    # にはdef get_context_dataを記載していませんが、
+    # なぜ動くのでしょうか？
+    # MyPostListViewとPostDetailViewは両方model = 'Post' としていますね。
+    # これはListViewを継承している場合、Post.objects.all() が、DetailViewを継承している場合はPost.objects.get(id=pk) が自動的に実行されるようになっています。
+    # get_context_dataでは上記のmodel='Post' 以外で何かtemplate側にデータを持っていきたい場合に使用します。
+    # こんかいの場合、liked_listというログイン中のユーザーがいいねしたPostオブジェクトのIDを格納したリストをtemplate側に渡していましたね。
+
+def LikeView(request):
+  if request.method =="POST":
+      post = get_object_or_404(Post, pk=request.POST.get('post_id'))
+      user = request.user
+      liked = False
+      like = Like.objects.filter(post=post, user=user)
+      if like.exists():
+          like.delete()
+      else:
+          like.create(post=post, user=user)
+          liked = True
+  
+      context={
+          'post_id': post.id,
+          'liked': liked,
+          'count': post.like_set.count(),
+      }
+
+  if request.is_ajax():
+      return JsonResponse(context)

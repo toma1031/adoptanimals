@@ -1,0 +1,14 @@
+<form action="{% url 'adopt_animals:like' %}" method="POST">
+  {% csrf_token %}
+  {% if post.id in liked_list %}
+  <!-- ログインしていない場合にハートマークを押したとき、いいねできないようにする -->
+  {% if user.is_authenticated %}
+      <button id="like" name="{{post.id}}" type="button" data-href="{% url 'adopt_animals:like' %}" data-csrf="{{ csrf_token }}"><i class="fas fa-lg fa-heart like-red"></i></button>
+  {% endif %}
+  {% else %}
+  <!-- 下記のコードに組み込まれている{% if not user.is_authenticated %} disabled {% endif %} でログインしていないユーザーは
+  いいねできないようにする -->
+      <button id="like" name="{{post.id}}" type="button" data-href="{% url 'adopt_animals:like' %}" {% if not user.is_authenticated %} disabled {% endif %} data-csrf="{{ csrf_token }}"><i class="far fa-lg fa-heart"></i></button>      
+  {% endif %}
+</form>
+<p name="{{post.id}}-count" class="count"> {{ post.like_set.count }} </p>

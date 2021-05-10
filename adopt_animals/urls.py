@@ -2,7 +2,9 @@ from django.urls import path
 from .views import IndexView
 from adopt_animals import views
 from accounts import views
-from adopt_animals.views import CreatePostView, PostDoneView, PostDetailView, PostUpdateView, PostDeleteView, MyPostListView
+from adopt_animals.views import (CreatePostView, PostDoneView, PostDetailView, PostUpdateView, 
+                                    PostDeleteView, MyPostListView)
+from . import views
 
 app_name = 'adopt_animals'
 
@@ -19,4 +21,6 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
 
     path('my_post_list/', MyPostListView.as_view(), name='my_post_list'),
+
+    path('like', views.LikeView, name='like'),
 ]
