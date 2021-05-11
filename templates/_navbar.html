@@ -8,6 +8,7 @@
       <li><a class="change_user" href="{% url 'accounts:accounts_change_user' user.username %}">Profile</a></li>
       <li><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
       <li><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Post List</a></li>
+      <li><a class="my_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">My Favorite Post List</a></li>
       <li><a class="logout" href="{% url 'logout' %}">Logout</a></li>
       {% else %}
       <!-- 未ログインの時に表示したいナビゲーション -->

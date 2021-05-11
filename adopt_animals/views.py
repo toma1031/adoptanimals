@@ -102,6 +102,29 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
 
+    def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      # post_listへPostオブジェクトを代入
+      post_list = Post.objects.all()
+      # Liked_listというスタックを用意する
+      liked_list = []
+      # ユーザーがログインしていなければ、このfor文を回さない
+      if self.request.user.is_authenticated:
+        for post in post_list:
+          # like_setでpostに紐づく全てのいいねを取得し、閲覧しているユーザーでフィルターをかけている
+            # 今回の場合LikeモデルにPostモデルと、Userモデルを外部キーで連携させています。
+            # LikeモデルのLikeオブジェクトからPostモデルの情報を引っ張ってくるときを参照といいます(Like.objects.filter(post=Post_object) )
+            # が逆にPostモデルもしくはUserモデルからLikeモデルの情報を引っ張ってくるときのことを逆参照といいます。
+            # 逆参照の時はオブジェクト.モデル名_set とすることでPostオブジェクトに紐づくLikeオブジェクトを取得することが可能になります。
+            liked = post.like_set.filter(user=self.request.user)
+            # いいねされていたらliked_list スタックの中にそのいいねされたPostを入れていく
+            if liked.exists():
+                liked_list.append(post.id)
+      # contextのliked_listリストにliked_listを代入
+      context['liked_list'] = liked_list
+      # contextを返す
+      return context
+
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'adopt_animals/pets/post_update_form.html'
     model = Post
@@ -169,6 +192,29 @@ class MyPostListView(LoginRequiredMixin, ListView):
     # get_context_dataでは上記のmodel='Post' 以外で何かtemplate側にデータを持っていきたい場合に使用します。
     # こんかいの場合、liked_listというログイン中のユーザーがいいねしたPostオブジェクトのIDを格納したリストをtemplate側に渡していましたね。
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # post_listへPostオブジェクトを代入
+        post_list = Post.objects.all()
+        # Liked_listというスタックを用意する
+        liked_list = []
+        # ユーザーがログインしていなければ、このfor文を回さない
+        if self.request.user.is_authenticated:
+          for post in post_list:
+            # like_setでpostに紐づく全てのいいねを取得し、閲覧しているユーザーでフィルターをかけている
+              # 今回の場合LikeモデルにPostモデルと、Userモデルを外部キーで連携させています。
+              # LikeモデルのLikeオブジェクトからPostモデルの情報を引っ張ってくるときを参照といいます(Like.objects.filter(post=Post_object) )
+              # が逆にPostモデルもしくはUserモデルからLikeモデルの情報を引っ張ってくるときのことを逆参照といいます。
+              # 逆参照の時はオブジェクト.モデル名_set とすることでPostオブジェクトに紐づくLikeオブジェクトを取得することが可能になります。
+              liked = post.like_set.filter(user=self.request.user)
+              # いいねされていたらliked_list スタックの中にそのいいねされたPostを入れていく
+              if liked.exists():
+                  liked_list.append(post.id)
+        # contextのliked_listリストにliked_listを代入
+        context['liked_list'] = liked_list
+        # contextを返す
+        return context
+
 def LikeView(request):
   if request.method =="POST":
       post = get_object_or_404(Post, pk=request.POST.get('post_id'))
@@ -189,3 +235,49 @@ def LikeView(request):
 
   if request.is_ajax():
       return JsonResponse(context)
+
+
+class MyFavoritePostListView(LoginRequiredMixin, ListView):
+    template_name = 'adopt_animals/pets/my_fav_post_list.html'
+    model = Post
+    ontext_object_name = 'post_list'
+    success_url = reverse_lazy('adopt_animals:index')
+    paginate_by = 8
+
+# get_queryset(self) を使用して、ページにアクセスできるユーザーは投稿者のみにする
+    def get_queryset(self):
+      # Postの中でログインユーザーがいいねした投稿したもののみ表示する
+      # （like__user=self.request.user）の意味は（Likeモデル__Userモデル＝ログインしているユーザー）で
+      # ログイン中ユーザーがLikeしているPostオブジェクトを全て取得するという意味になります。
+      return Post.objects.filter(like__user=self.request.user)
+
+    # ２、class MyPostListView(LoginRequiredMixin, ListView)　と　class PostDetailView(DetailView)
+    # にはdef get_context_dataを記載していませんが、
+    # なぜ動くのでしょうか？
+    # MyPostListViewとPostDetailViewは両方model = 'Post' としていますね。
+    # これはListViewを継承している場合、Post.objects.all() が、DetailViewを継承している場合はPost.objects.get(id=pk) が自動的に実行されるようになっています。
+    # get_context_dataでは上記のmodel='Post' 以外で何かtemplate側にデータを持っていきたい場合に使用します。
+    # こんかいの場合、liked_listというログイン中のユーザーがいいねしたPostオブジェクトのIDを格納したリストをtemplate側に渡していましたね。
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # post_listへPostオブジェクトを代入
+        post_list = Post.objects.all()
+        # Liked_listというスタックを用意する
+        liked_list = []
+        # ユーザーがログインしていなければ、このfor文を回さない
+        if self.request.user.is_authenticated:
+          for post in post_list:
+            # like_setでpostに紐づく全てのいいねを取得し、閲覧しているユーザーでフィルターをかけている
+              # 今回の場合LikeモデルにPostモデルと、Userモデルを外部キーで連携させています。
+              # LikeモデルのLikeオブジェクトからPostモデルの情報を引っ張ってくるときを参照といいます(Like.objects.filter(post=Post_object) )
+              # が逆にPostモデルもしくはUserモデルからLikeモデルの情報を引っ張ってくるときのことを逆参照といいます。
+              # 逆参照の時はオブジェクト.モデル名_set とすることでPostオブジェクトに紐づくLikeオブジェクトを取得することが可能になります。
+              liked = post.like_set.filter(user=self.request.user)
+              # いいねされていたらliked_list スタックの中にそのいいねされたPostを入れていく
+              if liked.exists():
+                  liked_list.append(post.id)
+        # contextのliked_listリストにliked_listを代入
+        context['liked_list'] = liked_list
+        # contextを返す
+        return context
