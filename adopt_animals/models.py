@@ -38,3 +38,17 @@ class Like(models.Model):
 # 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.post
+
+
+class MessageRoom(models.Model):
+    post = models.ForeignKey(Post, verbose_name='MessageRoom Post', on_delete=models.CASCADE)
+    inquiry_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='inquiry_user')
+
+    def __str__(self):
+      return str(self.id)
+class Message(models.Model):
+    message = models.CharField(max_length=100)
+    message_room = models.ForeignKey(MessageRoom, verbose_name='Message', on_delete=models.CASCADE)
+
+    def __str__(self):
+      return self.message

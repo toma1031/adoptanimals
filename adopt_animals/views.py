@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Tag, Like
+from .models import MessageRoom, Post, Tag, Like, Message, MessageRoom
 from .forms import PostForm
 from accounts.models import User
 from django.http import JsonResponse
@@ -124,6 +124,26 @@ class PostDetailView(DetailView):
       context['liked_list'] = liked_list
       # contextを返す
       return context
+
+    # メッセージボタンクリックした後にdef post() に飛ぶ
+    def post(self, request, **kwargs):
+      # filter()で該当Postオブジェクトかつinquiry_user が登録されているMessageRoomオブジェクトがあるのかないのかをチェックする
+      message_room = MessageRoom.objects.filter(post_id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
+      # ログインしているユーザーと該当のPostオブジェクトが登録されているMessageRoomオブジェクトを検索
+      if message_room:
+        # MessageRoomオブジェクトがあれば該当のMessageRoomオブジェクトの/message_room/<int:pk> へ飛ばす
+        # この場合はクエリセットで取得されます。
+        # クエリセットはオブジェクトが1つ以上格納されたリストに近い形ですのでmessage_room[0] で1つ目のオブジェクトが、message_room[1] で2つ目のオブジェクトが取得できます
+        return redirect('adopt_animals:message_room', pk=message_room[0].id)
+      else:
+        # なければ新しくMessageRoomオブジェクトを作成し/message_room/<int:pk> にリダイレクトさせる、
+        # こちらはMessageRoomオブジェクトを作成した後に作成したオブジェクトを返します。
+        # なのでmessage_room変数に新規のオブジェクトを格納しているということですね。
+        # オブジェクトなのでmessage_room.id とすることができます。
+        message_room = MessageRoom.objects.create(post_id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
+        return redirect('adopt_animals:message_room', pk=message_room.id)
+
+
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'adopt_animals/pets/post_update_form.html'
@@ -281,3 +301,22 @@ class MyFavoritePostListView(LoginRequiredMixin, ListView):
         context['liked_list'] = liked_list
         # contextを返す
         return context
+
+
+class MessageRoomView(LoginRequiredMixin, DetailView):
+  template_name = 'adopt_animals/pets/message_room.html'
+  model = MessageRoom
+  context_object_name = 'message_room'
+  success_url = reverse_lazy('adopt_animals:message_room')
+
+  # def get_context_data(self, **kwargs):
+  #   context = super().get_context_data(**kwargs)
+  #   message_list = Message.objects.all()
+  #   for message in message_list:
+  #     return context
+
+  # def form_valid(self, form):
+  #     form = form.save(commit=False)
+  #     form.user = self.request.user
+  #     form.save()
+  #     return redirect('adopt_animals:message_room')

@@ -44,13 +44,17 @@
   </div>
   <!-- ユーザーが投稿者でない場合表示する -->
   {% if not user == post.user %}
-  <a class="btn btn-primary" href="" >Message to {{ post.user }}</a><br>
+  <form action="{% url 'adopt_animals:post_detail' post.id %}" method="POST" class="btn btn-primary">
+    {% csrf_token %}
+    {{ form.errors }}
+    <button type="submit">Message to {{ post.user }}</button>
+  </form><br>
   {% endif %}
   <!-- もしユーザーが投稿者だった場合表示する  -->
   {% if user == post.user %}
-  <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}" >Edit this post</a><br>
-  <a class="btn btn-danger" href="{% url 'adopt_animals:post_delete' post.id %}" >Delete</a><br>
+  <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}">Edit this post</a><br>
+  <a class="btn btn-danger" href="{% url 'adopt_animals:post_delete' post.id %}">Delete</a><br>
   {% endif %}
-  <a class="btn btn-primary" href="/" >Top</a>
+  <a class="btn btn-primary" href="/">Top</a>
 </div>
 {% endblock main %}

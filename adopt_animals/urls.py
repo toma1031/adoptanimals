@@ -3,7 +3,7 @@ from .views import IndexView
 from adopt_animals import views
 from accounts import views
 from adopt_animals.views import (CreatePostView, PostDoneView, PostDetailView, PostUpdateView, 
-                                    PostDeleteView, MyPostListView, MyFavoritePostListView)
+                                    PostDeleteView, MyPostListView, MyFavoritePostListView, MessageRoomView)
 from . import views
 
 app_name = 'adopt_animals'
@@ -25,4 +25,6 @@ urlpatterns = [
     path('like', views.LikeView, name='like'),
 
     path('my_fav_post_list/', MyFavoritePostListView.as_view(), name='my_fav_post_list'),
+
+    path('message_room/<int:pk>/', MessageRoomView.as_view(), name='message_room'),
 ]
