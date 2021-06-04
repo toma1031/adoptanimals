@@ -4,23 +4,35 @@
 {% endblock %}
 {% block main %}
 {% if user.is_authenticated %}
-<h2 class="">Hello {{ user.get_username }}! Send message to {{ post.username }}</h2>
+<h2 class="">Hello {{ user.get_username }}! Send message to 
+    <!-- もしログインしているユーザーがAnimalsの投稿者であれば、inquiry_user（メッセージルーム作成者）の名前を表示させる -->
+    {% if message_room.post.user == user %}
+        {{ message_room.inquiry_user.username }} 
+    {% else %}
+    <!-- その他（ログインしているユーザーがAnimalsの投稿者でない場合は、Animalsの投稿者の名前を表示させる） -->
+        {{ message_room.post.user }}
+    {% endif %}
+</h2>
+
 {% endif %}
 <div class="chat-room-body">
+<!-- ここで送られたメッセージ回し、表示させていく -->
 {% for message in message_list %}
     <div class="chat-box">
         <div class="chat-body">
-            {{message.message}}
+            <!-- {{ message.message_user }}で誰がそのメッセージを送信したか表示 -->
+            {{ message.message }} by {{ message.message_user }} created at {{ message.create_time }} 
         </div>
     </div>
 {% endfor %}
     <div id="footer"></div>
 </div>
-<form action="{% url 'adopt_animals:message_room' message_room.id %}" method="POST"> # ここ編集しました。
+<form action="{% url 'adopt_animals:message_room' message_room.id %}" method="POST">
   {% csrf_token %}
   {{ form.errors }}
     <div class="send-msg">
-        <input placeholder="メッセージを入力" id="msg" value=""/><button class="btn btn-warning" type="submit">Send</button>
+       {{ form.message }}
+       <button class="btn btn-warning" type="submit">Send</button>
     </div>
 </form>
 {% endblock main %}

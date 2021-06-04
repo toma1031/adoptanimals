@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Tag
+from .models import Post, Tag, Message
 from accounts.models import User, get_user_model
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
@@ -52,3 +52,12 @@ class PostForm(forms.ModelForm):
       ]
 
 
+class MessageForm(forms.ModelForm):
+  message = forms.CharField(label='message', required=True)
+
+# このMetaの中身というのはmodelsのフィールドを元にしている
+  class Meta:
+      model = Message
+      fields = [
+          'message',
+      ]

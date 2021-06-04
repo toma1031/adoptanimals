@@ -49,6 +49,9 @@ class MessageRoom(models.Model):
 class Message(models.Model):
     message = models.CharField(max_length=100)
     message_room = models.ForeignKey(MessageRoom, verbose_name='Message', on_delete=models.CASCADE)
+    message_user = models.ForeignKey(get_user_model(), verbose_name='message_user', on_delete=models.CASCADE)
+    create_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-      return self.message
+      return str(self.id)
+

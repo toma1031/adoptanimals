@@ -1,9 +1,10 @@
+from django.db.models.query_utils import InvalidQuery
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import MessageRoom, Post, Tag, Like, Message, MessageRoom
-from .forms import PostForm
+from .forms import PostForm, MessageForm
 from accounts.models import User
 from django.http import JsonResponse
 
@@ -84,6 +85,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 # 何かformでは入力しないけど保存時に何かデータを突っ込みたいときにはdef form_valid()で入力してあげればOK
   def form_valid(self, form):
       form = form.save(commit=False)
+      # フォームを送信するユーザーとログインしているユーザーを紐づけしている
       form.user = self.request.user
       form.save()
       return redirect('adopt_animals:post_done')
@@ -132,7 +134,7 @@ class PostDetailView(DetailView):
       # ログインしているユーザーと該当のPostオブジェクトが登録されているMessageRoomオブジェクトを検索
       if message_room:
         # MessageRoomオブジェクトがあれば該当のMessageRoomオブジェクトの/message_room/<int:pk> へ飛ばす
-        # この場合はクエリセットで取得されます。
+        # この場合はクエリセットで取得されます。（MessageRoom.objects.filterで取得しているため）
         # クエリセットはオブジェクトが1つ以上格納されたリストに近い形ですのでmessage_room[0] で1つ目のオブジェクトが、message_room[1] で2つ目のオブジェクトが取得できます
         return redirect('adopt_animals:message_room', pk=message_room[0].id)
       else:
@@ -204,7 +206,7 @@ class MyPostListView(LoginRequiredMixin, ListView):
       # Postの中でログインユーザーが投稿したもののみ表示する
         return Post.objects.filter(user_id=self.request.user.id)
 
-    # ２、class MyPostListView(LoginRequiredMixin, ListView)　と　class PostDetailView(DetailView)
+    # ２、class MyPostListView(LoginRequiredMixin, ListView)とclass PostDetailView(DetailView)
     # にはdef get_context_dataを記載していませんが、
     # なぜ動くのでしょうか？
     # MyPostListViewとPostDetailViewは両方model = 'Post' としていますね。
@@ -306,17 +308,66 @@ class MyFavoritePostListView(LoginRequiredMixin, ListView):
 class MessageRoomView(LoginRequiredMixin, DetailView):
   template_name = 'adopt_animals/pets/message_room.html'
   model = MessageRoom
+  form_class = MessageForm
   context_object_name = 'message_room'
   success_url = reverse_lazy('adopt_animals:message_room')
 
-  # def get_context_data(self, **kwargs):
-  #   context = super().get_context_data(**kwargs)
-  #   message_list = Message.objects.all()
-  #   for message in message_list:
-  #     return context
+# Get関数でメッセージルームにアクセスできるユーザーを制限
+  def get(self, request, **kwargs):
+    # message_room_obj変数にMessageroomオブジェクトのIDを入れ込む
+      message_room_obj = get_object_or_404(MessageRoom, pk=self.kwargs['pk'])
+      # 投稿したユーザー(message_room_obj.post.userとログイン中のユーザー(self.request.user)が一致する、もしくは
+      # メッセージルームを作ったユーザー（message_room_obj.inquiry_user）とログイン中のユーザー（self.request.user）が一致すれば、メッセージルームへ移動させる
+      if message_room_obj.post.user == self.request.user or message_room_obj.inquiry_user == self.request.user:
+          print('a')
+          return super().get(request, **kwargs)
+      else:
+        # メッセージルームのメンバーでない場合はIndexへ飛ばす
+          print('b')
+          return redirect('/')
 
-  # def form_valid(self, form):
-  #     form = form.save(commit=False)
-  #     form.user = self.request.user
-  #     form.save()
-  #     return redirect('adopt_animals:message_room')
+  # 送信済みのメッセージを表示するために必要
+  def get_context_data(self, **kwargs):
+    # contextという変数にDetailView（ここではsuperがDetailViewを表している）のContextデータ（context_object_name = 'message_room'）をGetして辞書型として代入
+    # この時点で変数contextにはmessage_roomが辞書型で入っている。
+    context = super().get_context_data(**kwargs)
+    # CreateViewとUpdateView以外ではtemplate側で{{ form }} が使えないので、HTMLで表示するためForms.pyを使用している場合は下記のように書いてやる必要がある。
+    context['form'] = MessageForm
+    # message_listをContextとして定義。contextは辞書型のデータなので、データを追加することもできる。例えば、context['message_list'] = 'message_room'とすれば、keyがmessage_list、valueがMessage.objects.all()というデータを追加することができる。
+    # つまり、下記のように書くことによりcontextをどういうものにするか定義していることになる
+    context['message_list'] = Message.objects.all()
+    # 最後にContext（Message.objects.all()）を返す
+    return context
+
+
+# このPost関数はDetailViewであるMessageRoomView（MessageRoomページ）において、投稿機能を持たせるときに必要な関数
+  def post(self, request, **kwargs):
+    # リダイレクト先を現在開いているメッセージルームにするためここでmessage_roomを定義する
+    # 現在入っているメッセージルームと紐づけるため、引数はmessage_room_id=self.kwargs['pk']とする
+    message_room = MessageRoom.objects.filter(id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
+    # form変数にMessageFormを代入（このMessageRoomViewでMessageFormを使うには必須の作業）
+    form = MessageForm(request.POST)
+    # メッセージを保存するために必要
+    if form.is_valid():
+      # 仮のオブジェクトを作る(データベースにはまだ保存されない)
+      message_obj = form.save(commit=False)
+      # ここでmessage_roomに値（Pkやユーザー情報を入れてやる）。message_obj.message_room_id とはMessageオブジェクトに紐づいているMessage_roomのIDという意味
+      message_obj.message_room_id = self.kwargs['pk']
+      # Messageオブジェクトを作成時にmessage_user（送信者）のIDそのものを設定してやる必要がある。self.request.user.idの意味は「そのユーザーのIDそのもの」 
+      message_obj.message_user_id = self.request.user.id
+      # オブジェクトを保存する(データベースに保存される)
+      message_obj.save()
+    else:
+      # メッセージに何か不備がある場合はエラー表示
+      print(form.errors)
+    # メッセージを送った後はそのメッセージルームにリダイレクト
+    # return redirect('adopt_animals:message_room', pk=message_room[0].id)
+    return redirect('adopt_animals:message_room', pk=self.kwargs['pk'])
+
+
+class MessageRoomListView(LoginRequiredMixin, ListView):
+  template_name = 'adopt_animals/pets/my_messages.html'
+  model = MessageRoom
+  context_object_name = 'message_room_list'
+  success_url = reverse_lazy('adopt_animals:my_messages')
+  paginate_by = 8

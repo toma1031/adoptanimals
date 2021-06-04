@@ -7,4 +7,3 @@ admin.site.register(Tag)
 admin.site.register(Like)
 admin.site.register(Message)
 admin.site.register(MessageRoom)
-

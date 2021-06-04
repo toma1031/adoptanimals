@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/like.js' %}"></script>
+{% endblock %}
+{% block main %}
+{% if user.is_authenticated %}
+<h1>Hello</h1>
+<h2 class="">{{ user.get_username }}!</h2>
+{% endif %}
+{% if not message_room_list %}
+<p>No message room yet.</p>
+{% else %}
+{% for message_room in mesage_room_list %}
+    <div class="card mb-4">
+      <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
+      <div class="card-body">
+        <h2 class="card-title">{{ post.user}} <span class="small"> Name: {{ post.name }}</span></h2>
+        <h2 class="card-title">{{ message_room.id }}</h2>
+        <a class="btn btn-primary" href="{% url 'adopt_animals:message_room' message_room.id %}" >Detail</a>
+      </div>
+    </div>
+{% endfor %}
+{% endif %}
+{% endblock main %}
