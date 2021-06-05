@@ -7,6 +7,7 @@ from .models import MessageRoom, Post, Tag, Like, Message, MessageRoom
 from .forms import PostForm, MessageForm
 from accounts.models import User
 from django.http import JsonResponse
+from django.db.models import Q
 
 # Create your views here.
 class IndexView(ListView):
@@ -319,11 +320,12 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
       # 投稿したユーザー(message_room_obj.post.userとログイン中のユーザー(self.request.user)が一致する、もしくは
       # メッセージルームを作ったユーザー（message_room_obj.inquiry_user）とログイン中のユーザー（self.request.user）が一致すれば、メッセージルームへ移動させる
       if message_room_obj.post.user == self.request.user or message_room_obj.inquiry_user == self.request.user:
-          print('a')
+        # super(). = MessageRoomViewクラスに設定しているListViewのこと
+        # **kwargs　＝　ここではその前のコードでmessage_room_obj=get_object_or_404(MessageRoom, pk=self.kwargs['pk'])としているから、message_roomのIDのことをさす。つまりreturn super().get(request, **kwargs)を詳しくいうと
+        # ListViewで設定したmessage_roomのIDを探して（GET）、それを返す
           return super().get(request, **kwargs)
       else:
         # メッセージルームのメンバーでない場合はIndexへ飛ばす
-          print('b')
           return redirect('/')
 
   # 送信済みのメッセージを表示するために必要
@@ -335,7 +337,8 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
     context['form'] = MessageForm
     # message_listをContextとして定義。contextは辞書型のデータなので、データを追加することもできる。例えば、context['message_list'] = 'message_room'とすれば、keyがmessage_list、valueがMessage.objects.all()というデータを追加することができる。
     # つまり、下記のように書くことによりcontextをどういうものにするか定義していることになる
-    context['message_list'] = Message.objects.all()
+    # Message.objects.filter(message_room_id=self.kwargs['pk'])はMessageモデルのmessage_roomフィールドが今アクセスしてるMessageRoomのidと一致するものだけ持ってくるという意味。self.kwargs[‘pk’]はそのオブジェクトのIDという意味がある
+    context['message_list'] = Message.objects.filter(message_room_id=self.kwargs['pk'])
     # 最後にContext（Message.objects.all()）を返す
     return context
 
@@ -371,3 +374,13 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
   context_object_name = 'message_room_list'
   success_url = reverse_lazy('adopt_animals:my_messages')
   paginate_by = 8
+
+  def get_context_data(self, **kwargs):
+    # contextという変数にDetailView（ここではsuperがDetailViewを表している）のContextデータ（context_object_name = 'message_room'）をGetして辞書型として代入
+    # この時点で変数contextにはmessage_roomが辞書型で入っている。
+    context = super().get_context_data(**kwargs)
+    # message_listをContextとして定義。contextは辞書型のデータなので、データを追加することもできる。例えば、context['message_list'] = 'message_room'とすれば、keyがmessage_list、valueがMessage.objects.all()というデータを追加することができる。
+    # つまり、下記のように書くことによりcontextをどういうものにするか定義していることになる
+    context['message_room_list'] = MessageRoom.objects.all()
+    # 最後にContext（Message.objects.all()）を返す
+    return context

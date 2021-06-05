@@ -46,6 +46,7 @@ class MessageRoom(models.Model):
 
     def __str__(self):
       return str(self.id)
+      
 class Message(models.Model):
     message = models.CharField(max_length=100)
     message_room = models.ForeignKey(MessageRoom, verbose_name='Message', on_delete=models.CASCADE)
