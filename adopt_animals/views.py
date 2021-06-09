@@ -7,7 +7,7 @@ from .models import MessageRoom, Post, Tag, Like, Message, MessageRoom
 from .forms import PostForm, MessageForm
 from accounts.models import User
 from django.http import JsonResponse
-from django.db.models import Q
+from django.utils import timezone
 
 # Create your views here.
 class IndexView(ListView):
@@ -360,6 +360,8 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
       message_obj.message_user_id = self.request.user.id
       # オブジェクトを保存する(データベースに保存される)
       message_obj.save()
+      # MessageRoomのupdate_timeフィールドを更新する処理を追加
+      MessageRoom.objects.filter(pk=self.kwargs['pk']).update(update_time=timezone.now())
     else:
       # メッセージに何か不備がある場合はエラー表示
       print(form.errors)
@@ -375,12 +377,15 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
   success_url = reverse_lazy('adopt_animals:my_messages')
   paginate_by = 8
 
-  def get_context_data(self, **kwargs):
-    # contextという変数にDetailView（ここではsuperがDetailViewを表している）のContextデータ（context_object_name = 'message_room'）をGetして辞書型として代入
-    # この時点で変数contextにはmessage_roomが辞書型で入っている。
-    context = super().get_context_data(**kwargs)
-    # message_listをContextとして定義。contextは辞書型のデータなので、データを追加することもできる。例えば、context['message_list'] = 'message_room'とすれば、keyがmessage_list、valueがMessage.objects.all()というデータを追加することができる。
-    # つまり、下記のように書くことによりcontextをどういうものにするか定義していることになる
-    context['message_room_list'] = MessageRoom.objects.all()
-    # 最後にContext（Message.objects.all()）を返す
-    return context
+  # def get_context_data(self, **kwargs):
+  #   # contextという変数にDetailView（ここではsuperがDetailViewを表している）のContextデータ（context_object_name = 'message_room'）をGetして辞書型として代入
+  #   # この時点で変数contextにはmessage_roomが辞書型で入っている。
+  #   context = super().get_context_data(**kwargs)
+  #   # message_room_listをContextとして定義。contextは辞書型のデータなので、データを追加することもできる。例えば、context['message_room_list'] = 'message_room'とすれば、keyがmessage_list、valueがMessage.objects.all()というデータを追加することができる。
+  #   # つまり、下記のように書くことによりcontextをどういうものにするか定義していることになる
+  #   context['message_room_list'] = MessageRoom.objects.filter(inquiry_user=self.request.user)
+  #   # 最後にContext（MessageRoom.objects.all()）を返す
+  #   return context
+
+  def get_queryset(self):
+    return MessageRoom.objects.filter(inquiry_user=self.request.user).order_by('update_time').reverse()

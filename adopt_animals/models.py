@@ -43,6 +43,7 @@ class Like(models.Model):
 class MessageRoom(models.Model):
     post = models.ForeignKey(Post, verbose_name='MessageRoom Post', on_delete=models.CASCADE)
     inquiry_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='inquiry_user')
+    update_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
       return str(self.id)
