@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+# ファイルの存在チェック用モジュール
+import errno
+# environをインポートして読み込む
+import environ
+env = environ.Env()
+env.read_env('.env')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,11 +26,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4k)*(mf%vd)thj3^2eox%s*#7&-p9rnuhh(civf%akxq9yz7ol'
+
+# SECRET_KEY = '4k)*(mf%vd)thj3^2eox%s*#7&-p9rnuhh(civf%akxq9yz7ol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+
+DEBUG=env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -141,7 +150,15 @@ LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = '/' # ログイン後のデフォルト遷移ページ
 LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログインページへのリダイレクト先
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# manage.pyと同じ階層に.envファイルを作り、そちらへ
+# 必要な情報は格納する。そして下記のように呼び出す。
+# SECURITY WARNING: keep the secret key used in production secret!
+DEBUG=env.bool('DEBUG', False)
+SECRET_KEY=env("SECRET_KEY")
+EMAIL=env("EMAIL")
+PASSWORD=env("PASSWORD")
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Email setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -186,3 +203,14 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
+
+
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = EMAIL
+EMAIL_HOST_PASSWORD = PASSWORD

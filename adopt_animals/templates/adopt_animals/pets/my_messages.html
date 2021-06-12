@@ -11,6 +11,7 @@
 {% if not message_room_list %}
 <p>No message room yet.</p>
 {% else %}
+<!-- 下記のmessage_room_listはViewのcontext_object_name = 'message_room_list'のmessage_room_listをさしている -->
 {% for message_room in message_room_list %}
 <div>
     <!-- もしログインしているユーザーがAnimalsの投稿者であれば、inquiry_user（メッセージルーム作成者）の名前を表示させる -->
@@ -25,4 +26,7 @@
 </div>
 {% endfor %}
 {% endif %}
+<div class="form w-100 p-3">
+    {% include "adopt_animals/pets/pagination.html" %}
+</div>
 {% endblock main %}

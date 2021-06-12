@@ -8,6 +8,7 @@ from .forms import PostForm, MessageForm
 from accounts.models import User
 from django.http import JsonResponse
 from django.utils import timezone
+from django.db.models import Q
 
 # Create your views here.
 class IndexView(ListView):
@@ -345,9 +346,9 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
 
 # このPost関数はDetailViewであるMessageRoomView（MessageRoomページ）において、投稿機能を持たせるときに必要な関数
   def post(self, request, **kwargs):
-    # リダイレクト先を現在開いているメッセージルームにするためここでmessage_roomを定義する
-    # 現在入っているメッセージルームと紐づけるため、引数はmessage_room_id=self.kwargs['pk']とする
-    message_room = MessageRoom.objects.filter(id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
+    # def post内はself.object使えないので
+    # 以下のようにすればうまくいくと思います。
+    self.object = self.get_object()
     # form変数にMessageFormを代入（このMessageRoomViewでMessageFormを使うには必須の作業）
     form = MessageForm(request.POST)
     # メッセージを保存するために必要
@@ -362,17 +363,51 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
       message_obj.save()
       # MessageRoomのupdate_timeフィールドを更新する処理を追加
       MessageRoom.objects.filter(pk=self.kwargs['pk']).update(update_time=timezone.now())
+      # もしログインしているユーザーがmessage_room.inquiry_user(ペットの投稿者じゃない)だった場合
+      if self.request.user ==  self.object.inquiry_user:
+        print(self.object.post.user)
+        # ペットの投稿者（message_room.post.user）にメールを送る
+        # 自分の中ではform.送りたい宛先.email_userで
+        # メールが送れるのかなと解釈しておりました。
+        # なるほど、この場合は
+        # form = form.save(commit=False)
+        # こうしているのでRequestPTOオブジェクトを作成しているのでform.chose_supervisor.email.. というのが使えています。
+        # 自分の中ではform.送りたい宛先.email_userでメールが送れるのかなと解釈しておりました。
+        # この考え方はやめましょう。大事なのはformという変数に何がはいっているのか というところですね。
+        # 今回の場合同じformという変数が定義されていても中身は異なります。
+        # 何が入っているのか、というのを意識づけてもらえればなと思います。
+        # では今回の場合は、同様な処理を行っているのはmessage_obj = form.save(commit=False)ですね。
+        self.object.post.user.email_user(
+          # 題名
+          # 題名に外部情報を読み込む方法は下記を参照。
+          # https://qiita.com/nomurasan/items/d68ed63a7dae897eda7c
+          'Hi! ' '{0}'.format(self.object.post.user) + '! Recieved message about your Post on Adopt Animals',
+          # メッセージの中身
+          # メッセージに外部情報を読み込む方法は下記を参照。
+          # https://qiita.com/nomurasan/items/d68ed63a7dae897eda7c
+          # request.POSTにはHTML側のフォームからPOSTされた内容が保管されている
+          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n http://127.0.0.1:8000/message_room_list/'.format(request.POST.get('message')))
+      # もしログインしているユーザーがmessage_room.post(ペットの投稿者)だった場合
+      else:
+        print(self.object.inquiry_user)
+        # 質問者（message_room.inquiry_user）にメールを送る
+        self.object.inquiry_user.email_user(
+          # 題名
+          'Hi! ' '{0}'.format(self.object.inquiry_user) + '! Recieved message about your Post on Adopt Animals',
+          # メッセージの中身
+          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n http://127.0.0.1:8000/message_room_list/'.format(request.POST.get('message')))
     else:
       # メッセージに何か不備がある場合はエラー表示
       print(form.errors)
     # メッセージを送った後はそのメッセージルームにリダイレクト
-    # return redirect('adopt_animals:message_room', pk=message_room[0].id)
-    return redirect('adopt_animals:message_room', pk=self.kwargs['pk'])
+    # ただ豆知識でお伝えしておくと以下のように書いておけばmessage_room = MessageRoom.objects.filter(id=self.kwargs['pk'], inquiry_user_id=self.request.user.id) これは不要になります。
+    return redirect('adopt_animals:message_room', pk=self.object.id)
 
 
 class MessageRoomListView(LoginRequiredMixin, ListView):
   template_name = 'adopt_animals/pets/my_messages.html'
   model = MessageRoom
+  # HTMLのmessage_room_listを意味している
   context_object_name = 'message_room_list'
   success_url = reverse_lazy('adopt_animals:my_messages')
   paginate_by = 8
@@ -387,5 +422,9 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
   #   # 最後にContext（MessageRoom.objects.all()）を返す
   #   return context
 
+# paginated_by = 8　を使っている時点で、オブジェクトをフィルターをかけてページに表示するには
+# get_context_data関数は使えず、get_queryset関数しか使えない
+
   def get_queryset(self):
-    return MessageRoom.objects.filter(inquiry_user=self.request.user).order_by('update_time').reverse()
+    # フィールドを繋げて取得する時は、__で繋いでやる。post__user=はPostモデルの先にあるuserというフィールドを条件にかけてほしいという意味。ちなみに下記のコードはログインしているユーザー(self.request.user)が質問者(inquiry_user)もしくはペット投稿者(post__user)に該当するMessageRoomオブジェクトを取得し、リターンするという意味になる
+    return MessageRoom.objects.filter(Q(inquiry_user=self.request.user) | Q(post__user=self.request.user)).order_by('update_time').reverse()
