@@ -3,7 +3,8 @@ from .views import IndexView
 from adopt_animals import views
 from accounts import views
 from adopt_animals.views import (CreatePostView, PostDoneView, PostDetailView, PostUpdateView, 
-                                    PostDeleteView, MyPostListView, MyFavoritePostListView, MessageRoomView, MessageRoomListView)
+                                    PostDeleteView, MyPostListView, MyFavoritePostListView, MessageRoomView, MessageRoomListView,
+                                    ContactFormView, ContactResultView)
 from . import views
 
 app_name = 'adopt_animals'
@@ -29,4 +30,7 @@ urlpatterns = [
     path('message_room/<int:pk>/', MessageRoomView.as_view(), name='message_room'),
 
     path('message_room_list/', MessageRoomListView.as_view(), name='my_messages'),
+
+    path('contact/', ContactFormView.as_view(), name='contact_form'),
+    path('contact/result/', ContactResultView.as_view(), name='contact_result'),
 ]

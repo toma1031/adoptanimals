@@ -4,11 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import MessageRoom, Post, Tag, Like, Message, MessageRoom
-from .forms import PostForm, MessageForm
+from .forms import PostForm, MessageForm, ContactForm
 from accounts.models import User
 from django.http import JsonResponse
 from django.utils import timezone
 from django.db.models import Q
+from django.views.generic.edit import FormView
 
 # Create your views here.
 class IndexView(ListView):
@@ -428,3 +429,22 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
   def get_queryset(self):
     # フィールドを繋げて取得する時は、__で繋いでやる。post__user=はPostモデルの先にあるuserというフィールドを条件にかけてほしいという意味。ちなみに下記のコードはログインしているユーザー(self.request.user)が質問者(inquiry_user)もしくはペット投稿者(post__user)に該当するMessageRoomオブジェクトを取得し、リターンするという意味になる
     return MessageRoom.objects.filter(Q(inquiry_user=self.request.user) | Q(post__user=self.request.user)).order_by('update_time').reverse()
+
+# お問い合わせフォーム
+class ContactFormView(FormView):
+    template_name = 'adopt_animals/contact/contact_form.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('adopt_animals:contact_result')
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
+
+
+class ContactResultView(TemplateView):
+    template_name = 'adopt_animals/contact/contact_result.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['success'] = "The form was sent successfully."
+        return context
