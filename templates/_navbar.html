@@ -1,21 +1,47 @@
+{% load static %}
 
-<nav>
-  <a href="/" >Adopt Animals</a>
-    <ul>
-      <li><a href="/" >Top</li>
+<nav class="navbar navbar-expand-sm">
+  <div class="container">
+    <a href="/" class="navbar-brand">Adopt Animals</a>
+    <!-- PC -->
+    <ul class="navbar-nav pc-class ml-auto"> 
+      <li class="nav-item"><a class="top" href="/" >Top</li>
       {% if user.is_authenticated %}
       <!-- ログイン中に表示したいナビゲーション -->
-      <li><a class="change_user" href="{% url 'accounts:accounts_change_user' user.username %}">Profile</a></li>
-      <li><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
-      <li><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Post List</a></li>
-      <li><a class="my_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">My Favorite Post List</a></li>
-      <li><a class="my_post_list" href="{% url 'adopt_animals:my_messages' %}">My Messages</a></li>
-      <li><a class="logout" href="{% url 'logout' %}">Logout</a></li>
+      <li class="nav-item"><a class="change_user" href="{% url 'accounts:accounts_change_user' user.username %}">Profile</a></li>
+      <li class="nav-item"><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
+      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Post List</a></li>
+      <li class="nav-item"><a class="my_fav_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">My Favorite Post List</a></li>
+      <li class="nav-item"><a class="my_message_list" href="{% url 'adopt_animals:my_messages' %}">My Messages</a></li>
+      <li class="nav-item"><a class="logout" href="{% url 'logout' %}">Logout</a></li>
       {% else %}
       <!-- 未ログインの時に表示したいナビゲーション -->
-      <li><a class="login" href="{% url 'login' %}">Login</a></li>
-      <li><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
+      <li class="nav-item"><a class="login" href="{% url 'login' %}">Login</a></li>
+      <li class="nav-item"><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
       {% endif %}
-      <li><a class="contact_form" href="{% url 'adopt_animals:contact_form' %}">Contact</a></li>
+      <li class="nav-item"><a class="contact_form " href="{% url 'adopt_animals:contact_form' %}">Contact</a></li>
     </ul>
+
+    <!-- phone -->
+    <button class="hamburger-button"></button>
+    <nav class="hamburger-nav navbar-right">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="/" >Top</li>
+      {% if user.is_authenticated %}
+      <!-- ログイン中に表示したいナビゲーション -->
+      <li class="nav-item"><a class="change_user" href="{% url 'accounts:accounts_change_user' user.username %}">Profile</a></li>
+      <li class="nav-item"><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
+      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Post List</a></li>
+      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">My Favorite Post List</a></li>
+      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_messages' %}">My Messages</a></li>
+      <li class="nav-item"><a class="logout" href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <!-- 未ログインの時に表示したいナビゲーション -->
+      <li class="nav-item"><a class="login" href="{% url 'login' %}">Login</a></li>
+      <li class="nav-item"><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
+      {% endif %}
+      <li class="nav-item"><a class="contact_form" href="{% url 'adopt_animals:contact_form' %}">Contact</a></li>
+    </ul>
+    </nav>
+  </div>
 </nav>
