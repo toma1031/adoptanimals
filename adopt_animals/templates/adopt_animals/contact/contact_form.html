@@ -4,16 +4,12 @@
 <script type="text/javascript" src="{% static 'js/like.js' %}"></script>
 {% endblock %}
 {% block main %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>Contact</h1>
-      <p>Contact Form</p>
-      <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </div>
+<div class="w-100 text-center ml-2 mr-2 each_page_top">
+  <h1 class="">Contact</h1>
+  <p class="">Contact Form</p>
+  <form method="POST" class="col-md-6 offset-md-3">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 {% endblock main %}
