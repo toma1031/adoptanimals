@@ -71,6 +71,38 @@ img {
   display: inline-block;
 }
 
+/* profile page */
+.phone-field-ext {
+  display:none;
+}
+
+#id_phone_number_1 {
+  display:none;
+}
+
+.update {
+  margin-bottom: 10px;
+}
+
+.change_password {
+  margin-bottom: 10px;
+}
+
+.each_page_top {
+  margin-top: 30px;
+}
+
+.cancel_membership {
+  margin-bottom: 10px;
+}
+
+.top {
+  margin-bottom: 10px;
+}
+
+/* password_change.html CSS */
+
+
 
 .request_form_page {
   color: black;

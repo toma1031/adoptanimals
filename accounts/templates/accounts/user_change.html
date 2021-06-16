@@ -1,25 +1,27 @@
 {% extends 'base.html' %}
+<!-- load widget_tweaksはform-controlを使うために必要 -->
 {% load widget_tweaks %}
 {% block main %}
-<div class="w-100 text-center ml-2 mr-2">
+<div class="w-100 text-center ml-2 mr-2 each_page_top">
   <h3 class="w-100 text-center ml-2 mr-2">Change User Info</h3>
-  <form class="ui form" action="" method="POST" class="">
+  <form class="col-md-6 offset-md-3" action="" method="POST" class="">
     {% csrf_token %}
     <!-- {{form.as_p}} -->
-    <div class="col-md-2 form-inline"><p>User Name: {{ form.username|add_class:"form-control" }}</p></div>
-    <div class="col-md-2 form-inline"><p>Email: {{ form.email|add_class:"form-control" }}</p></div>
-    <div class="col-md-2 form-inline"><p>State: {{ form.state|add_class:"form-control" }}</p></div>
-    <div class="col-md-2 form-inline"><p>City: {{ form.city|add_class:"form-control" }}</p></div>
-    <div class="col-md-2 form-inline"><p>Zipcode: {{ form.zipcode|add_class:"form-control" }}</p></div>
-    <div class="col-md-2 form-inline"><p>Phone number: {{ form.phone_number|add_class:"form-control" }}</p></div>
-    <button class="btn btn-warning" type="submit">Update</button>
+    <p>User Name{{ form.username|add_class:"form-control" }}</p>
+    <p>Email{{ form.email|add_class:"form-control" }}</p>
+    <p>State{{ form.state|add_class:"form-control" }}</p>
+    <p>City{{ form.city|add_class:"form-control" }}</p>
+    <p>Zipcode{{ form.zipcode|add_class:"form-control" }}</p>
+    <p>Phone number{{ form.phone_number|add_class:"form-control" }}</p>
+    <button class="btn btn-primary update" type="submit">Update</button>
   </form>
   <!-- ここでユーザーがGoogleアカウントでログインしている場合、パスワード変更のURLリンクは
   表示させないようにしている -->
   {% if user.has_usable_password %}
-  <a class="btn btn-warning" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
+  <a class="btn btn-success col-md-2 col-6 change_password" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
   {% endif %}
-  <a class="delete_user btn btn-warning" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel Membership</a><br>
-  <a href="/" class="btn btn-warning">TOP</a>
+  <a class="delete_user btn btn-danger col-md-2 col-6 cancel_membership" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel
+    Membership</a><br>
+  <a href="/" class="btn btn-warning top">TOP</a>
 </div>
 {% endblock %}

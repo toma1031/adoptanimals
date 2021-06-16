@@ -81,6 +81,11 @@ class UserChangeForm(ModelForm):
         user.save()
 
 class MyPasswordChangeForm(PasswordChangeForm):
+
+    def __init__(self, user, *args, **kwargs):
+        super(MyPasswordChangeForm, self).__init__(user,*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
     class Meta:
         model = User
         fields = [
