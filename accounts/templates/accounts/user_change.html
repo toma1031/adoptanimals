@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block main %}
-<div>
-  <div class="header"><h3>Change User Info</h3></div>
-  <form class="ui form" action="" method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button class="" type="submit">Update</button>
+<div class="w-100 text-center ml-2 mr-2">
+  <h3 class="w-100 text-center ml-2 mr-2">Change User Info</h3>
+  <form class="ui form" action="" method="POST" class="">
+    {% csrf_token %}
+    <!-- {{form.as_p}} -->
+    <div class="col-md-2 form-inline"><p>User Name: {{ form.username|add_class:"form-control" }}</p></div>
+    <div class="col-md-2 form-inline"><p>Email: {{ form.email|add_class:"form-control" }}</p></div>
+    <div class="col-md-2 form-inline"><p>State: {{ form.state|add_class:"form-control" }}</p></div>
+    <div class="col-md-2 form-inline"><p>City: {{ form.city|add_class:"form-control" }}</p></div>
+    <div class="col-md-2 form-inline"><p>Zipcode: {{ form.zipcode|add_class:"form-control" }}</p></div>
+    <div class="col-md-2 form-inline"><p>Phone number: {{ form.phone_number|add_class:"form-control" }}</p></div>
+    <button class="btn btn-warning" type="submit">Update</button>
   </form>
   <!-- ここでユーザーがGoogleアカウントでログインしている場合、パスワード変更のURLリンクは
   表示させないようにしている -->
   {% if user.has_usable_password %}
-  <a class="" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
+  <a class="btn btn-warning" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
   {% endif %}
-  <a class="delete_user" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel Membership</a><br>
-  <a href="/">TOP</a>
+  <a class="delete_user btn btn-warning" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel Membership</a><br>
+  <a href="/" class="btn btn-warning">TOP</a>
 </div>
 {% endblock %}

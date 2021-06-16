@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'cloudinary',
     # 投稿に紐付けされている写真を削除
     'django_cleanup.apps.CleanupConfig',
+    # |add_class:"form-control"を使用できるようにする
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

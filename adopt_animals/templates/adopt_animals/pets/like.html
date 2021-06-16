@@ -1,4 +1,4 @@
-<form action="{% url 'adopt_animals:like' %}" method="POST">
+<form action="{% url 'adopt_animals:like' %}" method="POST" class="like_button">
   {% csrf_token %}
   {% if post.id in liked_list %}
   <!-- ログインしていない場合にハートマークを押したとき、いいねできないようにする -->

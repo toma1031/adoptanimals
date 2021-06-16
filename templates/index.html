@@ -5,60 +5,64 @@
 {% endblock %}
 {% block main %}
 {% if user.is_authenticated %}
-<h1>Hello</h1>
-<h2 class="">{{ user.get_username }}!</h2>
+<p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
 {% endif %}
 <!-- 検索機能 -->
-<form action="" method="get">
-  <select name="query_category" value="{{ request.GET.query_category }}">
-    <option value="">----</option>
-    <option value="Dog">Dog</option>
-    <option value="Cat">Cat</option>
-    <option value="Others">Others</option>
-  </select>
-  <select name="query_sex" value="{{ request.GET.query_sex }}">
-    <option value="">----</option>
-    <option value="1">Male</option>
-    <option value="2">Female</option>
-  </select>
-  <select name="query_state" value="{{ request.GET.query_state }}">
-    <option value="">----</option>
-    <option value="NJ">NJ</option>
-    <option value="NY">NY</option>
-  </select>
-  <input name="query_zipcode" value="{{ request.GET.query_zipcode }}" type="text" placeholder="Zipcode">
-  <button type="submit">Search</button>
-</form>
+<div class="form w-100 text-right ml-2 mr-2">
+  <form action="" method="get">
+    <select class="form-control col-md-2" name="query_category" value="{{ request.GET.query_category }}">
+      <option value="" style="display: none;">Type</option>
+      <option value="Dog">Dog</option>
+      <option value="Cat">Cat</option>
+      <option value="Others">Others</option>
+    </select>
+    <select class="form-control col-md-2" name="query_sex" value="{{ request.GET.query_sex }}">
+      <option value="" style="display: none;">Sex</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+    <select class="form-control col-md-2" name="query_state" value="{{ request.GET.query_state }}">
+      <option value=""style="display: none;">State</option>
+      <option value="NJ">NJ</option>
+      <option value="NY">NY</option>
+    </select>
+    <input class="form-control col-md-2" name="query_zipcode" value="{{ request.GET.query_zipcode }}" type="text" placeholder="Zipcode">
+    <button class="btn btn-warning form-control col-md-2" type="submit">Search</button>
+  </form>
+</div>
 <!-- 検索機能ここまで -->
+<!-- 投稿 -->
 {% for post in post_list %}
-    <div class="card mb-4">
-      <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
-      <div class="card-body">
-        <h2 class="card-title">{{ post.title }} <span class="small"> - {{ post.category }}</span></h2>
-        <p class="card-text">Name: {{ post.name }}</p>
-        <p class="card-text">Age: {{ post.age }}</p>
-        <p class="card-text">Weight: {{ post.weight }}</p>
-        <p class="card-text">Sex:
-          {% if post.sex == 1 %}
-          Male
-          {% else %}
-          Female
-          {% endif %}
-        </p>
-        <p class="card-text">State: {{ post.user.state }}</p>
-        <p class="card-text">Zipcode: {{ post.user.zipcode }}</p>
-        <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p>
-        <a class="btn btn-primary" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
-      </div>
-      <div class="card-footer text-muted">
-       <p>by {{ post.user}}</p>
-      <!-- いいねボタン -->
-        <div class="like-outer">          
-          {% include 'adopt_animals/pets/like.html' %}
-        </div>
-      <!-- いいねボタンここまで -->
-      </div>
+<div class="col-md-3">
+  <div class="card mb-4">
+    <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
+    <div class="card-body">
+      <!-- <h2 class="card-title">{{ post.title }} <span class="small"> - {{ post.category }}</span></h2> -->
+      <h5 class="card-text w-100 text-center">Name: {{ post.name }}</h5>
+      <!-- <p class="card-text">Age: {{ post.age }}</p>
+      <p class="card-text">Weight: {{ post.weight }}</p> -->
+      <p class="card-text">Sex:
+        {% if post.sex == 1 %}
+        Male
+        {% else %}
+        Female
+        {% endif %}
+      </p>
+      <p class="card-text">State: {{ post.user.state }}</p>
+      <!-- <p class="card-text">Zipcode: {{ post.user.zipcode }}</p>
+      <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p> -->
+      <a class="btn btn-primary w-100 text-center" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
+    </div>
+    <!-- いいねボタン -->
+    <div class="like-outer w-100 text-center">          
+      {% include 'adopt_animals/pets/like.html' %}
+    </div>
+    <!-- いいねボタンここまで -->
+  </div>
+</div>
 {% endfor %}
+
+
 <div class="form w-100 p-3">
   {% include "adopt_animals/pets/pagination.html" %}
 </div>
