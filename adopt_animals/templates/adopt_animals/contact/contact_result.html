@@ -4,5 +4,10 @@
 <script type="text/javascript" src="{% static 'js/like.js' %}"></script>
 {% endblock %}
 {% block main %}
-{{ success }}
+<div class="w-100 text-center ml-2 mr-2 each_page_top">
+<div class="success">
+  {{ success }}
+</div>
+<a href="/" class="btn btn-warning top">TOP</a>
+</div>
 {% endblock main %}

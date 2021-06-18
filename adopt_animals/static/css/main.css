@@ -100,7 +100,114 @@ img {
   margin-bottom: 10px;
 }
 
-/* password_change.html CSS */
+/* contact_form.html CSS */
+.success {
+  margin-bottom: 30px;
+}
+
+/* animals_post_form.html CSS */
+
+.create_new_post {
+  padding-top: 30px;
+}
+
+.submit_button_post_page {
+  margin-top: 30px;
+}
+
+.filelabel{
+  display: inline-block;
+  position: relative;
+  background-color: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel:hover{
+  background-color: #004db1;
+}
+
+.fileinput{
+  display: none;
+}
+
+.filelabel2{
+  display: inline-block;
+  position: relative;
+  background-color: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel2:hover{
+  background-color: #004db1;
+}
+
+.fileinput2{
+  display: none;
+}
+
+.filelabel3 {
+  display: inline-block;
+  position: relative;
+  background-color: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel3:hover{
+  background-color: #004db1;
+}
+
+.fileinput3 {
+  display: none;
+}
+
+.filelabel4{
+  display: inline-block;
+  position: relative;
+  background-color: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel4:hover{
+  background-color: #004db1;
+}
+
+.fileinput4{
+  display: none;
+}
+
+.filelabel5{
+  display: inline-block;
+  position: relative;
+  background-color: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel5:hover{
+  background-color: #004db1;
+}
+
+.fileinput5{
+  display: none;
+}
+
+
+
+
 
 
 

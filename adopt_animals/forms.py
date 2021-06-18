@@ -15,9 +15,31 @@ def file_size(value):
 
 class PostForm(forms.ModelForm):
 
-  title = forms.CharField(label='Title', required=True)
-  name = forms.CharField(label='Name', required=True)
-  age = forms.IntegerField(label='Age', required=True)
+  title = forms.CharField(
+        label='Title', 
+        required=True, 
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Title",
+        }),
+    )
+  name = forms.CharField(
+        label='Name', 
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "name",
+        }),
+    )
+  age = forms.IntegerField(
+        label='Age', 
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Age",
+        }),
+    )
+#   photo = forms.ImageField(label='Image', validators=[file_size],widget=forms.ImageField(attrs={'class': 'fileinput'}))
   photo = forms.ImageField(label='Image', validators=[file_size])
   photo2 = forms.ImageField(label='Image2', required=False, validators=[file_size])
   photo3 = forms.ImageField(label='Image3', required=False, validators=[file_size])
@@ -29,13 +51,33 @@ class PostForm(forms.ModelForm):
           ('2', 'Female'),
           ), 
          required=True,
-         widget=forms.widgets.Select
+         widget=forms.widgets.Select(attrs={
+                'class': 'form-control',
+            }),
          )
-  weight = forms.IntegerField(label='Weight', required=False)
-  story = forms.CharField(label='Story', required=True)
+  weight = forms.IntegerField(
+        label='Weight', 
+        required=False,
+        widget=forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Weight",
+        }),
+    )
+  story = forms.CharField(
+        label='Story', 
+        required=True,
+        widget=forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Story",
+        }),
+    )
 #   下記のempty_label=Noneはプルダウンメニューをクリックすると--------という項目を非表示にできる
   category = forms.ModelChoiceField(queryset=Tag.objects.all(),
-                      widget=forms.Select, label="Category:", required=True, empty_label=None)
+        label="Category:", required=True, empty_label=None, 
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }),
+    )
 # このMetaの中身というのはmodelsのフィールドを元にしている
   class Meta:
       model = Post

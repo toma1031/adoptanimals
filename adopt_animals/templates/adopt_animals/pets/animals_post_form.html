@@ -1,51 +1,99 @@
 {% extends 'base.html' %}
-
+<!-- |{% load widget_tweaks %}はadd_class:を使用する時に必要 -->
+{% load widget_tweaks %}
 {% block main %}
-<div class="my-4">
-  <h2>Post</h2>
+<div class="w-100 text-center ml-2 mr-2 each_page_to">
+  <h2 class="create_new_post">Create new post</h2>
 </div>
 <!-- enctype="multipart/form-data というのは基本的にテキストベースのデータのやり取りしかしないHTTP通信で色んなデータ(画像やエクセルファイル)も通信の対象に含めるいったものです。 -->
+<div class="w-100 text-center ml-2 mr-2 each_page_to">
 <form action="{% url 'adopt_animals:post_new' %}" method="POST" enctype="multipart/form-data">
-  <div class="container">
-    {% csrf_token %}
-    {{ form.errors }}
-    <p class="title">Title</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.title }}</div>
+  {% csrf_token %}
+  {{ form.errors }}
+  <p class="title">Title</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.title }}</div>
+  </div>
+  <p class="title">Name</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.name }}</div>
+  </div>
+  <p class="title">Age</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.age }}</div>
+  </div>
+  <p class="title">Wight</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.weight }}</div>
+  </div>
+  <p class="title">Sex</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.sex }}</div>
+  </div>
+  <p class="title">Story</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.story }}</div>
+  </div>
+  <p class="title">Category</p>
+  <div class="row justify-content-center">
+    <div class="col-8 col-lg-4">{{ form.category }}</div>
+  </div>
+  <p class="title">Photo</p>
+  <div class="photo row justify-content-center">
+    <div>
+      <label for="id_photo" class="filelabel">Choose Photo</label>
+      <div class="col-8 col-lg-4">{{ form.photo|add_class:"fileinput" }}</div>
     </div>
-    <p class="title">Name</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.name }}</div>
+  </div>
+  <div class="row justify-content-center">
+    <div>
+      <label for="id_photo2" class="filelabel2">Choose Photo</label>
+      <div class="col-8 col-lg-4">{{ form.photo2|add_class:"fileinput2" }}</div>
     </div>
-    <p class="title">Age</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.age }}</div>
+  </div>
+  <div class="row justify-content-center">
+    <div>
+      <label for="id_photo3" class="filelabel3">Choose Photo</label>
+      <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput3" }}</div>
     </div>
-    <p class="title">Wight</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.weight }}</div>
+  </div>
+  <div class="row justify-content-center">
+    <div>
+      <label for="id_photo4" class="filelabel4">Choose Photo</label>
+      <div class="col-8 col-lg-4">{{ form.photo4|add_class:"fileinput4" }}</div>
     </div>
-    <p class="title">Sex</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.sex }}</div>
+  </div>
+  <div class="row justify-content-center">
+    <div>
+      <label for="id_photo5" class="filelabel5">Choose Photo</label>
+      <div class="col-8 col-lg-4">{{ form.photo5|add_class:"fileinput5" }}</div>
     </div>
-    <p class="title">Story</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.story }}</div>
-    </div>
-    <p class="title">Category</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.category }}</div>
-    </div>
-    <p class="title">Photo</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.photo }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo2 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo3 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo4 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo5 }}</div>
-    </div>
-    <button class="btn btn-warning" type="submit">Post</button>
+  </div>
+  <button class="btn btn-warning submit_button_post_page" type="submit">Post</button>
+</div>
 </form>
 
+<script>
+  // 添付ファイルチェンジイベント
+  $('.fileinput').on('change', function () {
+    let file = $(this).prop('files')[0];
+    $('.filelabel').text(file.name);
+  });
+  $('.fileinput2').on('change', function () {
+    let file = $(this).prop('files')[0];
+    $('.filelabel2').text(file.name);
+  });
+  $('.fileinput3').on('change', function () {
+    let file = $(this).prop('files')[0];
+    $('.filelabel3').text(file.name);
+  });
+  $('.fileinput4').on('change', function () {
+    let file = $(this).prop('files')[0];
+    $('.filelabel4').text(file.name);
+  });
+  $('.fileinput5').on('change', function () {
+    let file = $(this).prop('files')[0];
+    $('.filelabel5').text(file.name);
+  });
+</script>
 {% endblock %}
