@@ -5,56 +5,92 @@
 {% endblock %}
 {% block main %}
 {% if user.is_authenticated %}
-<h2 class="">Hello {{ user.get_username }}!</h2>
+<p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
 {% endif %}
-<div class="card mb-4">
-  <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="500">
-  {% if post.photo2 %}
-  <img src="{{ post.photo2.url }}" alt="" class="card-img-top index-img" width="500">
-  {% endif %}
-  {% if post.photo3 %}
-  <img src="{{ post.photo3.url }}" alt="" class="card-img-top index-img" width="500">
-  {% endif %}
-  {% if post.photo4 %}
-  <img src="{{ post.photo4.url }}" alt="" class="card-img-top index-img" width="500">
-  {% endif %}
-  {% if post.photo5 %}
-  <img src="{{ post.photo5.url }}" alt="" class="card-img-top index-img" width="500">
-  {% endif %}
+<!-- 写真セクション -->
+<div class="main-container w-100 text-center ml-2 mr-2 each_page_to">
+  <div class="main wrapper clearfix">
+    <article>
+      <section>
+        <div id="mygallery" class="gallery">
+          <div class="images">
+            <div class="active" style="background-image: url({{ post.photo.url }})"></div>
+            {% if post.photo2 %}
+            <div  style="background-image: url({{ post.photo2.url }})"></div>
+            {% endif %}
+            {% if post.photo3 %}
+            <div  style="background-image: url({{ post.photo3.url }})"></div>
+            {% endif %}
+            {% if post.photo4 %}
+            <div  style="background-image: url({{ post.photo4.url }})"></div>
+            {% endif %}
+            {% if post.photo5 %}
+            <div  style="background-image: url({{ post.photo5.url }})"></div>
+            {% endif %}
+            {% if post.photo2 or post.photo3 or post.photo4 or post.photo5 %}
+            <span class="left"></span>
+            <span class="right"></span>
+            {% endif %}
+          </div>
+          <div class="thumbs">
+            {% if post.photo2 %}
+            <div class="active" style="background-image: url({{ post.photo.url }})"></div>
+            <div  style="background-image: url({{ post.photo2.url }})"></div>
+            {% endif %}
+            {% if post.photo3 %}
+            <div  style="background-image: url({{ post.photo3.url }})"></div>
+            {% endif %}
+            {% if post.photo4 %}
+            <div  style="background-image: url({{ post.photo4.url }})"></div>
+            {% endif %}
+            {% if post.photo5 %}
+            <div  style="background-image: url({{ post.photo5.url }})"></div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </article>
+  </div>
 </div>
-<div class="card-body">
+<!-- 写真セクションここまで -->
+
+<!-- 文章セクション -->
+<div class="card-body w-100 text-center ml-2 mr-2 each_page_to">
   <h2 class="card-title">Title: {{ post.title }}</h2>
-  <p class="card-text">Name: {{ post.name }}</p>
-  <p class="card-text">Age: {{ post.age }}</p>
-  <p class="card-text">Weight: {{ post.weight }}</p>
-  <p class="card-text">Sex:
-    {% if post.sex == 1 %}
-    Male
-    {% else %}
-    Female
-    {% endif %}
-  </p>
-  <p class="card-text">Name: {{ post.category }}</p>
-  <p class="card-text">State: {{ user.state }}</p>
-  <p class="card-text">Zipcode: {{ user.zipcode }}</p>
-  <p class="card-text">Story: {{ post.story }}</p>
-  <p class="card-text">Owener: {{ post.user }}</p>
+  <div class="row">
+    <p class="card-text col-md-6">Name: {{ post.name }}</p>
+    <p class="card-text col-md-6">Age: {{ post.age }}</p>
+    <p class="card-text col-md-6">Weight: {{ post.weight }}</p>
+    <p class="card-text col-md-6">Sex:
+      {% if post.sex == 1 %}
+      Male
+      {% else %}
+      Female
+      {% endif %}
+    </p>
+    <p class="card-text col-md-6">Name: {{ post.category }}</p>
+    <p class="card-text col-md-6">State: {{ user.state }}</p>
+    <p class="card-text col-md-6">Zipcode: {{ user.zipcode }}</p>
+    <p class="card-text col-md-6">Owner: {{ post.user }}</p>
+  </div>
+  <p class="card-text story">Story: {{ post.story }}</p>
   <div class="like-outer">
     {% include 'adopt_animals/pets/like.html' %}
   </div>
   <!-- ユーザーが投稿者でない場合表示する -->
   {% if not user == post.user %}
-  <form action="{% url 'adopt_animals:post_detail' post.id %}" method="POST" class="btn btn-primary">
+  <form action="{% url 'adopt_animals:post_detail' post.id %}" method="POST">
     {% csrf_token %}
     {{ form.errors }}
-    <button type="submit">Message to {{ post.user }}</button>
+    <button class="btn btn-primary" type="submit">Message to {{ post.user }}</button>
   </form><br>
   {% endif %}
   <!-- もしユーザーが投稿者だった場合表示する  -->
   {% if user == post.user %}
-  <a class="btn btn-primary" href="{% url 'adopt_animals:post_update' post.id %}">Edit this post</a><br>
-  <a class="btn btn-danger" href="{% url 'adopt_animals:post_delete' post.id %}">Delete</a><br>
+  <a class="btn btn-info edit_this_post" href="{% url 'adopt_animals:post_update' post.id %}">Edit this post</a><br>
+  <a class="btn btn-danger delete" href="{% url 'adopt_animals:post_delete' post.id %}">Delete</a><br>
   {% endif %}
-  <a class="btn btn-primary" href="/">Top</a>
+  <a class="btn btn-primary" href="{{request.META.HTTP_REFERER}}">Back</a>
 </div>
+<!-- 文章セクションここまで -->
 {% endblock main %}

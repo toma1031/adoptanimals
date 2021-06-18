@@ -8,10 +8,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-  integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="{% static 'css/hamburger-menu.css' %}">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  
+  <!-- post_detail.htmlフォトギャラリー用 -->
+  <link rel="stylesheet" href="{% static 'css/gallery.min.css' %}">
+  
   {% block js %}
   {% endblock js %}
   <title>Adopt Animals</title>
@@ -28,11 +30,14 @@
     {% include "_footer.html" %}
   </div>
 
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{% static 'js/hamburger-menu.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+
+  <!-- post_detail.htmlフォトギャラリー用 -->
+  <script src="{% static 'js/hammer.min.js' %}"></script>
+  <script src="{% static 'js/main.min.js' %}"></script>
 </body>
 </html>
