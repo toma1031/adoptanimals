@@ -1,50 +1,85 @@
 {% extends 'base.html' %}
 {% block main %}
-<h2 class="">Hello {{ user.get_username }}!</h2>
-<div class="my-4">
+{% load widget_tweaks %}
+<p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
+<div class="my-4 w-100 text-center ml-2 mr-2">
   <h2>Post Update</h2>
 </div>
 <!-- enctype="multipart/form-data というのは基本的にテキストベースのデータのやり取りしかしないHTTP通信で色んなデータ(画像やエクセルファイル)も通信の対象に含めるいったものです。 -->
-<form action="{% url 'adopt_animals:post_update' post.id %}" method="POST" enctype="multipart/form-data">
-  <div class="container">
-    {% csrf_token %}
-    {{ form.errors }}
-    <p class="title">Title</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.title }}</div>
-    </div>
-    <p class="title">Name</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.name}}</div>
-    </div>
-    <p class="title">Age</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.age }}</div>
-    </div>
-    <p class="title">Wight</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.weight }}</div>
-    </div>
-    <p class="title">Sex</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.sex }}</div>
-    </div>
-    <p class="title">Story</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.story }}</div>
-    </div>
-    <p class="title">Category</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.category }}</div>
-    </div>
-    <p class="title">Photo</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.photo }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo2 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo3 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo4 }}</div>
-      <div class="col-8 col-lg-4">{{ form.photo5 }}</div>
-    </div>
-    <button class="btn btn-warning" type="submit">Update</button>
-</form>
+<div class="w-100 text-center ml-2 mr-2 each_page_to">
+  <form action="{% url 'adopt_animals:post_update' post.id %}" method="POST" enctype="multipart/form-data">
+    <!-- <div class="container"> -->
+      {% csrf_token %}
+      {{ form.errors }}
+      <p class="title">Title</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.title }}</div>
+      </div>
+      <p class="title">Name</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.name }}</div>
+      </div>
+      <p class="title">Age</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.age }}</div>
+      </div>
+      <p class="title">Wight</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.weight }}</div>
+      </div>
+      <p class="title">Sex</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.sex }}</div>
+      </div>
+      <p class="title">Story</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.story }}</div>
+      </div>
+      <p class="title">Category</p>
+      <div class="row justify-content-center">
+        <div class="col-8 col-lg-4">{{ form.category }}</div>
+      </div>
+      <p class="title">Photo</p>
+      <!-- <div class="photo row justify-content-center"> -->
+        <!-- <div class="col-8 col-lg-4">{{ form.photo }}</div>
+        <div class="col-8 col-lg-4">{{ form.photo2 }}</div>
+        <div class="col-8 col-lg-4">{{ form.photo3 }}</div>
+        <div class="col-8 col-lg-4">{{ form.photo4 }}</div>
+        <div class="col-8 col-lg-4">{{ form.photo5 }}</div> -->
+        <!-- <div class="photo row justify-content-center"> -->
+          <!-- <div class="row justify-content-center"> -->
+            <!-- <div> -->
+              <label for="id_photo3" class="filelabel">Choose Photo</label>
+              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput" }}</div>
+            <!-- </div> -->
+          <!-- </div> -->
+          <div class="row justify-content-center">
+            <div>
+              <label for="id_photo3" class="filelabel2">Choose Photo</label>
+              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput2" }}</div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div>
+              <label for="id_photo3" class="filelabel3">Choose Photo</label>
+              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput3" }}</div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div>
+              <label for="id_photo3" class="filelabel4">Choose Photo</label>
+              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput4" }}</div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div>
+              <label for="id_photo3" class="filelabel5">Choose Photo</label>
+              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput5" }}</div>
+            </div>
+          </div>
+        <button class="btn btn-warning" type="submit">Update</button>
+      <!-- </div> -->
+  </form>
+</div>
+
 {% endblock %}

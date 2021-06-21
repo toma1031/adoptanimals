@@ -8,7 +8,7 @@
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
 {% endif %}
 <!-- 写真セクション -->
-<div class="main-container w-100 text-center ml-2 mr-2 each_page_to">
+<!-- <div class="main-container w-100 text-center ml-2 mr-2 each_page_to">
   <div class="main wrapper clearfix">
     <article>
       <section>
@@ -51,6 +51,39 @@
       </section>
     </article>
   </div>
+</div> -->
+
+
+
+
+<!-- スライダーのメインコンテナの div 要素 -->
+<div class="swiper-container w-100 text-center ml-2 mr-2 each_page_to" id="swiper01"> 
+  <!-- ラッパーの（スライドを囲む） div 要素 -->
+  <div class="swiper-wrapper"> 
+    <!-- それぞれのスライドの div 要素 -->
+    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo.url }}" alt=""></div>
+    {% if post.photo2 %}
+    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo2.url }}" alt=""></div>
+    {% endif %}
+    {% if post.photo3 %}
+    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo3.url }}" alt=""></div>
+    {% endif %}
+    {% if post.photo4 %}
+    <div class="swiper-slide"><img class="post_detail_page_photo"src="{{ post.photo4.url }}" alt=""></div>
+    {% endif %}
+    {% if post.photo5 %}
+    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo5.url }}" alt=""></div>
+    {% endif %}
+  </div>
+  <!-- ページネーションの div 要素 -->
+  <!-- <div class="swiper-pagination"></div> -->
+ 
+  <!-- ナビゲーションボタンの div 要素-->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+ 
+  <!-- スクロールバーの div 要素 -->
+  <!-- <div class="swiper-scrollbar"></div> -->
 </div>
 <!-- 写真セクションここまで -->
 

@@ -71,6 +71,28 @@ img {
   display: inline-block;
 }
 
+/* login page */
+.each_page_to_login_page {
+  padding-top: 30px;
+}
+
+.login_with_socail_media_account {
+  margin-top: 30px;
+}
+
+.login_with_socail_media_account_btn{
+  margin-top: 20px;
+}
+
+.forget_password_btn {
+  margin-top: 20px;
+}
+
+.forget_password {
+  margin-top: 30px;
+}
+
+
 /* profile page */
 .phone-field-ext {
   display:none;
@@ -222,6 +244,43 @@ img {
   margin-bottom: 10px;
   padding: 10px 65px 10px 65px;
 }
+
+.post_detail_page_photo {
+  object-fit: cover;
+  width: 600px;
+  height: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* ディスプレイによって写真の表示が変わる */
+@media (max-width: 540px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 410px;
+    height: 410px; 
+  }
+}
+
+@media (max-width: 400px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 310px;
+    height: 310px; 
+  }
+}
+
+@media (max-width: 300px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 270px;
+    height: 270px; 
+  }
+}
+
+
 
 
 

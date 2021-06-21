@@ -6,6 +6,8 @@
 {% block main %}
 {% if user.is_authenticated %}
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
+{% else %}
+<p class="hello w-100 text-right ml-2 mr-2">Hello Guest!</p>
 {% endif %}
 <!-- 検索機能 -->
 <div class="form w-100 text-right ml-2 mr-2">

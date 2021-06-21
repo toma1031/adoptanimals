@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
-
 {% block main %}
+<div class="w-100 text-center ml-2 mr-2">
+  <h2 class="each_page_to_login_page">Login with Username</h2>
+  <form action="{% url 'login' %}" method="POST" novalidate>
+    {% include "accounts/_form.html" with submit_label="Login" %}
+  </form>
+  <div class="login_with_socail_media_account">
+    <h2>Login with Socail Media Account</h2>
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-primary login_with_socail_media_account_btn">Google Account Login</a></li>
+  </div>
+  <div class="forget_password">
+    <h2>Forget Password?</h2>
+    <a href="{% url 'accounts:password_reset' %}" class="btn btn-success forget_password_btn" >Reset Password</a>
+  </div>
+</div>
 
-<h2>Login with Email Address</h2>
-<form action="{% url 'login' %}" method="POST" novalidate>
-  {% include "accounts/_form.html" with submit_label="Login" %}
-</form>
-
-<h2>Login with Socail Media Account</h2>
-<ul>
-  <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google Account Login</a></li>
-</ul>
-
-<h2>Forget Password?</h2>
-<ul>
-  <a href="{% url 'accounts:password_reset' %}" class="btn btn-success btn-lg btn-block" >Reset Password</a>
-</ul>
 
 {% endblock %}
