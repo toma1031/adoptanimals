@@ -71,6 +71,22 @@ img {
   display: inline-block;
 }
 
+/* sign up page */
+.each_page_to_signup {
+  padding-top: 30px;
+}
+
+.socail_medias_signup {
+  padding-top: 30px;
+}
+
+.socail_medias_signup_btn {
+  margin-top: 20px;
+}
+
+.signup_page_home_btn {
+  margin-top: 20px;
+}
 /* login page */
 .each_page_to_login_page {
   padding-top: 30px;
@@ -92,6 +108,9 @@ img {
   margin-top: 30px;
 }
 
+.errorlist {
+  color: red;
+}
 
 /* profile page */
 .phone-field-ext {

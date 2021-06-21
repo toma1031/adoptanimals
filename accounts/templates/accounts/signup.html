@@ -1,23 +1,79 @@
 {% extends 'base.html' %}
-
+<!-- load widget_tweaksはform-controlを使うために必要 -->
+{% load widget_tweaks %}
 {% block main %}
-  <h2>SignUp</h2>
-  <form action="{% url 'accounts:accounts_signup' %}" method="POST">
+<div class="form w-100 text-center ml-2 mr-2 each_page_to_signup">
+  <h2>Signup</h2>
+  <form action="{% url 'accounts:accounts_signup' %}" method="POST" class="">
     {{ form.non_field_errors }}
-    {% for field in form %}
-    <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-        {{ field }}
-        {{ field.errors }}
-    </div>
-    {% endfor %}
     {% csrf_token %}
+    {{ field.errors }}
+    <div class = "form-group">
+      <label class="control-label"><p>Username</p>{{ form.username|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.username.errors %}
+      <p class="">{{ form.username.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>Email</p>{{ form.email|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.email.errors %}
+      <p class="">{{ form.email.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>Phone number</p>{{ form.phone_number|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.phone_number.errors %}
+      <p class="">{{ form.phone_number.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>State</p>{{ form.state|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.state.errors %}
+      <p class="">{{ form.state.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>City</p>{{ form.city|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.city.errors %}
+      <p class="">{{ form.city.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>Zip Code</p>{{ form.zipcode|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.zipcode.errors %}
+      <p class="error">{{ form.zipcode.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>Password</p>{{ form.password1|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.password1.errors %}
+      <p class="error">{{ form.password1.errors }}</p>
+      {% endif %}
+    </div>
+    <div class = "form-group">
+      <label class="control-label"><p>Confirm Password</p>{{ form.password2|add_class:"form-control" }}</label>
+      <!-- エラー表示 -->
+      {% if form.password2.errors %}
+      <p class="error">{{ form.password2.errors }}</p>
+      {% endif %}
+    </div>
     <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
   </form>
+<div>
+  <h2 class="socail_medias_signup">Socail media Signup</h2>
+  <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-primary socail_medias_signup_btn">Google Signup</a>
+</div>
+<div>
+  <a href="/" class="btn btn-primary signup_page_home_btn">Home</a>
+</div>
 
-  <h2>Socail media SignUp</h2>
-  <ul>
-    <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google Signup</a></li>
-  </ul>
-  <a href="/" class="btn btn-warning">Home</a>
+</div>
+
 {% endblock %}

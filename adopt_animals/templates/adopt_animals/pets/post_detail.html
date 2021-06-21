@@ -6,6 +6,8 @@
 {% block main %}
 {% if user.is_authenticated %}
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
+{% else %}
+<p class="hello w-100 text-right ml-2 mr-2">Hello Guest!</p>
 {% endif %}
 <!-- 写真セクション -->
 <!-- <div class="main-container w-100 text-center ml-2 mr-2 each_page_to">
