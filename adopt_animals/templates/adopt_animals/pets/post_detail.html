@@ -81,9 +81,10 @@
   <!-- <div class="swiper-pagination"></div> -->
  
   <!-- ナビゲーションボタンの div 要素-->
+  {% if post.photo2 or post.photo3 or post.photo4 or post.photo5 %}
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
- 
+  {% endif %}
   <!-- スクロールバーの div 要素 -->
   <!-- <div class="swiper-scrollbar"></div> -->
 </div>
@@ -104,8 +105,8 @@
       {% endif %}
     </p>
     <p class="card-text col-md-6">Name: {{ post.category }}</p>
-    <p class="card-text col-md-6">State: {{ user.state }}</p>
-    <p class="card-text col-md-6">Zipcode: {{ user.zipcode }}</p>
+    <p class="card-text col-md-6">State: {{ post.user.state }}</p>
+    <p class="card-text col-md-6">Zipcode: {{ post.user.zipcode }}</p>
     <p class="card-text col-md-6">Owner: {{ post.user }}</p>
   </div>
   <p class="card-text story">Story: {{ post.story }}</p>

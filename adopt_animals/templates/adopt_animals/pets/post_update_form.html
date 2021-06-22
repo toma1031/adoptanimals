@@ -8,77 +8,84 @@
 <!-- enctype="multipart/form-data というのは基本的にテキストベースのデータのやり取りしかしないHTTP通信で色んなデータ(画像やエクセルファイル)も通信の対象に含めるいったものです。 -->
 <div class="w-100 text-center ml-2 mr-2 each_page_to">
   <form action="{% url 'adopt_animals:post_update' post.id %}" method="POST" enctype="multipart/form-data">
-    <!-- <div class="container"> -->
-      {% csrf_token %}
-      {{ form.errors }}
-      <p class="title">Title</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.title }}</div>
+    {% csrf_token %}
+    {{ form.errors }}
+    <p class="title">Title</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.title }}</div>
+    </div>
+    <p class="title">Name</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.name }}</div>
+    </div>
+    <p class="title">Age</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.age }}</div>
+    </div>
+    <p class="title">Wight</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.weight }}</div>
+    </div>
+    <p class="title">Sex</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.sex }}</div>
+    </div>
+    <p class="title">Story</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.story }}</div>
+    </div>
+    <p class="title">Category</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.category }}</div>
+    </div>
+    <p class="title">Photo</p>
+    <div class="row justify-content-center">
+      <div>
+        <label for="id_photo" class="filelabel">{{ form.photo.value }}</label>
+        <div class="">{{ form.photo|add_class:"fileinput" }}</div>
       </div>
-      <p class="title">Name</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.name }}</div>
+    </div>
+    <div class="row justify-content-center">
+      <div>
+        {% if post.photo2 %}
+        <label for="id_photo2" class="filelabel2">{{ form.photo2.value }}</label>
+        {% else %}
+        <label for="id_photo2" class="filelabel2">{{ form.photo2.value }}</label>
+        {% endif %}
+        <div class="">{{ form.photo2|add_class:"fileinput2" }}</div>
       </div>
-      <p class="title">Age</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.age }}</div>
+    </div>
+    <div class="row justify-content-center">
+      <div>
+        {% if post.photo3 %}
+        <label for="id_photo3" class="filelabel3">{{ form.photo3.value }}</label>
+        {% else %}
+        <label for="id_photo3" class="filelabel3">Chose Photo 3</label>
+        {% endif %}
+        <div class="">{{ form.photo3|add_class:"fileinput3" }}</div>
       </div>
-      <p class="title">Wight</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.weight }}</div>
+    </div>
+    <div class="row justify-content-center">
+      <div>
+        {% if post.photo5 %}
+        <label for="id_photo4" class="filelabel4">{{ form.photo4.value }}</label>
+        {% else %}
+        <label for="id_photo4" class="filelabel4">{{ form.photo4.value }}</label>
+        {% endif %}
+        <div class="">{{ form.photo4|add_class:"fileinput4" }}</div>
       </div>
-      <p class="title">Sex</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.sex }}</div>
+    </div>
+    <div class="row justify-content-center">
+      <div>
+        {% if post.photo5 %}
+        <label for="id_photo5" class="filelabel5">{{ form.photo5.value }}</label>
+        {% else %}
+        <label for="id_photo5" class="filelabel5">Chose Photo 5</label>
+        {% endif %}
+        <div class="">{{ form.photo5|add_class:"fileinput5" }}</div>
       </div>
-      <p class="title">Story</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.story }}</div>
-      </div>
-      <p class="title">Category</p>
-      <div class="row justify-content-center">
-        <div class="col-8 col-lg-4">{{ form.category }}</div>
-      </div>
-      <p class="title">Photo</p>
-      <!-- <div class="photo row justify-content-center"> -->
-        <!-- <div class="col-8 col-lg-4">{{ form.photo }}</div>
-        <div class="col-8 col-lg-4">{{ form.photo2 }}</div>
-        <div class="col-8 col-lg-4">{{ form.photo3 }}</div>
-        <div class="col-8 col-lg-4">{{ form.photo4 }}</div>
-        <div class="col-8 col-lg-4">{{ form.photo5 }}</div> -->
-        <!-- <div class="photo row justify-content-center"> -->
-          <!-- <div class="row justify-content-center"> -->
-            <!-- <div> -->
-              <label for="id_photo3" class="filelabel">Choose Photo</label>
-              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput" }}</div>
-            <!-- </div> -->
-          <!-- </div> -->
-          <div class="row justify-content-center">
-            <div>
-              <label for="id_photo3" class="filelabel2">Choose Photo</label>
-              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput2" }}</div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div>
-              <label for="id_photo3" class="filelabel3">Choose Photo</label>
-              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput3" }}</div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div>
-              <label for="id_photo3" class="filelabel4">Choose Photo</label>
-              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput4" }}</div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div>
-              <label for="id_photo3" class="filelabel5">Choose Photo</label>
-              <div class="col-8 col-lg-4">{{ form.photo3|add_class:"fileinput5" }}</div>
-            </div>
-          </div>
-        <button class="btn btn-warning" type="submit">Update</button>
-      <!-- </div> -->
+    </div>
+    <button class="btn btn-warning" type="submit">Update</button>
   </form>
 </div>
 

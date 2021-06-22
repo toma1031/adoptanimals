@@ -16,7 +16,7 @@ class IndexView(ListView):
   template_name = "index.html"
   model = Post
   context_object_name = 'post_list'
-  paginate_by = 8
+  paginate_by = 9
 
 # get_queryset関数で検索機能を実装
   def get_queryset(self):
@@ -132,6 +132,9 @@ class PostDetailView(DetailView):
 
     # メッセージボタンクリックした後にdef post() に飛ぶ
     def post(self, request, **kwargs):
+      # ここ追記（もしユーザーがログインしていないユーザーだったらサインアップページへ飛ばす）
+      if not self.request.user:
+        return redirect('accounts:signup')
       # filter()で該当Postオブジェクトかつinquiry_user が登録されているMessageRoomオブジェクトがあるのかないのかをチェックする
       message_room = MessageRoom.objects.filter(post_id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
       # ログインしているユーザーと該当のPostオブジェクトが登録されているMessageRoomオブジェクトを検索
@@ -140,6 +143,7 @@ class PostDetailView(DetailView):
         # この場合はクエリセットで取得されます。（MessageRoom.objects.filterで取得しているため）
         # クエリセットはオブジェクトが1つ以上格納されたリストに近い形ですのでmessage_room[0] で1つ目のオブジェクトが、message_room[1] で2つ目のオブジェクトが取得できます
         return redirect('adopt_animals:message_room', pk=message_room[0].id)
+
       else:
         # なければ新しくMessageRoomオブジェクトを作成し/message_room/<int:pk> にリダイレクトさせる、
         # こちらはMessageRoomオブジェクトを作成した後に作成したオブジェクトを返します。
@@ -147,6 +151,9 @@ class PostDetailView(DetailView):
         # オブジェクトなのでmessage_room.id とすることができます。
         message_room = MessageRoom.objects.create(post_id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
         return redirect('adopt_animals:message_room', pk=message_room.id)
+
+
+
 
 
 
@@ -202,7 +209,7 @@ class MyPostListView(LoginRequiredMixin, ListView):
     model = Post
     ontext_object_name = 'post_list'
     success_url = reverse_lazy('adopt_animals:index')
-    paginate_by = 8
+    paginate_by = 9
 
 # get_queryset(self) を使用して、ページにアクセスできるユーザーは投稿者のみにする
     def get_queryset(self):
@@ -267,7 +274,7 @@ class MyFavoritePostListView(LoginRequiredMixin, ListView):
     model = Post
     ontext_object_name = 'post_list'
     success_url = reverse_lazy('adopt_animals:index')
-    paginate_by = 8
+    paginate_by = 9
 
 # get_queryset(self) を使用して、ページにアクセスできるユーザーは投稿者のみにする
     def get_queryset(self):
@@ -411,7 +418,7 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
   # HTMLのmessage_room_listを意味している
   context_object_name = 'message_room_list'
   success_url = reverse_lazy('adopt_animals:my_messages')
-  paginate_by = 8
+  paginate_by = 9
 
   # def get_context_data(self, **kwargs):
   #   # contextという変数にDetailView（ここではsuperがDetailViewを表している）のContextデータ（context_object_name = 'message_room'）をGetして辞書型として代入

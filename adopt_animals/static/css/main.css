@@ -110,6 +110,8 @@ img {
 
 .errorlist {
   color: red;
+  padding: none;
+  margin: none;
 }
 
 /* profile page */
@@ -189,6 +191,10 @@ img {
 }
 
 .fileinput2{
+  display: none;
+}
+
+#id_photo2 {
   display: none;
 }
 
@@ -453,6 +459,7 @@ p {
 
 ul {
   list-style: none;
+  padding-left: 0;
 }
 
 .request_list {

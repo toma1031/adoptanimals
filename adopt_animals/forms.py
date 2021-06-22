@@ -39,12 +39,14 @@ class PostForm(forms.ModelForm):
             'placeholder': "Age",
         }),
     )
-#   photo = forms.ImageField(label='Image', validators=[file_size],widget=forms.ImageField(attrs={'class': 'fileinput'}))
-  photo = forms.ImageField(label='Image', validators=[file_size])
-  photo2 = forms.ImageField(label='Image2', required=False, validators=[file_size])
-  photo3 = forms.ImageField(label='Image3', required=False, validators=[file_size])
-  photo4 = forms.ImageField(label='Image4', required=False, validators=[file_size])
-  photo5 = forms.ImageField(label='Image5', required=False, validators=[file_size])
+
+# widget=forms.FileInputとすることでCurrentryとChangeを一旦全て削除
+# 参考箇所（https://stackoverflow.com/questions/14336925/how-to-not-render-django-image-field-currently-and-clear-stuff）
+  photo = forms.ImageField(label='Image', validators=[file_size], widget=forms.FileInput)
+  photo2 = forms.ImageField(label='Image2', required=False, validators=[file_size], widget=forms.FileInput)
+  photo3 = forms.ImageField(label='Image3', required=False, validators=[file_size], widget=forms.FileInput)
+  photo4 = forms.ImageField(label='Image4', required=False, validators=[file_size], widget=forms.FileInput)
+  photo5 = forms.ImageField(label='Image5', required=False, validators=[file_size], widget=forms.FileInput)
   sex = forms.fields.ChoiceField(
       choices = (
           ('1', 'Male'),
