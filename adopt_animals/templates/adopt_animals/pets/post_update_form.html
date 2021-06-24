@@ -50,7 +50,7 @@
         {% if post.photo2 %}
         <label for="id_photo2" class="filelabel2">{{ form.photo2.value }}</label>
         {% else %}
-        <label for="id_photo2" class="filelabel2">{{ form.photo2.value }}</label>
+        <label for="id_photo2" class="filelabel2">Chose Photo 2</label>
         {% endif %}
         <div class="">{{ form.photo2|add_class:"fileinput2" }}</div>
       </div>
@@ -67,10 +67,10 @@
     </div>
     <div class="row justify-content-center">
       <div>
-        {% if post.photo5 %}
+        {% if post.photo4 %}
         <label for="id_photo4" class="filelabel4">{{ form.photo4.value }}</label>
         {% else %}
-        <label for="id_photo4" class="filelabel4">{{ form.photo4.value }}</label>
+        <label for="id_photo4" class="filelabel4">Chose Photo 4</label>
         {% endif %}
         <div class="">{{ form.photo4|add_class:"fileinput4" }}</div>
       </div>

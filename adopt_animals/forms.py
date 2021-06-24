@@ -68,7 +68,7 @@ class PostForm(forms.ModelForm):
   story = forms.CharField(
         label='Story', 
         required=True,
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': "Story",
         }),

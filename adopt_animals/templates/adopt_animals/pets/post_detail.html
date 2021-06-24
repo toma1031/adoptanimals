@@ -113,8 +113,8 @@
   <div class="like-outer">
     {% include 'adopt_animals/pets/like.html' %}
   </div>
-  <!-- ユーザーが投稿者でない場合表示する -->
-  {% if not user == post.user %}
+  <!-- ユーザーが投稿者でない場合で会員ユーザー（ログインしている）の場合、表示する -->
+  {% if not user == post.user and self.request.user %}
   <form action="{% url 'adopt_animals:post_detail' post.id %}" method="POST">
     {% csrf_token %}
     {{ form.errors }}
@@ -126,7 +126,12 @@
   <a class="btn btn-info edit_this_post" href="{% url 'adopt_animals:post_update' post.id %}">Edit this post</a><br>
   <a class="btn btn-danger delete" href="{% url 'adopt_animals:post_delete' post.id %}">Delete</a><br>
   {% endif %}
-  <a class="btn btn-primary" href="{{request.META.HTTP_REFERER}}">Back</a>
+  <a class="btn btn-primary back" href="{{request.META.HTTP_REFERER}}">Back</a>
+  <!-- もしユーザーがログインしていなかったら -->
+  {% if user is not self.request.user %}
+  <p class="not_yet_signup">Want to send a message to owner and not yet signup?</p>
+  <a class="btn btn-primary" href="{% url 'accounts:accounts_signup' %}">Go to Signup page</a><br>
+  {% endif %}
 </div>
 <!-- 文章セクションここまで -->
 {% endblock main %}

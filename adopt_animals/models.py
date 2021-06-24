@@ -45,6 +45,15 @@ class MessageRoom(models.Model):
     inquiry_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='inquiry_user')
     update_time = models.DateTimeField(auto_now=True)
 
+    # my_messages.htmlで最新のMessageを表示するために下記を追記、
+    def get_last_message(self):
+      # selfはMessageRoomオブジェクトのこと
+      first_message_obj = self.message_set.all().order_by('-create_time').first()
+      if first_message_obj:
+          return first_message_obj.message
+      else:
+          return 'No massage yet'
+
     def __str__(self):
       return str(self.id)
       
@@ -53,6 +62,7 @@ class Message(models.Model):
     message_room = models.ForeignKey(MessageRoom, verbose_name='Message', on_delete=models.CASCADE)
     message_user = models.ForeignKey(get_user_model(), verbose_name='message_user', on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=timezone.now)
+
 
     def __str__(self):
       return str(self.id)

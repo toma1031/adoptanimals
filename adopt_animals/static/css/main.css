@@ -280,6 +280,33 @@ img {
   margin-bottom: 10px;
 }
 
+.back {
+  margin-bottom: 20px;
+}
+
+/* my_messages.html */
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.my_messages_photo {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.messages{
+  margin-top: 20px;
+  padding:0 30px 0px 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden; 
+}
+
 /* ディスプレイによって写真の表示が変わる */
 @media (max-width: 540px) {
   /* 横幅が320px以下の場合に適用するスタイル */
@@ -489,3 +516,14 @@ ul {
     justify-content: center;
   }
 }
+
+
+
+
+/* message_room.html CSS */
+
+
+
+
+
+

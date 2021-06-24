@@ -132,9 +132,6 @@ class PostDetailView(DetailView):
 
     # メッセージボタンクリックした後にdef post() に飛ぶ
     def post(self, request, **kwargs):
-      # ここ追記（もしユーザーがログインしていないユーザーだったらサインアップページへ飛ばす）
-      if not self.request.user:
-        return redirect('accounts:signup')
       # filter()で該当Postオブジェクトかつinquiry_user が登録されているMessageRoomオブジェクトがあるのかないのかをチェックする
       message_room = MessageRoom.objects.filter(post_id=self.kwargs['pk'], inquiry_user_id=self.request.user.id)
       # ログインしているユーザーと該当のPostオブジェクトが登録されているMessageRoomオブジェクトを検索
@@ -433,9 +430,31 @@ class MessageRoomListView(LoginRequiredMixin, ListView):
 # paginated_by = 8　を使っている時点で、オブジェクトをフィルターをかけてページに表示するには
 # get_context_data関数は使えず、get_queryset関数しか使えない
 
+# 検索機能
   def get_queryset(self):
+    # ログインしているユーザー(self.request.user)が質問者(inquiry_user)もしくはペット投稿者(post__user)というフィルタリングをかけて、
+    # MessageRoomを取得
+    # .distinct()は重複取得をふせぐ時に使用するので基本は絶対書くべき。その際はorder_byをつける。そうしないと、レコードに値がバラバラに入っていると正しく重複を削除してくれないので注意。.reverse()は逆にするという意味だが、今回の場合はupdate_timeが最新のものが通常は一番最後に表示されるところを一番最初に持ってきてくれる。
+    message_room_list = MessageRoom.objects.filter(Q(inquiry_user=self.request.user) | Q(post__user=self.request.user)).order_by('update_time').reverse().distinct()
+    # HTMLのname="message"がViewのdef get_querysetの中の構文、search_text = self.request.GET.get('message')の
+    # messageを意味する
+    search_text = self.request.GET.get('message')
+    if search_text:
+  # １番目のmassageはmassageモデル、１番目のmassageモデルのmassageフィールド、3番目はicontainsは入力された文字列。それを取得しobject_list変数に代入。つづけてユーザーネーム（inquiry_user（質問者）とpost__user（投稿者）のユーザーネーム）でも検索できるようにQ(inquiry_user__username__icontains=search_text)| Q(post__user__username__icontains=search_text)を追記
+      message_room_list = message_room_list.filter(Q(message__message__icontains=search_text) | Q(inquiry_user__username__icontains=search_text)
+      | Q(post__user__username__icontains=search_text))
+  # 最後に取得されたオブジェクトのリスト（message_roomのリスト）を返す
+      return message_room_list
+
+
+
     # フィールドを繋げて取得する時は、__で繋いでやる。post__user=はPostモデルの先にあるuserというフィールドを条件にかけてほしいという意味。ちなみに下記のコードはログインしているユーザー(self.request.user)が質問者(inquiry_user)もしくはペット投稿者(post__user)に該当するMessageRoomオブジェクトを取得し、リターンするという意味になる
     return MessageRoom.objects.filter(Q(inquiry_user=self.request.user) | Q(post__user=self.request.user)).order_by('update_time').reverse()
+
+
+
+
+
 
 # お問い合わせフォーム
 class ContactFormView(FormView):
