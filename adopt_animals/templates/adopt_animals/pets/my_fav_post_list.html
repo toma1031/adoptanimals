@@ -4,6 +4,7 @@
 <script type="text/javascript" src="{% static 'js/like.js' %}"></script>
 {% endblock %}
 {% block main %}
+<h3 class="hello w-100 text-center ml-2 mr-2">Favorite posts</h3>
 {% if user.is_authenticated %}
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
 {% endif %}

@@ -5,6 +5,7 @@
 {% endblock %}
 {% block main %}
 {% if user.is_authenticated %}
+<h3 class="hello w-100 text-center ml-2 mr-2">My messages</h3>
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}!</p>
 {% endif %}
 <!-- 検索機能 -->
@@ -23,7 +24,7 @@ messageを意味する -->
 {% else %}
 <!-- 下記のmessage_room_listはViewのcontext_object_name = 'message_room_list'のmessage_room_listをさしている -->
 {% for message_room in message_room_list %}
-<div class="w-100 text-center ml-2 mr-2 each_page_to card ">
+<div class="w-100 text-center ml-2 mr-2 each_page_to card">
     <!-- もしログインしているユーザーがAnimalsの投稿者であれば、inquiry_user（メッセージルーム作成者）の名前を表示させる -->
     {% if message_room.post.user == user %}
     <!-- align-items-centerで上下中央寄せ -->

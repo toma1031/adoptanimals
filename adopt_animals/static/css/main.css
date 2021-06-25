@@ -1,3 +1,4 @@
+/* 共通事項 */
 /* フォントについて */
 p {
   font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
@@ -179,6 +180,15 @@ h5 {
     border: 2px solid blue;
 }
 
+.card {
+  margin-bottom: 10px;
+  box-shadow :0px 0px 8px silver;
+}
+
+
+
+
+/* _navbar.html CSS */
 .navbar {
   background: orange;
   /* background: linear-gradient(#FAEBD7,#FFC7AF); */
@@ -286,6 +296,7 @@ img {
 /* sign up page */
 .each_page_to_signup {
   padding-top: 30px;
+
 }
 
 .socail_medias_signup {
@@ -499,7 +510,6 @@ img {
 }
 
 /* my_messages.html */
-
 .nopadding {
   padding: 0 !important;
   margin: 0 !important;
