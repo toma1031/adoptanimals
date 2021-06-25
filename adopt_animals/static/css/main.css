@@ -179,7 +179,7 @@
 
 .index_card {
   border-radius: 20px;
-  border: 3px solid orange;
+  border: 2px solid orange;
 }
 
 .index_card_body {
@@ -207,12 +207,21 @@ img {
   display: inline-block;
 }
 
-/* .like-outer {
-  padding: 0;
-  margin: 0;
-} */
+/* like.html CSS */
+/* likeボタンの枠線を消す */
+#like {
+  border: none;  /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent; /* 背景の灰色を消す */
+}
 
+.like-red {
+  color: red;
+}
 
+.fa-heart {
+  color: red;
+}
 
 .like_button {
   display: inline-block;
@@ -313,7 +322,7 @@ img {
 .filelabel{
   display: inline-block;
   position: relative;
-  background-color: #1877F2;
+  background-color: orange;
   color: #fff;
   font-size: 16px;
   padding: 10px 20px;
@@ -321,7 +330,7 @@ img {
   transition: all 0.5s;
 }
 .filelabel:hover{
-  background-color: #004db1;
+  background-color: orangered;
 }
 
 .fileinput{
@@ -331,7 +340,7 @@ img {
 .filelabel2{
   display: inline-block;
   position: relative;
-  background-color: #1877F2;
+  background-color: orange;
   color: #fff;
   font-size: 16px;
   padding: 10px 20px;
@@ -339,7 +348,7 @@ img {
   transition: all 0.5s;
 }
 .filelabel2:hover{
-  background-color: #004db1;
+  background-color: orangered;
 }
 
 .fileinput2{
@@ -353,7 +362,7 @@ img {
 .filelabel3 {
   display: inline-block;
   position: relative;
-  background-color: #1877F2;
+  background-color: orange;
   color: #fff;
   font-size: 16px;
   padding: 10px 20px;
@@ -361,7 +370,7 @@ img {
   transition: all 0.5s;
 }
 .filelabel3:hover{
-  background-color: #004db1;
+  background-color: orangered;
 }
 
 .fileinput3 {
@@ -371,7 +380,7 @@ img {
 .filelabel4{
   display: inline-block;
   position: relative;
-  background-color: #1877F2;
+  background-color: orange;
   color: #fff;
   font-size: 16px;
   padding: 10px 20px;
@@ -379,7 +388,7 @@ img {
   transition: all 0.5s;
 }
 .filelabel4:hover{
-  background-color: #004db1;
+  background-color: orangered;
 }
 
 .fileinput4{
@@ -389,7 +398,7 @@ img {
 .filelabel5{
   display: inline-block;
   position: relative;
-  background-color: #1877F2;
+  background-color: orange;
   color: #fff;
   font-size: 16px;
   padding: 10px 20px;
@@ -397,7 +406,7 @@ img {
   transition: all 0.5s;
 }
 .filelabel5:hover{
-  background-color: #004db1;
+  background-color: orangered;
 }
 
 .fileinput5{
@@ -574,14 +583,25 @@ ul {
   -webkit-transition: .25s opacity linear;
   transition: .25s opacity linear;
 }
+.comment2 time, .comment2:hover time,.icon-rocknroll, .like-count {
+  -webkit-transition: .25s opacity linear;
+  transition: .25s opacity linear;
+}
 .comments-main ul li{
   list-style: none;
 }
 .comments .comment {
   padding: 5px 10px;
-  background: #00AF90;
+  background: #FFE4B5;
+}
+.comments .comment2 {
+  padding: 5px 10px;
+  background: #FFE4C4;
 }
 .comments .comment:hover time{
+  opacity: 1;
+}
+.comments .comment2:hover time{
   opacity: 1;
 }
 .comments .user-img img {
@@ -594,7 +614,15 @@ ul {
   display: inline-block;
   font-size: 16px;
 }
+.comments .comment2 h4 {
+  display: inline-block;
+  font-size: 16px;
+}
 .comments .comment h4 a {
+  color: #404040;
+  text-decoration: none;
+}
+.comments .comment2 h4 a {
   color: #404040;
   text-decoration: none;
 }
@@ -602,24 +630,48 @@ ul {
   color: #545454;
   font-size: .85rem;
 }
+.comments .comment2 .icon-rocknroll {
+  color: #545454;
+  font-size: .85rem;
+}
 .comments .comment .icon-rocknroll:hover {
+  opacity: .5;
+}
+.comments .comment2 .icon-rocknroll:hover {
   opacity: .5;
 }
 .comments .comment time,.comments .comment .like-count,.comments .comment .icon-rocknroll {
   font-size: .75rem;
   opacity: 0;
 }
+.comments .comment2 time,.comments .comment2 .like-count,.comments .comment2 .icon-rocknroll {
+  font-size: .75rem;
+  opacity: 0;
+}
 .comments .comment time, .comments .comment .like-count {
   font-weight: 300;
 }
+.comments .comment2 time, .comments .comment2 .like-count {
+  font-weight: 300;
+}
 .comments .comment p {
+  font-size: 13px;
+}
+.comments .comment2 p {
   font-size: 13px;
 }
 .comments .comment p .reply {
   color: #BFBFA8;
   cursor: pointer;
 }
+.comments .comment2 p .reply {
+  color: #BFBFA8;
+  cursor: pointer;
+}
 .comments .comment .active {
+  opacity: 1;
+}
+.comments .comment2 .active {
   opacity: 1;
 }
 .icon-rocknroll {
@@ -631,9 +683,10 @@ ul {
 .comments .comment:hover .icon-rocknroll,.comments .comment:hover .like-count {
   opacity: 1;
 }
-.comment-box-main{
-  background: #CA1D5F;
+.comments .comment2:hover .icon-rocknroll,.comments .comment2:hover .like-count {
+  opacity: 1;
 }
+
 @media (min-width: 320px) and (max-width: 480px){
   .comments .comment h4 {
     font-size: 12px;
@@ -641,7 +694,29 @@ ul {
   .comments .comment p{
     font-size: 11px;
   }
-  .comment-box-main .send-btn button{
-    margin-left: 5px;
+  .comments .comment2 h4 {
+    font-size: 12px;
   }
+  .comments .comment2 p{
+    font-size: 11px;
+  }
+
+  }
+
+  .text-color {
+    color: black;
+  }
+
+
+/* pagination.html CSS */
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}
+
+.page-link {
+  color: orange;
 }

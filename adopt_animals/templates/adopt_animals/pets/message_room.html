@@ -20,20 +20,6 @@
 <!-- ここで送られたメッセージ回し、表示させていく -->
 {% for message in message_list %}
     <ul class="p-0">
-        <!-- メッセージ相手のメッセージ -->
-        <!-- <li>
-            <div class="row comments mb-2">
-                <div class="col-md-2 col-sm-2 col-3 text-center user-img">
-                    <img id="profile-photo" src="http://nicesnippets.com/demo/man01.png" class="rounded-circle" />
-                </div>
-                <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
-                    <h4 class="m-0"><a href="#">メッセージ相手</a></h4>
-                    <time class="text-white ml-3">1 hours ago</time>
-                    <like></like>
-                    <p class="mb-0 text-white">Thank you for visiting all the way from New York.</p>
-                </div>
-            </div>
-        </li> -->
         <!-- ログインしているユーザーのメッセージ -->
         <li>
             <div class="row comments mb-2">
@@ -41,9 +27,9 @@
                 {% if message.message_user == user %}
                 <div class="col-md-10 col-sm-10 col-10 comment rounded mb-2">
                     <h4 class="m-0">{{ message.message_user }}</a></h4>
-                    <time class="text-white ml-3">{{ message.create_time }}</time>
+                    <time class="text-color ml-3">{{ message.create_time }}</time>
                     <like></like>
-                    <p class="mb-0 text-white">{{ message.message }}</p>
+                    <p class="mb-0 text-color">{{ message.message }}</p>
                 </div>
                 <!-- .colには、左右にpadding: 15pxが指定されているため、Bootstrapでは.px-0を適用することで左右のpaddingを0pxにできます。 -->
                 <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
@@ -55,11 +41,11 @@
                 <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
                     <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle" />
                 </div>
-                <div class="col-md-10 col-sm-10 col-10 comment rounded mb-2">
+                <div class="col-md-10 col-sm-10 col-10 comment2 rounded mb-2">
                     <h4 class="m-0">{{ message.message_user }}</a></h4>
-                    <time class="text-white ml-3">{{ message.create_time }}</time>
+                    <time class="text-color ml-3">{{ message.create_time }}</time>
                     <like></like>
-                    <p class="mb-0 text-white">{{ message.message }}</p>
+                    <p class="mb-0 text-color">{{ message.message }}</p>
                 </div>
                 {% endif %}
             </div>
