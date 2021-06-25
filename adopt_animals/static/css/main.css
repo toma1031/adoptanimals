@@ -197,7 +197,7 @@ h5 {
 
 .logo {
   height: 50px;
-  width: 300px;
+  width: 270px;
 }
 
 .navbar-brand{
@@ -365,6 +365,13 @@ img {
 
 .user_change_top {
   margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 /* contact_form.html CSS */
@@ -564,11 +571,16 @@ img {
   display: block;
 }
 
+.succeed {
+  margin-bottom: 30px;
+}
+
   /* フッターを固定するために追記 */
 #wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 130vh;
+  position: relative;
 }
 
 footer {
@@ -579,6 +591,8 @@ footer {
   /* フッターを固定するために追記 */
   margin-top: auto;
   height: 100px;
+  position: absolute;/*②絶対位置*/
+  width: 100%;
 }
 
 .footer {
@@ -779,6 +793,31 @@ ul {
   .text-color {
     color: gray;
   }
+
+  /* about.html CSS */
+.img-about {
+  margin-top: 40px;
+  width: 50% !important;
+  height: 50% !important;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+}
+
+.about {
+  margin-top: 40px;
+}
+
+.how_to_use {
+  margin-top: 40px;
+}
+
+.for_people_who_looking_for_pets {
+  margin-top: 40px;
+}
+
+.for_people_who_looking_for_foster_homes {
+  margin-top: 40px;
+}
 
 
 /* pagination.html CSS */

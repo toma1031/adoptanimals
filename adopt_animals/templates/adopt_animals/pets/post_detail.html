@@ -92,11 +92,11 @@
 
 <!-- 文章セクション -->
 <div class="card-body w-100 text-center ml-2 mr-2 each_page_to">
-  <h2 class="card-title">Title: {{ post.title }}</h2>
+  <h2 class="card-title">{{ post.title }}</h2>
   <div class="row">
     <p class="card-text col-md-6">Name: {{ post.name }}</p>
     <p class="card-text col-md-6">Age: {{ post.age }}</p>
-    <p class="card-text col-md-6">Weight: {{ post.weight }}</p>
+    <p class="card-text col-md-6">Weight(lbs): {{ post.weight }}</p>
     <p class="card-text col-md-6">Sex:
       {% if post.sex == 1 %}
       Male
@@ -104,12 +104,13 @@
       Female
       {% endif %}
     </p>
-    <p class="card-text col-md-6">Name: {{ post.category }}</p>
+    <p class="card-text col-md-6">Category: {{ post.category }}</p>
     <p class="card-text col-md-6">State: {{ post.user.state }}</p>
     <p class="card-text col-md-6">Zipcode: {{ post.user.zipcode }}</p>
     <p class="card-text col-md-6">Owner: {{ post.user }}</p>
   </div>
-  <p class="card-text story">Story: {{ post.story }}</p>
+  <h4 class="card-text story">Story</h4><br>
+  <p>{{ post.story }}</p>
   <div class="like-outer">
     {% include 'adopt_animals/pets/like.html' %}
   </div>

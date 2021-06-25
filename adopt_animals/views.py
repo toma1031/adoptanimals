@@ -474,3 +474,7 @@ class ContactResultView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['success'] = "The form was sent successfully."
         return context
+
+
+class AboutView(TemplateView):
+  template_name = 'adopt_animals/pets/about.html'

@@ -2,26 +2,29 @@
 <!-- load widget_tweaksはform-controlを使うために必要 -->
 {% load widget_tweaks %}
 {% block main %}
-<div class="w-100 text-center ml-2 mr-2 each_page_top">
-  <h3 class="w-100 text-center ml-2 mr-2">Change User Info</h3>
-  <form class="col-md-6 offset-md-3" action="" method="POST" class="">
-    {% csrf_token %}
-    <!-- {{form.as_p}} -->
-    <p>User Name{{ form.username|add_class:"form-control" }}</p>
-    <p>Email{{ form.email|add_class:"form-control" }}</p>
-    <p>State{{ form.state|add_class:"form-control" }}</p>
-    <p>City{{ form.city|add_class:"form-control" }}</p>
-    <p>Zipcode{{ form.zipcode|add_class:"form-control" }}</p>
-    <p>Phone number{{ form.phone_number|add_class:"form-control" }}</p>
-    <button class="btn btn-primary update" type="submit">Update</button>
-  </form>
-  <!-- ここでユーザーがGoogleアカウントでログインしている場合、パスワード変更のURLリンクは
-  表示させないようにしている -->
-  {% if user.has_usable_password %}
-  <a class="btn btn-success col-md-2 col-6 change_password" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
-  {% endif %}
-  <a class="delete_user btn btn-danger col-md-2 col-6 cancel_membership" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel
-    Membership</a><br>
-  <a href="/" class="btn btn-warning user_change_top">TOP</a>
+  <div class="w-100 text-center ml-2 mr-2 each_page_top">
+    <h3 class="">Change User Info</h3>
+    <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle profile-img" />
+    <form class="col-md-6 offset-md-3" action="" method="POST">
+      {% csrf_token %}
+      <!-- {{form.as_p}} -->
+      <p>User Name{{ form.username|add_class:"form-control" }}</p>
+      <p>Email{{ form.email|add_class:"form-control" }}</p>
+      <p>State{{ form.state|add_class:"form-control" }}</p>
+      <p>City{{ form.city|add_class:"form-control" }}</p>
+      <p>Zipcode{{ form.zipcode|add_class:"form-control" }}</p>
+      <p>Phone number{{ form.phone_number|add_class:"form-control" }}</p>
+      <button class="btn btn-primary update" type="submit">Update</button>
+    </form>
+    <!-- ここでユーザーがGoogleアカウントでログインしている場合、パスワード変更のURLリンクは
+    表示させないようにしている -->
+    {% if user.has_usable_password %}
+    <a class="btn btn-success col-md-2 col-6 change_password" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
+    {% endif %}
+    <a class="delete_user btn btn-danger col-md-2 col-6 cancel_membership" href="{% url 'accounts:accounts_delete_user' user.username %}">Cancel
+      Membership</a><br>
+    <a href="/" class="btn btn-warning user_change_top">TOP</a>
+  </div>
 </div>
+
 {% endblock %}

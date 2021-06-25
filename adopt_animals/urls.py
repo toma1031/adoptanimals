@@ -4,7 +4,7 @@ from adopt_animals import views
 from accounts import views
 from adopt_animals.views import (CreatePostView, PostDoneView, PostDetailView, PostUpdateView, 
                                     PostDeleteView, MyPostListView, MyFavoritePostListView, MessageRoomView, MessageRoomListView,
-                                    ContactFormView, ContactResultView)
+                                    ContactFormView, ContactResultView, AboutView)
 from . import views
 
 
@@ -34,5 +34,7 @@ urlpatterns = [
 
     path('contact/', ContactFormView.as_view(), name='contact_form'),
     path('contact/result/', ContactResultView.as_view(), name='contact_result'),
+
+    path('about/', AboutView.as_view(), name='about'),
 ]
 

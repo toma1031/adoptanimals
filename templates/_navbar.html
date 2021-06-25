@@ -13,13 +13,14 @@
       <li class="nav-item"><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
       <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Posts</a></li>
       <li class="nav-item"><a class="my_fav_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">Favorite Posts</a></li>
-      <li class="nav-item"><a class="my_message_list" href="{% url 'adopt_animals:my_messages' %}">My Messages</a></li>
+      <li class="nav-item"><a class="my_message_list" href="{% url 'adopt_animals:my_messages' %}">Messages</a></li>
       <li class="nav-item"><a class="logout" href="{% url 'logout' %}">Logout</a></li>
       {% else %}
       <!-- 未ログインの時に表示したいナビゲーション -->
       <li class="nav-item"><a class="login" href="{% url 'login' %}">Login</a></li>
       <li class="nav-item"><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
       {% endif %}
+      <li class="nav-item"><a class="about" href="{% url 'adopt_animals:about' %}">About</a></li>
     </ul>
 
     <!-- phone -->
@@ -33,13 +34,14 @@
       <li class="nav-item"><a class="new_post" href="{% url 'adopt_animals:post_new' %}">New Post</a></li>
       <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_post_list' %}">My Posts</a></li>
       <li class="nav-item"><a class="my_fav_post_list" href="{% url 'adopt_animals:my_fav_post_list' %}">Favorite Posts</a></li>
-      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_messages' %}">My Messages</a></li>
+      <li class="nav-item"><a class="my_post_list" href="{% url 'adopt_animals:my_messages' %}">Messages</a></li>
       <li class="nav-item"><a class="logout" href="{% url 'logout' %}">Logout</a></li>
       {% else %}
       <!-- 未ログインの時に表示したいナビゲーション -->
       <li class="nav-item"><a class="login" href="{% url 'login' %}">Login</a></li>
       <li class="nav-item"><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
       {% endif %}
+      <li class="nav-item"><a class="about" href="{% url 'adopt_animals:about' %}">About</a></li>
     </ul>
     </nav>
   </div>
