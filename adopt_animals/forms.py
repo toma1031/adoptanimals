@@ -54,7 +54,7 @@ class PostForm(forms.ModelForm):
           ), 
          required=True,
          widget=forms.widgets.Select(attrs={
-                'class': 'form-control',
+                'class': 'form-control sex',
             }),
          )
   weight = forms.IntegerField(
@@ -77,7 +77,7 @@ class PostForm(forms.ModelForm):
   category = forms.ModelChoiceField(queryset=Tag.objects.all(),
         label="Category:", required=True, empty_label=None, 
         widget=forms.Select(attrs={
-            'class': 'form-control',
+            'class': 'form-control category',
         }),
     )
 # このMetaの中身というのはmodelsのフィールドを元にしている

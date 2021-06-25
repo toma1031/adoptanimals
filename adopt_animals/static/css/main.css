@@ -1,6 +1,57 @@
-/* body {
-  background:#FFDDFF;
-} */
+/* フォントについて */
+p {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+a {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+h1 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h2 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h3 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h4 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h5 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* .form-controlのインプットのplaceholder文字のフォントと色 */
+.form-control::-webkit-input-placeholder {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* animals_post_form.htmlのselectインプットのフォント（forms.pyを編集） */
+.sex {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+.category {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* index.htmlのselectインプットのフォント */
+.search-index {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
 
 /* ボタンの色変更 */
 /* primary button */
@@ -247,6 +298,7 @@ img {
 
 .signup_page_home_btn {
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 /* login page */
 .each_page_to_login_page {
@@ -300,7 +352,7 @@ img {
   margin-bottom: 10px;
 }
 
-.top {
+.user_change_top {
   margin-bottom: 10px;
 }
 
@@ -317,6 +369,7 @@ img {
 
 .submit_button_post_page {
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .filelabel{
@@ -501,11 +554,21 @@ img {
   display: block;
 }
 
+  /* フッターを固定するために追記 */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 footer {
   text-align: center;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   background: orange;
   box-shadow :0px 0px 30px silver;
+  /* フッターを固定するために追記 */
+  margin-top: auto;
+  height: 100px;
 }
 
 .footer {
@@ -704,7 +767,7 @@ ul {
   }
 
   .text-color {
-    color: black;
+    color: gray;
   }
 
 

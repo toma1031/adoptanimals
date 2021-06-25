@@ -24,9 +24,12 @@
 <body>
   {% include "_navbar.html" %}
   <div class="container">
-    <div class="row">
-      {% block main %}
-      {% endblock %}
+    <!-- <div id="wrapper">はフッターを固定するために追記 -->
+    <div id="wrapper">
+      <div class="row">
+          {% block main %}
+          {% endblock %}
+      </div>
     </div>
   </div>
   <div>
