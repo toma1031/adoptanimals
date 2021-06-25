@@ -177,6 +177,21 @@
   margin-bottom: 20px;
 }
 
+.index_card {
+  border-radius: 20px;
+  border: 3px solid orange;
+}
+
+.index_card_body {
+  background: #FFFFCC;
+  border-radius: 20px;
+}
+
+.index-img {
+  border: 10px solid #FFFFCC;
+  border-radius: 20px;
+}
+
 img {
   object-fit: cover;
   width: 300px;
@@ -192,10 +207,12 @@ img {
   display: inline-block;
 }
 
-.like-outer {
+/* .like-outer {
   padding: 0;
   margin: 0;
-}
+} */
+
+
 
 .like_button {
   display: inline-block;
@@ -467,58 +484,6 @@ img {
   }
 }
 
-
-
-
-
-
-.request_form_page {
-  color: black;
-  transition: all  0.3s ease;
-}
-
-.request_form_page:hover {
-  color: black;
-  text-decoration:none; 
-  background-color: #FFEEFF;
-}
-
-.waiting_response {
-  color: black;
-  transition: all  0.3s ease;
-}
-
-.waiting_response:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
-}
-
-.approved_request {
-  color: black;
-  transition: all  0.3s ease;
-}
-
-.approved_request:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
-}
-
-.declined_request {
-  color: black;
-  transition: all  0.3s ease;
-}
-
-.declined_request:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
-}
-
-
-
-
 .nav-item {
   margin: 0px 10px 0px 0px;
 }
@@ -558,61 +523,9 @@ p {
   margin-bottom: 1rem; 
 }
 
-.chose_supervisor_field {
-  display: inline-block
-}
 
-/* employee.html */
-.chose_supervisor {
-  margin: 16px;
-}
 
-.request_date_from {
-  margin: 16px;
-}
 
-.request_date_to {
-  margin: 16px;
-}
-
-.note {
-  margin: 16px;
-}
-
-.submit-request {
-  margin: 16px;
-}
-
-.success {
-  margin-top: 20px;
-}
-/* supervisor_page */
-
-.supervisorpage {
-  margin-top: 20px;
-}
-
-/* hr_page */
-
-.hrpage {
-  margin-top: 20px;
-}
-
-.approved_reqest_list {
-  margin: 20px;
-}
-
-.declined_reqest_list {
-  margin: 20px;
-}
-
-.request_detail {
-  background: #FFFFCC;
-  border-radius :8px;
-  box-shadow :0px 0px 10px silver;
-  padding: 10px 0px 10px 0px;
-  margin: 20px;
-}
 /* list */
 
 ul {
