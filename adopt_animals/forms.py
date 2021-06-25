@@ -100,7 +100,13 @@ class PostForm(forms.ModelForm):
 
 
 class MessageForm(forms.ModelForm):
-  message = forms.CharField(label='message', required=True)
+  message = forms.CharField(
+        label='message', 
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "Message",
+        }),)
 
 # このMetaの中身というのはmodelsのフィールドを元にしている
   class Meta:

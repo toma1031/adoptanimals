@@ -13,34 +13,71 @@
         {{ message_room.post.user }}!
     {% endif %}
 </p>
-
 {% endif %}
-<div class="chat-room-body w-100 text-center ml-2 mr-2">
-    <!-- ここで送られたメッセージ回し、表示させていく -->
-    {% for message in message_list %}
-        <div class="chat-box">
-            <div class="chat-body">
-                <!-- {{ message.message_user }}で誰がそのメッセージを送信したか表示 -->
-                {{ message.message }} by {{ message.message_user }} created at {{ message.create_time }} 
+
+<!-- チャット -->
+<div class="col-md-10 offset-md-1 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
+<!-- ここで送られたメッセージ回し、表示させていく -->
+{% for message in message_list %}
+    <ul class="p-0">
+        <!-- メッセージ相手のメッセージ -->
+        <!-- <li>
+            <div class="row comments mb-2">
+                <div class="col-md-2 col-sm-2 col-3 text-center user-img">
+                    <img id="profile-photo" src="http://nicesnippets.com/demo/man01.png" class="rounded-circle" />
+                </div>
+                <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
+                    <h4 class="m-0"><a href="#">メッセージ相手</a></h4>
+                    <time class="text-white ml-3">1 hours ago</time>
+                    <like></like>
+                    <p class="mb-0 text-white">Thank you for visiting all the way from New York.</p>
+                </div>
             </div>
-        </div>
-    {% endfor %}
-        <div id="footer"></div>
-
-    <form action="{% url 'adopt_animals:message_room' message_room.id %}" method="POST">
-    {% csrf_token %}
-    {{ form.errors }}
-        <div class="send-msg">
-        {{ form.message }}
-        <button class="btn btn-warning" type="submit">Send</button>
-        </div>
-    </form>
+        </li> -->
+        <!-- ログインしているユーザーのメッセージ -->
+        <li>
+            <div class="row comments mb-2">
+                <!-- メッセージのユーザーがログイン中のユーザーと一致すれば右側アイコンのレイアウト -->
+                {% if message.message_user == user %}
+                <div class="col-md-10 col-sm-10 col-10 comment rounded mb-2">
+                    <h4 class="m-0">{{ message.message_user }}</a></h4>
+                    <time class="text-white ml-3">{{ message.create_time }}</time>
+                    <like></like>
+                    <p class="mb-0 text-white">{{ message.message }}</p>
+                </div>
+                <!-- .colには、左右にpadding: 15pxが指定されているため、Bootstrapでは.px-0を適用することで左右のpaddingを0pxにできます。 -->
+                <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
+                    <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle" />
+                </div>
+                <!-- ログイン中のユーザーでなければ左側アイコンのレイアウト -->
+                {% else %}
+                <!-- .colには、左右にpadding: 15pxが指定されているため、Bootstrapでは.px-0を適用することで左右のpaddingを0pxにできます。 -->
+                <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
+                    <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle" />
+                </div>
+                <div class="col-md-10 col-sm-10 col-10 comment rounded mb-2">
+                    <h4 class="m-0">{{ message.message_user }}</a></h4>
+                    <time class="text-white ml-3">{{ message.create_time }}</time>
+                    <like></like>
+                    <p class="mb-0 text-white">{{ message.message }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </li>
+    </ul>
+{% endfor %}
+<!-- 送信フォーム -->
+    <div class="chat-room-body w-100 text-center">
+            <form action="{% url 'adopt_animals:message_room' message_room.id %}" method="POST" class="col-sm-6 offset-sm-3">
+                    {% csrf_token %}
+                    {{ form.errors }}
+                        <div class="send-msg">
+                            {{ form.message }}
+                                <button class="btn btn-warning" type="submit">Send</button>
+                        </div>
+            </form>
+    </div>
+<!-- 送信フォーム -->
 </div>
-
-
-
-
-
-
 
 {% endblock main %}

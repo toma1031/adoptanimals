@@ -2,7 +2,8 @@
 
 <nav class="navbar navbar-expand-sm">
   <div class="container">
-    <a href="/" class="navbar-brand">Adopt Animals</a>
+    <a href="/" class="navbar-brand"><img id="" src="/media/images/logo.png" class="logo" alt="logo" /></a>
+
     <!-- PC -->
     <ul class="navbar-nav pc-class ml-auto"> 
       <li class="nav-item"><a class="top" href="/" >Top</li>
@@ -19,7 +20,6 @@
       <li class="nav-item"><a class="login" href="{% url 'login' %}">Login</a></li>
       <li class="nav-item"><a class="signup" href="{% url 'accounts:accounts_signup' %}">Sign Up</a></li>
       {% endif %}
-      <li class="nav-item"><a class="contact_form " href="{% url 'adopt_animals:contact_form' %}">Contact</a></li>
     </ul>
 
     <!-- phone -->

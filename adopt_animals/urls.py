@@ -7,6 +7,7 @@ from adopt_animals.views import (CreatePostView, PostDoneView, PostDetailView, P
                                     ContactFormView, ContactResultView)
 from . import views
 
+
 app_name = 'adopt_animals'
 
 urlpatterns = [
@@ -34,3 +35,4 @@ urlpatterns = [
     path('contact/', ContactFormView.as_view(), name='contact_form'),
     path('contact/result/', ContactResultView.as_view(), name='contact_result'),
 ]
+

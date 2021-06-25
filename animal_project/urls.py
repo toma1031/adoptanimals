@@ -19,6 +19,10 @@ from django.contrib.auth.decorators import login_required
 
 from django.views.generic import TemplateView
 
+from . import settings_mysql
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -27,4 +31,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('oauth/', include('social_django.urls', namespace='social')),
-]
+] 
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings_mysql.MEDIA_URL, document_root=settings_mysql.MEDIA_ROOT)
