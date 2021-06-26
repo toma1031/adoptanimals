@@ -51,7 +51,7 @@ class UserChangeForm(ModelForm):
             
         ]
 
-    def __init__(self, username=None, email=None, state=None, city=None,  zipcode=None, phone_number=None, *args, **kwargs):
+    def __init__(self, username=None, email=None, state=None, city=None, zipcode=None, phone_number=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
         # ユーザーの更新前情報をフォームに挿入

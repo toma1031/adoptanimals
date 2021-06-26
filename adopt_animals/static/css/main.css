@@ -484,6 +484,12 @@ img {
   display: none;
 }
 
+/* .post_update_form.html CSS */
+
+.postupdate {
+  margin-bottom: 30px;
+}
+
 
 /* post_detail.html CSS  */
 
@@ -581,6 +587,7 @@ img {
   flex-direction: column;
   min-height: 130vh;
   position: relative;
+  margin-bottom: 30px;
 }
 
 footer {

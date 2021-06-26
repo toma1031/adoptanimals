@@ -129,8 +129,8 @@
   {% endif %}
   <a class="btn btn-primary back" href="{{request.META.HTTP_REFERER}}">Back</a>
   <!-- もしユーザーがログインしていなかったら -->
-  {% if user is not self.request.user %}
-  <p class="not_yet_signup">Want to send a message to owner and not yet signup?</p>
+  {% if not user.is_authenticated %}
+  <p class="not_yet_signup">Want to ask the owner something?</p>
   <a class="btn btn-primary" href="{% url 'accounts:accounts_signup' %}">Go to Signup page</a><br>
   {% endif %}
 </div>

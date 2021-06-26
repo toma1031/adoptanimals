@@ -10,35 +10,35 @@
   <form action="{% url 'adopt_animals:post_update' post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.errors }}
-    <p class="title">Title</p>
+    <p class="">Title</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.title }}</div>
     </div>
-    <p class="title">Name</p>
+    <p class="">Name</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.name }}</div>
     </div>
-    <p class="title">Age</p>
+    <p class="">Age</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.age }}</div>
     </div>
-    <p class="title">Wight</p>
+    <p class="">Wight</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.weight }}</div>
     </div>
-    <p class="title">Sex</p>
+    <p class="">Sex</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.sex }}</div>
     </div>
-    <p class="title">Story</p>
-    <div class="row justify-content-center">
-      <div class="col-8 col-lg-4">{{ form.story }}</div>
-    </div>
-    <p class="title">Category</p>
+    <p class="category">Category</p>
     <div class="row justify-content-center">
       <div class="col-8 col-lg-4">{{ form.category }}</div>
     </div>
-    <p class="title">Photo</p>
+    <p class="">Story</p>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-4">{{ form.story }}</div>
+    </div>
+    <p class="">Photo</p>
     <div class="row justify-content-center">
       <div>
         <label for="id_photo" class="filelabel">{{ form.photo.value }}</label>
@@ -85,7 +85,7 @@
         <div class="">{{ form.photo5|add_class:"fileinput5" }}</div>
       </div>
     </div>
-    <button class="btn btn-warning" type="submit">Update</button>
+    <button class="btn btn-warning" type="submit" class="postupdate">Update</button>
   </form>
 </div>
 
