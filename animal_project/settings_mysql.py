@@ -19,6 +19,13 @@ import environ
 env = environ.Env()
 env.read_env('.env')
 
+# herokuの環境かどうか
+HEROKU_ENV = env.bool('DJANGO_HEROKU_ENV', default=False)
+
+# herokuの環境でない時は.envファイルを読む
+if not HEROKU_ENV:
+    env.read_env('.env')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,8 +33,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-
-# SECRET_KEY = '4k)*(mf%vd)thj3^2eox%s*#7&-p9rnuhh(civf%akxq9yz7ol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
