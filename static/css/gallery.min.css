@@ -1,0 +1,124 @@
+/*
+Copyright (c) 2015 Omar Al-Ithawi
+Released under the MIT license
+https://github.com/OmarIthawi/responsive-gallery
+*/
+.gallery .images {
+  position: relative;
+  width: 100%;
+  padding-bottom: 60%;
+  height: 0
+}
+
+.gallery .images>div, .gallery .images>span {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%
+}
+
+.gallery .images>div {
+  opacity: 0;
+  background: center no-repeat;
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .4);
+  -webkit-transition: all .88s ease;
+  transition: all .88s ease
+}
+
+.gallery .images>div.active {
+  opacity: 1
+}
+
+.gallery .images>span {
+  cursor: pointer;
+  width: 50px;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+  font-size: 50px;
+  height: 100%;
+  line-height: 44px
+}
+
+.gallery .images>span.right {
+  left: 95%;
+  margin-left: -38px
+}
+
+.gallery .images>span.left {
+  right: 94.5%;
+  padding-left: 5px
+}
+
+.gallery .images>span:before {
+  margin-top: -25px;
+  top: 50%;
+  position: absolute;
+  bottom: 0
+}
+
+.gallery .images>span.left:before {
+  content: "\00AB"
+}
+
+.gallery .images>span.right:before {
+  content: "\00BB"
+}
+
+.gallery .thumbs {
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer
+}
+
+.gallery .thumbs>div {
+  box-sizing: border-box;
+  background: center no-repeat;
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  margin: 4px;
+  border: 3px solid transparent;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  -webkit-transition: all .88s ease;
+  transition: all .88s ease
+}
+
+@media (max-width:768px) {
+  .gallery .thumbs>div {
+    width: 65px;
+    height: 65px
+  }
+}
+
+.gallery .thumbs>div:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: solid transparent;
+  border-width: 0 5px 5px;
+  position: absolute;
+  left: 45px;
+  top: -8px;
+  -webkit-transition: all .88s ease;
+  transition: all .88s ease
+}
+
+@media (max-width:768px) {
+  .gallery .thumbs>div:before {
+    left: 25px
+  }
+}
+
+.gallery .thumbs>div.active {
+  border-color: silver
+}
+
+.gallery .thumbs>div.active:before {
+  border-bottom-color: silver
+}
