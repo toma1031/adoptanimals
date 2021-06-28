@@ -35,9 +35,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-DEBUG=env.bool('DEBUG', False)
+# DEBUG=env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -166,7 +166,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログイ�
 # manage.pyと同じ階層に.envファイルを作り、そちらへ
 # 必要な情報は格納する。そして下記のように呼び出す。
 # SECURITY WARNING: keep the secret key used in production secret!
-DEBUG=env.bool('DEBUG', False)
+# DEBUG=env.bool('DEBUG', False)
 SECRET_KEY=env("SECRET_KEY")
 EMAIL=env("EMAIL")
 PASSWORD=env("PASSWORD")
