@@ -32,7 +32,6 @@ json5==0.9.5
 jsonschema==2.6.0
 multipledispatch==0.6.0
 mysqlclient==2.0.3
-navigator-updater==0.2.1
 path==13.1.0
 Pillow==2.2.2
 pip==21.0.1
