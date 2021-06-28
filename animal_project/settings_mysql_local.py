@@ -106,12 +106,11 @@ WSGI_APPLICATION = 'animal_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_289c99319ec0957',
-        'USER': 'b8e7f890b8028a',
-        'PASSWORD': 'e6813d0a',
-        'HOST': 'us-cdbr-east-04.cleardb.com',
-        'PORT': 3306
+        'ENGINE': 'django.db.backends.mysql', # 変更
+        'NAME': 'adopt_animals', 
+        'USER': 'root', # パソコンにインストールしたMySQLのユーザー名
+        'PASSWORD': '', # 同上。そのパスワード
+        'PORT': 3306 # はも追記 
     }
 }
 
