@@ -110,6 +110,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'heroku_289c99319ec0957',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         'USER': 'b8e7f890b8028a',
         'PASSWORD': 'e6813d0a',
         'HOST': 'us-cdbr-east-04.cleardb.com',
