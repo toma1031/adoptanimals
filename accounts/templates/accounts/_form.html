@@ -6,7 +6,7 @@
         <div class = "form-group">
           {% csrf_token %}
           <!-- {{ form.as_p }} -->
-          <label class="col-sm-3 control-label">      <p>Username</p>{{ form.username|add_class:"form-control " }}</label>
+          <label class="col-sm-3 control-label">      <p>Username (not email)</p>{{ form.username|add_class:"form-control " }}</label>
         </div>
         <div class = "form-group">
           <label class="col-sm-3 control-label">      <p>Password</p>{{ form.password|add_class:"form-control " }}</label>
