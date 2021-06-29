@@ -39,6 +39,7 @@ class IndexView(ListView):
           object_list = object_list.filter(sex=q_sex)
     # もしstateになにかある場合（html側のvalueに何か入っている時）、
       if q_state:
+          print(q_state)
         # １番目のuserはUserモデルのuserフィールド、２番目のstateはUserモデルstateフィールド、３番目はUserモデルにはStateモデルがForeginKey紐づいているのでStateモデルのstateフィールドを表す。それを取得しobject_list変数に代入
           object_list = object_list.filter(user__state__state=q_state)
     # もしzipcodeになにかある場合（html側のvalueに何か入っている時）、
