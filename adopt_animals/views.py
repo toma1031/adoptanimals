@@ -392,7 +392,7 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
           # メッセージに外部情報を読み込む方法は下記を参照。
           # https://qiita.com/nomurasan/items/d68ed63a7dae897eda7c
           # request.POSTにはHTML側のフォームからPOSTされた内容が保管されている
-          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n https://adoptanimalsusa.herokuapp.com/message_room_list/'.format(request.POST.get('message')))
+          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n https://adoptanimalsusa.herokuapp.com/'.format(request.POST.get('message')))
       # もしログインしているユーザーがmessage_room.post(ペットの投稿者)だった場合
       else:
         print(self.object.inquiry_user)
@@ -401,7 +401,7 @@ class MessageRoomView(LoginRequiredMixin, DetailView):
           # 題名
           'Hi! ' '{0}'.format(self.object.inquiry_user) + '! Recieved message about your Post on Adopt Animals',
           # メッセージの中身
-          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n https://adoptanimalsusa.herokuapp.com/message_room_list/'.format(request.POST.get('message')))
+          'New Message Recieved. The massage is "{0}". Please login to your account and check the Message! \n\n https://adoptanimalsusa.herokuapp.com/'.format(request.POST.get('message')))
     else:
       # メッセージに何か不備がある場合はエラー表示
       print(form.errors)
