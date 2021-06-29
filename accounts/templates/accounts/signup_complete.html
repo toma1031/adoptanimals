@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block main %}
-<p>
-  This Sign up is complete. <br>
-  Please log in with your registered email address and password. <br>
-  <a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a>
-</p>
+<div class="hello w-100 text-center ml-2 mr-2">
+  <p>
+    This Sign up is complete. <br>
+    Please log in with your registered email address and password. <br>
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}">Login</a>
+  </p>
+</div>
+
 {% endblock %}

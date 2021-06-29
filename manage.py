@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'animal_project.settings_mysql')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'animal_project.settings_mysql_local')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

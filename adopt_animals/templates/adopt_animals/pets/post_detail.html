@@ -65,7 +65,7 @@
     {% include 'adopt_animals/pets/like.html' %}
   </div>
   <!-- ユーザーが投稿者でない場合で会員ユーザー（ログインしている）の場合、表示する -->
-  {% if not user == post.user and self.request.user %}
+  {% if user.is_authenticated and not user == post.user %}
   <form action="{% url 'adopt_animals:post_detail' post.id %}" method="POST">
     {% csrf_token %}
     {{ form.errors }}
