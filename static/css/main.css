@@ -1,89 +1,573 @@
-body {
-  background: pink;
+/* 共通事項 */
+/* フォントについて */
+p {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
 }
 
+a {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+h1 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h2 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h3 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h4 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+h5 {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* .form-controlのインプットのplaceholder文字のフォントと色 */
+.form-control::-webkit-input-placeholder {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* animals_post_form.htmlのselectインプットのフォント（forms.pyを編集） */
+.sex {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+.category {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* index.htmlのselectインプットのフォント */
+.search-index {
+  font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
+  color: gray;
+}
+
+/* ボタンの色変更 */
+/* primary button */
+.btn-primary {
+  background: white; 
+  color: orange; 
+  border-color: orange;
+  border: 2px solid orange;
+}
+
+.btn-primary:hover, .btn-primary:focus, 
+.btn-primary:active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:active.focus,
+.btn-primary.active, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary, 
+.open > .dropdown-toggle.btn-primary:hover,
+.open > .dropdown-toggle.btn-primary:focus, 
+.open > .dropdown-toggle.btn-primary.focus,
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
+    background: orange;
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
+    color: white; 
+    border: 2px solid orange;
+}
+
+/* warning button */
+.btn-warning {
+  background: white; 
+  color: orange; 
+  border-color: orange;
+  border: 2px solid orange;
+}
+
+.btn-warning:hover, .btn-warning:focus, 
+.btn-warning:active, .btn-warning:active:focus, .btn-warning:active:hover, .btn-warning:active.focus,
+.btn-warning.active, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning.active.focus,
+.open > .dropdown-toggle.btn-warning, 
+.open > .dropdown-toggle.btn-warning:hover,
+.open > .dropdown-toggle.btn-warning:focus, 
+.open > .dropdown-toggle.btn-warning.focus,
+.btn-warning.disabled:hover, .btn-warning[disabled]:hover, fieldset[disabled] .btn-warning:hover,
+.btn-warning.disabled:focus, .btn-warning[disabled]:focus, fieldset[disabled] .btn-warning:focus,
+.btn-warning.disabled.focus, .btn-warning[disabled].focus, fieldset[disabled] .btn-warning.focus {
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
+    background: orange;
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
+    color: white; 
+    border: 2px solid orange;
+}
+
+/* success button */
+.btn-success {
+  background: white; 
+  color: green; 
+  border-color: green;
+  border: 2px solid green;
+}
+
+.btn-success:hover, .btn-success:focus, 
+.btn-success:active, .btn-success:active:focus, .btn-success:active:hover, .btn-success:active.focus,
+.btn-success.active, .btn-success.active:focus, .btn-success.active:hover, .btn-success.active.focus,
+.open > .dropdown-toggle.btn-success, 
+.open > .dropdown-toggle.btn-success:hover,
+.open > .dropdown-toggle.btn-success:focus, 
+.open > .dropdown-toggle.btn-success.focus,
+.btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover,
+.btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus,
+.btn-success.disabled.focus, .btn-success[disabled].focus, fieldset[disabled] .btn-success.focus {
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
+    background: green;
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
+    color: white; 
+    border: 2px solid green;
+}
+
+/* danger button */
+.btn-danger {
+  background: white; 
+  color: red; 
+  border-color: red;
+  border: 2px solid red;
+}
+
+.btn-danger:hover, .btn-danger:focus, 
+.btn-danger:active, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger:active.focus,
+.btn-danger.active, .btn-danger.active:focus, .btn-danger.active:hover, .btn-danger.active.focus,
+.open > .dropdown-toggle.btn-danger, 
+.open > .dropdown-toggle.btn-danger:hover,
+.open > .dropdown-toggle.btn-danger:focus, 
+.open > .dropdown-toggle.btn-danger.focus,
+.btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover,
+.btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus,
+.btn-danger.disabled.focus, .btn-danger[disabled].focus, fieldset[disabled] .btn-danger.focus {
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
+    background: red;
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
+    color: white; 
+    border: 2px solid red;
+}
+
+/* info button */
+.btn-info {
+  background: white; 
+  color: blue; 
+  border-color: blue;
+  border: 2px solid blue;
+}
+
+.btn-info:hover, .btn-info:focus, 
+.btn-info:active, .btn-info:active:focus, .btn-info:active:hover, .btn-info:active.focus,
+.btn-info.active, .btn-info.active:focus, .btn-info.active:hover, .btn-info.active.focus,
+.open > .dropdown-toggle.btn-info, 
+.open > .dropdown-toggle.btn-info:hover,
+.open > .dropdown-toggle.btn-info:focus, 
+.open > .dropdown-toggle.btn-info.focus,
+.btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover,
+.btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus,
+.btn-info.disabled.focus, .btn-info[disabled].focus, fieldset[disabled] .btn-info.focus {
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
+    background: blue;
+    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
+    color: white; 
+    border: 2px solid blue;
+}
+
+.card {
+  margin-bottom: 10px;
+  box-shadow :0px 0px 8px silver;
+}
+
+
+
+
+/* _navbar.html CSS */
 .navbar {
-  background: pink;
-  background: linear-gradient(#FFEEFF,pink);
-  height: 300px;
-  box-shadow :0px 0px 10px silver;
+  background: orange;
+  /* background: linear-gradient(#FAEBD7,#FFC7AF); */
+  box-shadow :0px 0px 20px silver;
+}
+
+.logo {
+  height: 50px;
+  width: 270px;
 }
 
 .navbar-brand{
   font-weight: bold;
 }
 
-.black-text {
+.nav-item a {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-decoration: none;
+  /* アニメーション速度を指定 */
+  transition: 0.3s ease-out;
+}
+.nav-item a:hover {
+  /* hover後の文字の太さを指定 */
+  /* font-weight: bold; */
   color: black;
-  }
-
-.navbar-brand:link, .navbar-brand:visited, .navbar-brand:hover, .navbar-brand:active {
-  color: black;
+  text-decoration:none;
+  background-color: white;
 }
 
-.navbar-nav:link, .navbar-nav:visited, .navbar-nav:hover, .navbar-nav:active{
-  color: black;
-}
+
 
 .pc-class {
   margin-left: 65%;
 }
 
-.request_form_page {
-  color: black;
-  transition: all  0.3s ease;
+/* index page css */
+
+.hello {
+  padding-top: 20px;
 }
 
-.request_form_page:hover {
-  color: black;
-  text-decoration:none; 
-  background-color: #FFEEFF;
+.search {
+  padding: none;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-.waiting_response {
-  color: black;
-  transition: all  0.3s ease;
+.index_card {
+  border-radius: 20px;
+  border: 2px solid orange;
 }
 
-.waiting_response:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
+.index_card_body {
+  background: #FFFFCC;
+  border-radius: 20px;
 }
 
-.approved_request {
-  color: black;
-  transition: all  0.3s ease;
+.index-img {
+  border: 10px solid #FFFFCC;
+  border-radius: 20px;
 }
 
-.approved_request:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
+img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
 }
 
-.declined_request {
-  color: black;
-  transition: all  0.3s ease;
+.form-control {
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
-.declined_request:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
+.card_bottum_owner {
+  display: inline-block;
 }
 
-.logout {
-  color: black;
-  transition: all  0.3s ease;
+/* like.html CSS */
+/* likeボタンの枠線を消す */
+#like {
+  border: none;  /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent; /* 背景の灰色を消す */
 }
 
-.logout:hover {
-  color: black;
-  text-decoration:none;
-  background-color: #FFEEFF;
+.like-red {
+  color: red;
 }
 
+.fa-heart {
+  color: red;
+}
+
+.like_button {
+  display: inline-block;
+}
+
+.count {
+  padding-left: 10px;
+  display: inline-block;
+}
+
+/* sign up page */
+.each_page_to_signup {
+  padding-top: 30px;
+
+}
+
+.socail_medias_signup {
+  padding-top: 30px;
+}
+
+.socail_medias_signup_btn {
+  margin-top: 20px;
+}
+
+.signup_page_home_btn {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+/* login page */
+.each_page_to_login_page {
+  padding-top: 30px;
+}
+
+.login_with_socail_media_account {
+  margin-top: 30px;
+}
+
+.login_with_socail_media_account_btn{
+  margin-top: 20px;
+}
+
+.forget_password_btn {
+  margin-top: 20px;
+}
+
+.forget_password {
+  margin-top: 30px;
+}
+
+.errorlist {
+  color: red;
+  padding: none;
+  margin: none;
+}
+
+/* profile page */
+.phone-field-ext {
+  display:none;
+}
+
+#id_phone_number_1 {
+  display:none;
+}
+
+.update {
+  margin-bottom: 10px;
+}
+
+.change_password {
+  margin-bottom: 10px;
+}
+
+.each_page_top {
+  margin-top: 30px;
+}
+
+.cancel_membership {
+  margin-bottom: 10px;
+}
+
+.user_change_top {
+  margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+/* contact_form.html CSS */
+.success {
+  margin-bottom: 30px;
+}
+
+/* animals_post_form.html CSS */
+
+.create_new_post {
+  padding-top: 30px;
+}
+
+.submit_button_post_page {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.filelabel{
+  display: inline-block;
+  position: relative;
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel:hover{
+  background-color: orangered;
+}
+
+.fileinput{
+  display: none;
+}
+
+.filelabel2{
+  display: inline-block;
+  position: relative;
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel2:hover{
+  background-color: orangered;
+}
+
+.fileinput2{
+  display: none;
+}
+
+#id_photo2 {
+  display: none;
+}
+
+.filelabel3 {
+  display: inline-block;
+  position: relative;
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel3:hover{
+  background-color: orangered;
+}
+
+.fileinput3 {
+  display: none;
+}
+
+.filelabel4{
+  display: inline-block;
+  position: relative;
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel4:hover{
+  background-color: orangered;
+}
+
+.fileinput4{
+  display: none;
+}
+
+.filelabel5{
+  display: inline-block;
+  position: relative;
+  background-color: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.filelabel5:hover{
+  background-color: orangered;
+}
+
+.fileinput5{
+  display: none;
+}
+
+/* .post_update_form.html CSS */
+
+.postupdate {
+  margin-bottom: 30px;
+}
+
+
+/* post_detail.html CSS  */
+
+.story {
+  margin-top: 20px;
+}
+
+.edit_this_post {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 40px 10px 40px;
+}
+
+.delete {
+  margin-bottom: 10px;
+  padding: 10px 65px 10px 65px;
+}
+
+.post_detail_page_photo {
+  object-fit: cover;
+  width: 600px;
+  height: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.back {
+  margin-bottom: 20px;
+}
+
+/* my_messages.html */
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.my_messages_photo {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.messages{
+  margin-top: 20px;
+  padding:0 30px 0px 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden; 
+}
+
+/* ディスプレイによって写真の表示が変わる */
+@media (max-width: 540px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 410px;
+    height: 410px; 
+  }
+}
+
+@media (max-width: 400px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 310px;
+    height: 310px; 
+  }
+}
+
+@media (max-width: 300px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .post_detail_page_photo {   
+    width: 270px;
+    height: 270px; 
+  }
+}
 
 .nav-item {
   margin: 0px 10px 0px 0px;
@@ -93,10 +577,38 @@ body {
   display: block;
 }
 
+.succeed {
+  margin-bottom: 30px;
+}
+
+  /* フッターを固定するために追記 */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 130vh;
+  position: relative;
+  margin-bottom: 30px;
+}
+
 footer {
-  background:pink;
   text-align: center;
-  margin-top: 30px;
+  /* margin-top: 30px; */
+  background: orange;
+  box-shadow :0px 0px 30px silver;
+  /* フッターを固定するために追記 */
+  margin-top: auto;
+  height: 100px;
+  position: absolute;/*②絶対位置*/
+  width: 100%;
+}
+
+.footer {
+  padding-top: 10px;
+  color: white;
+}
+
+.contact_form {
+  color: white;
 }
 
 h1 {
@@ -114,65 +626,14 @@ p {
   margin-bottom: 1rem; 
 }
 
-.chose_supervisor_field {
-  display: inline-block
-}
 
-/* employee.html */
-.chose_supervisor {
-  margin: 16px;
-}
 
-.request_date_from {
-  margin: 16px;
-}
 
-.request_date_to {
-  margin: 16px;
-}
-
-.note {
-  margin: 16px;
-}
-
-.submit-request {
-  margin: 16px;
-}
-
-.success {
-  margin-top: 20px;
-}
-/* supervisor_page */
-
-.supervisorpage {
-  margin-top: 20px;
-}
-
-/* hr_page */
-
-.hrpage {
-  margin-top: 20px;
-}
-
-.approved_reqest_list {
-  margin: 20px;
-}
-
-.declined_reqest_list {
-  margin: 20px;
-}
-
-.request_detail {
-  background: #FFFFCC;
-  border-radius :8px;
-  box-shadow :0px 0px 10px silver;
-  padding: 10px 0px 10px 0px;
-  margin: 20px;
-}
 /* list */
 
 ul {
   list-style: none;
+  padding-left: 0;
 }
 
 .request_list {
@@ -187,6 +648,10 @@ ul {
   word-wrap: break-word;
 }
 
+/* .pc-class {
+  display: none;
+}  */
+
 @media screen and (min-width:480px) {
   .searchform {
     float: right;
@@ -197,4 +662,178 @@ ul {
   .searchform {
     justify-content: center;
   }
+}
+
+
+/* message_room.html CSS */
+
+.comments-main{
+  background: #FFF;
+  word-wrap: break-word;
+}
+.comment time, .comment:hover time,.icon-rocknroll, .like-count {
+  -webkit-transition: .25s opacity linear;
+  transition: .25s opacity linear;
+}
+.comment2 time, .comment2:hover time,.icon-rocknroll, .like-count {
+  -webkit-transition: .25s opacity linear;
+  transition: .25s opacity linear;
+}
+.comments-main ul li{
+  list-style: none;
+}
+.comments .comment {
+  padding: 5px 10px;
+  background: #FFE4B5;
+}
+.comments .comment2 {
+  padding: 5px 10px;
+  background: #FFE4C4;
+}
+.comments .comment:hover time{
+  opacity: 1;
+}
+.comments .comment2:hover time{
+  opacity: 1;
+}
+.comments .user-img img {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+}
+.comments .comment h4 {
+  display: inline-block;
+  font-size: 16px;
+}
+.comments .comment2 h4 {
+  display: inline-block;
+  font-size: 16px;
+}
+.comments .comment h4 a {
+  color: #404040;
+  text-decoration: none;
+}
+.comments .comment2 h4 a {
+  color: #404040;
+  text-decoration: none;
+}
+.comments .comment .icon-rocknroll {
+  color: #545454;
+  font-size: .85rem;
+}
+.comments .comment2 .icon-rocknroll {
+  color: #545454;
+  font-size: .85rem;
+}
+.comments .comment .icon-rocknroll:hover {
+  opacity: .5;
+}
+.comments .comment2 .icon-rocknroll:hover {
+  opacity: .5;
+}
+.comments .comment time,.comments .comment .like-count,.comments .comment .icon-rocknroll {
+  font-size: .75rem;
+  opacity: 0;
+}
+.comments .comment2 time,.comments .comment2 .like-count,.comments .comment2 .icon-rocknroll {
+  font-size: .75rem;
+  opacity: 0;
+}
+.comments .comment time, .comments .comment .like-count {
+  font-weight: 300;
+}
+.comments .comment2 time, .comments .comment2 .like-count {
+  font-weight: 300;
+}
+.comments .comment p {
+  font-size: 13px;
+}
+.comments .comment2 p {
+  font-size: 13px;
+}
+.comments .comment p .reply {
+  color: #BFBFA8;
+  cursor: pointer;
+}
+.comments .comment2 p .reply {
+  color: #BFBFA8;
+  cursor: pointer;
+}
+.comments .comment .active {
+  opacity: 1;
+}
+.comments .comment2 .active {
+  opacity: 1;
+}
+.icon-rocknroll {
+  background: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0 .125rem 0 0;
+}
+.comments .comment:hover .icon-rocknroll,.comments .comment:hover .like-count {
+  opacity: 1;
+}
+.comments .comment2:hover .icon-rocknroll,.comments .comment2:hover .like-count {
+  opacity: 1;
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+  .comments .comment h4 {
+    font-size: 12px;
+  }
+  .comments .comment p{
+    font-size: 11px;
+  }
+  .comments .comment2 h4 {
+    font-size: 12px;
+  }
+  .comments .comment2 p{
+    font-size: 11px;
+  }
+
+  }
+
+  .text-color {
+    color: gray;
+  }
+
+  /* about.html CSS */
+.img-about {
+  margin-top: 40px;
+  width: 50% !important;
+  height: 50% !important;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+}
+
+.about {
+  margin-top: 40px;
+}
+
+.how_to_use {
+  margin-top: 40px;
+}
+
+.for_people_who_looking_for_pets {
+  margin-top: 40px;
+}
+
+.for_people_who_looking_for_foster_homes {
+  margin-top: 40px;
+}
+
+
+/* pagination.html CSS */
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}
+
+.page-link {
+  color: orange;
 }
