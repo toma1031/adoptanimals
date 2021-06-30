@@ -153,7 +153,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = "/login"
+# LoginRequireMixedInはログインしてなければデフォルト/accounts/login にアクセスしようとします。
+# 実際のアプリのログインURLに
+# LOGIN_URL =　の記載を合わせなければいけない。実際のアプリのログインURLは/accounts/login なので下記のように書く
+LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/' # ログイン後のデフォルト遷移ページ
 LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログインページへのリダイレクト先
 

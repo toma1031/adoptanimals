@@ -232,4 +232,3 @@ EMAIL_HOST_PASSWORD = PASSWORD
 # アイコンやロゴ表示用
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
