@@ -802,21 +802,10 @@ ul {
   /* about.html CSS */
 .img-about {
   margin-top: 40px;
-  width: 50% ;
-  height: 50% ;
+  width: 50% !important;
+  height: 50% !important;
   border-radius: 10px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
-}
-
-@media (max-width: 540px) {
-  /* 横幅が320px以下の場合に適用するスタイル */
-  .img-about {   
-    margin-top: 40px;
-    width: 90% !important;
-    height: 90% !important;
-    border-radius: 10px;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
-  }
 }
 
 .about {

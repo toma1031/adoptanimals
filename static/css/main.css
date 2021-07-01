@@ -590,6 +590,26 @@ img {
   margin-bottom: 30px;
 }
 
+@media (max-width:540px) {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 200vh;
+    position: relative;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width:340px) {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 300vh;
+    position: relative;
+    margin-bottom: 30px;
+  }
+}
+
 footer {
   text-align: center;
   /* margin-top: 30px; */
@@ -806,6 +826,28 @@ ul {
   height: 50% !important;
   border-radius: 10px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+}
+
+@media (max-width: 540px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .img-about {   
+    margin-top: 40px;
+    width: 90% !important;
+    height: 50% !important;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+  }
+}
+
+@media (max-width: 540px) {
+  /* 横幅が320px以下の場合に適用するスタイル */
+  .img-about {   
+    margin-top: 40px;
+    width: 90% !important;
+    height: 50% !important;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .5);
+  }
 }
 
 .about {
