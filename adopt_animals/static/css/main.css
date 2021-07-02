@@ -590,6 +590,26 @@ img {
   margin-bottom: 30px;
 }
 
+@media (max-width:540px) {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 200vh;
+    position: relative;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width:340px) {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 300vh;
+    position: relative;
+    margin-bottom: 30px;
+  }
+}
+
 footer {
   text-align: center;
   /* margin-top: 30px; */

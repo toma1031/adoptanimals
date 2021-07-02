@@ -16,18 +16,38 @@
   <!-- ラッパーの（スライドを囲む） div 要素 -->
   <div class="swiper-wrapper"> 
     <!-- それぞれのスライドの div 要素 -->
-    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo.url }}" alt=""></div>
+    <div class="swiper-slide">
+      <a href="{{ post.photo.url }}" data-lightbox="group">
+        <img class="post_detail_page_photo" src="{{ post.photo.url }}" alt="">
+      </a>
+    </div>
     {% if post.photo2 %}
-    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo2.url }}" alt=""></div>
+    <div class="swiper-slide">
+      <a href="{{ post.photo2.url }}" data-lightbox="group">
+        <img class="post_detail_page_photo" src="{{ post.photo2.url }}" alt="">
+      </a>
+    </div>
     {% endif %}
     {% if post.photo3 %}
-    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo3.url }}" alt=""></div>
+    <div class="swiper-slide">
+      <a href="{{ post.photo3.url }}" data-lightbox="group">
+        <img class="post_detail_page_photo" src="{{ post.photo3.url }}" alt="">
+      </a>
+    </div>
     {% endif %}
     {% if post.photo4 %}
-    <div class="swiper-slide"><img class="post_detail_page_photo"src="{{ post.photo4.url }}" alt=""></div>
+    <div class="swiper-slide">
+      <a href="{{ post.photo4.url }}" data-lightbox="group">
+        <img class="post_detail_page_photo"src="{{ post.photo4.url }}" alt="">
+      </a>
+    </div>
     {% endif %}
     {% if post.photo5 %}
-    <div class="swiper-slide"><img class="post_detail_page_photo" src="{{ post.photo5.url }}" alt=""></div>
+    <div class="swiper-slide">
+      <a href="{{ post.photo5.url }}" data-lightbox="group">
+        <img class="post_detail_page_photo" src="{{ post.photo5.url }}" alt="">
+      </a>
+    </div>
     {% endif %}
   </div>
  
