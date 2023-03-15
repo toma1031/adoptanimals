@@ -1,5 +1,4 @@
-/* 共通事項 */
-/* フォントについて */
+
 p {
   font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
   color: gray;
@@ -48,14 +47,12 @@ h5 {
   color: gray;
 }
 
-/* index.htmlのselectインプットのフォント */
 .search-index {
   font-family: 'Comic Sans MS', 'Arial Narrow', Arial, sans-serif;
   color: gray;
 }
 
-/* ボタンの色変更 */
-/* primary button */
+
 .btn-primary {
   background: white; 
   color: orange; 
@@ -73,14 +70,11 @@ h5 {
 .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
 .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
     background: orange;
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
     color: white; 
     border: 2px solid orange;
 }
 
-/* warning button */
 .btn-warning {
   background: white; 
   color: orange; 
@@ -98,14 +92,11 @@ h5 {
 .btn-warning.disabled:hover, .btn-warning[disabled]:hover, fieldset[disabled] .btn-warning:hover,
 .btn-warning.disabled:focus, .btn-warning[disabled]:focus, fieldset[disabled] .btn-warning:focus,
 .btn-warning.disabled.focus, .btn-warning[disabled].focus, fieldset[disabled] .btn-warning.focus {
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
     background: orange;
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
     color: white; 
     border: 2px solid orange;
 }
 
-/* success button */
 .btn-success {
   background: white; 
   color: green; 
@@ -123,14 +114,11 @@ h5 {
 .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover,
 .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus,
 .btn-success.disabled.focus, .btn-success[disabled].focus, fieldset[disabled] .btn-success.focus {
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
     background: green;
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
     color: white; 
     border: 2px solid green;
 }
 
-/* danger button */
 .btn-danger {
   background: white; 
   color: red; 
@@ -148,14 +136,11 @@ h5 {
 .btn-danger.disabled:hover, .btn-danger[disabled]:hover, fieldset[disabled] .btn-danger:hover,
 .btn-danger.disabled:focus, .btn-danger[disabled]:focus, fieldset[disabled] .btn-danger:focus,
 .btn-danger.disabled.focus, .btn-danger[disabled].focus, fieldset[disabled] .btn-danger.focus {
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
     background: red;
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
     color: white; 
     border: 2px solid red;
 }
 
-/* info button */
 .btn-info {
   background: white; 
   color: blue; 
@@ -173,9 +158,7 @@ h5 {
 .btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover,
 .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus,
 .btn-info.disabled.focus, .btn-info[disabled].focus, fieldset[disabled] .btn-info.focus {
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時の背景色 */
     background: blue;
-    /* ボタンの上にポインタを持ってきたり、クリックしたりした時のテキストの色 */
     color: white; 
     border: 2px solid blue;
 }
@@ -186,12 +169,8 @@ h5 {
 }
 
 
-
-
-/* _navbar.html CSS */
 .navbar {
   background: orange;
-  /* background: linear-gradient(#FAEBD7,#FFC7AF); */
   box-shadow :0px 0px 20px silver;
 }
 
@@ -209,24 +188,18 @@ h5 {
   font-size: 0.9rem;
   font-weight: 400;
   text-decoration: none;
-  /* アニメーション速度を指定 */
   transition: 0.3s ease-out;
 }
 .nav-item a:hover {
-  /* hover後の文字の太さを指定 */
-  /* font-weight: bold; */
   color: black;
   text-decoration:none;
   background-color: white;
 }
 
-
-
 .pc-class {
   margin-left: 65%;
 }
 
-/* index page css */
 
 .hello {
   padding-top: 20px;
@@ -268,12 +241,11 @@ img {
   display: inline-block;
 }
 
-/* like.html CSS */
-/* likeボタンの枠線を消す */
+
 #like {
-  border: none;  /* 枠線を消す */
-  outline: none; /* クリックしたときに表示される枠線を消す */
-  background: transparent; /* 背景の灰色を消す */
+  border: none;  
+  outline: none; 
+  background: transparent; 
 }
 
 .like-red {
@@ -293,7 +265,6 @@ img {
   display: inline-block;
 }
 
-/* sign up page */
 .each_page_to_signup {
   padding-top: 30px;
 
@@ -311,7 +282,7 @@ img {
   margin-top: 20px;
   margin-bottom: 30px;
 }
-/* login page */
+
 .each_page_to_login_page {
   padding-top: 30px;
 }
@@ -338,7 +309,6 @@ img {
   margin: none;
 }
 
-/* profile page */
 .phone-field-ext {
   display:none;
 }
@@ -374,12 +344,11 @@ img {
   margin-bottom: 30px;
 }
 
-/* contact_form.html CSS */
+
 .success {
   margin-bottom: 30px;
 }
 
-/* animals_post_form.html CSS */
 
 .create_new_post {
   padding-top: 30px;
@@ -484,14 +453,9 @@ img {
   display: none;
 }
 
-/* .post_update_form.html CSS */
-
 .postupdate {
   margin-bottom: 30px;
 }
-
-
-/* post_detail.html CSS  */
 
 .story {
   margin-top: 20px;
@@ -522,7 +486,6 @@ img {
   margin-bottom: 20px;
 }
 
-/* my_messages.html */
 .nopadding {
   padding: 0 !important;
   margin: 0 !important;
@@ -544,9 +507,7 @@ img {
   overflow: hidden; 
 }
 
-/* ディスプレイによって写真の表示が変わる */
 @media (max-width: 540px) {
-  /* 横幅が320px以下の場合に適用するスタイル */
   .post_detail_page_photo {   
     width: 410px;
     height: 410px; 
@@ -554,7 +515,6 @@ img {
 }
 
 @media (max-width: 400px) {
-  /* 横幅が320px以下の場合に適用するスタイル */
   .post_detail_page_photo {   
     width: 310px;
     height: 310px; 
@@ -562,7 +522,6 @@ img {
 }
 
 @media (max-width: 300px) {
-  /* 横幅が320px以下の場合に適用するスタイル */
   .post_detail_page_photo {   
     width: 270px;
     height: 270px; 
@@ -581,7 +540,6 @@ img {
   margin-bottom: 30px;
 }
 
-  /* フッターを固定するために追記 */
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -612,13 +570,11 @@ img {
 
 footer {
   text-align: center;
-  /* margin-top: 30px; */
   background: orange;
   box-shadow :0px 0px 30px silver;
-  /* フッターを固定するために追記 */
   margin-top: auto;
   height: 100px;
-  position: absolute;/*②絶対位置*/
+  position: absolute;
   width: 100%;
 }
 
@@ -647,10 +603,6 @@ p {
 }
 
 
-
-
-/* list */
-
 ul {
   list-style: none;
   padding-left: 0;
@@ -668,9 +620,6 @@ ul {
   word-wrap: break-word;
 }
 
-/* .pc-class {
-  display: none;
-}  */
 
 @media screen and (min-width:480px) {
   .searchform {
@@ -684,8 +633,6 @@ ul {
   }
 }
 
-
-/* message_room.html CSS */
 
 .comments-main{
   background: #FFF;
@@ -819,7 +766,6 @@ ul {
     color: gray;
   }
 
-  /* about.html CSS */
 .img-about {
   margin-top: 40px;
   width: 50% ;
@@ -829,7 +775,6 @@ ul {
 }
 
 @media (max-width: 540px) {
-  /* 横幅が320px以下の場合に適用するスタイル */
   .img-about {   
     margin-top: 40px;
     width: 90% !important;
@@ -854,9 +799,6 @@ ul {
 .for_people_who_looking_for_foster_homes {
   margin-top: 40px;
 }
-
-
-/* pagination.html CSS */
 
 .page-item.active .page-link {
   z-index: 1;

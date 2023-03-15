@@ -5,7 +5,6 @@ from django.utils import timezone
 class Tag(models.Model):
   category = models.CharField(verbose_name='Animal Category', max_length=20, null=False, blank=False)
 
-# 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.category
 
@@ -13,7 +12,6 @@ class Post(models.Model):
   title = models.CharField(verbose_name='Title', max_length=40, null=False, blank=False)
   name = models.CharField(verbose_name='Name', max_length=40, null=False, blank=False)
   age = models.IntegerField(verbose_name='Age', null=False, blank=False)
-  # 写真は５枚アップロードできるようにする
   photo = models.ImageField(upload_to='images/', verbose_name='Photo', null=False, blank=False)
   photo2 = models.ImageField(upload_to='images/', verbose_name='Photo2', null=True, blank=True)
   photo3 = models.ImageField(upload_to='images/', verbose_name='Photo3', null=True, blank=True)
@@ -25,7 +23,6 @@ class Post(models.Model):
   user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='user')
   category = models.ForeignKey(Tag, verbose_name='Category', on_delete=models.CASCADE)
 
-# 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.title
 
@@ -35,7 +32,6 @@ class Like(models.Model):
   user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
   timestamp = models.DateTimeField(default=timezone.now)
 
-# 以下を書くことによりcategoryをちゃんとオブジェクト名で表示できる
   def __str__(self):
     return self.post
 
@@ -45,9 +41,7 @@ class MessageRoom(models.Model):
     inquiry_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, related_name='inquiry_user')
     update_time = models.DateTimeField(auto_now=True)
 
-    # my_messages.htmlで最新のMessageを表示するために下記を追記、
     def get_last_message(self):
-      # selfはMessageRoomオブジェクトのこと
       first_message_obj = self.message_set.all().order_by('-create_time').first()
       if first_message_obj:
           return first_message_obj.message

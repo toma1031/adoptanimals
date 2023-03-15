@@ -5,7 +5,6 @@
 <div class="my-4 w-100 text-center ml-2 mr-2">
   <h2>Post Update</h2>
 </div>
-<!-- enctype="multipart/form-data というのは基本的にテキストベースのデータのやり取りしかしないHTTP通信で色んなデータ(画像やエクセルファイル)も通信の対象に含めるいったものです。 -->
 <div class="w-100 text-center ml-2 mr-2 each_page_to">
   <form action="{% url 'adopt_animals:post_update' post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

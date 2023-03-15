@@ -7,7 +7,6 @@ from django.conf import settings
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 
-# 下記で写真にサイズ制限をかける
 def file_size(value): 
   limit = 2 * 1024 * 1024
   if value.size > limit:
@@ -40,8 +39,6 @@ class PostForm(forms.ModelForm):
         }),
     )
 
-# widget=forms.FileInputとすることでCurrentryとChangeを一旦全て削除
-# 参考箇所（https://stackoverflow.com/questions/14336925/how-to-not-render-django-image-field-currently-and-clear-stuff）
   photo = forms.ImageField(label='Image', validators=[file_size], widget=forms.FileInput)
   photo2 = forms.ImageField(label='Image2', required=False, validators=[file_size], widget=forms.FileInput)
   photo3 = forms.ImageField(label='Image3', required=False, validators=[file_size], widget=forms.FileInput)
@@ -73,14 +70,13 @@ class PostForm(forms.ModelForm):
                 'placeholder': "Story",
         }),
     )
-#   下記のempty_label=Noneはプルダウンメニューをクリックすると--------という項目を非表示にできる
   category = forms.ModelChoiceField(queryset=Tag.objects.all(),
         label="Category:", required=True, empty_label=None, 
         widget=forms.Select(attrs={
             'class': 'form-control category',
         }),
     )
-# このMetaの中身というのはmodelsのフィールドを元にしている
+
   class Meta:
       model = Post
       fields = [
@@ -108,14 +104,12 @@ class MessageForm(forms.ModelForm):
             'placeholder': "Message",
         }),)
 
-# このMetaの中身というのはmodelsのフィールドを元にしている
   class Meta:
       model = Message
       fields = [
           'message',
       ]
 
-# お問い合わせフォーム
 class ContactForm(forms.Form):
     name = forms.CharField(
         label='',

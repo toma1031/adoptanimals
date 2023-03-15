@@ -16,10 +16,7 @@
   <div class="card mb-4 index_card">
     <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
     <div class="card-body index_card_body">
-      <!-- <h2 class="card-title">{{ post.title }} <span class="small"> - {{ post.category }}</span></h2> -->
       <h5 class="card-text w-100 text-center">Name: {{ post.name }}</h5>
-      <!-- <p class="card-text">Age: {{ post.age }}</p>
-      <p class="card-text">Weight: {{ post.weight }}</p> -->
       <p class="card-text">Sex:
         {% if post.sex == 1 %}
         Male
@@ -28,15 +25,11 @@
         {% endif %}
       </p>
       <p class="card-text">State: {{ post.user.state }}</p>
-      <!-- <p class="card-text">Zipcode: {{ post.user.zipcode }}</p>
-      <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p> -->
       <a class="btn btn-primary w-100 text-center" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
     </div>
-    <!-- いいねボタン -->
     <div class="like-outer w-100 text-center index_card_body">          
       {% include 'adopt_animals/pets/like.html' %}
     </div>
-    <!-- いいねボタンここまで -->
   </div>
 </div>
 {% endfor %}

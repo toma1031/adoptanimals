@@ -1,13 +1,11 @@
-// JavaScript Document
 
 $(function(){
 
-  /* オプション設定 */
   const options = {
-    slide: 'top', /* スライド方向（none, top, bottom, left, right） */
-    duration: 300, /* 表示アニメーション速度（ms） */
-    weight: 'regular', /* アイコン太さ（regular, light, solid） */
-    dark: true, /* 画面の暗転（true, false） */
+    slide: 'top', 
+    duration: 300, 
+    weight: 'regular', 
+    dark: true, 
   };
 
   const icons = {
@@ -26,7 +24,6 @@ $(function(){
   const barsIcon = icons['bars' + weight];
   const timesIcon = icons['times' + options.weight[0].toUpperCase() + options.weight.substring(1)];
   
-  /* overlay（z-index対策） */
   $nav.parent().append('<div id="hamburger-overlay"></div>');
   const $overlay = $('#hamburger-overlay');
   $overlay.css('transition-duration', (options.duration / 1000) + 's');
@@ -34,30 +31,30 @@ $(function(){
     $overlay.css('background-color', 'transparent');
   }
   
-  /* メニュー収納 */
+
   prepare();
   $(window).on('resize', function() {
     prepare();
   });
   
-  /* クリック処理 */
+
   let isOpen = false;
   $button.on('click', function() {
     isOpen ? close() : open();
     isOpen = ! isOpen;
   });
   
-  /* Prepare */
+
   function prepare() {
-    navHeight = $nav.outerHeight(); /* responsive対応 */
-    navWidth = $nav.outerWidth(); /* responsive対応 */
+    navHeight = $nav.outerHeight(); 
+    navWidth = $nav.outerWidth(); 
     close();
     setTimeout(() => {
       $nav.css('display', 'block');
       $nav.css('transition-duration', (options.duration / 1000) + 's');
-    }, 0); /* 表示される不具合対策 */
+    }, 0); 
   }
-  /* Close */
+
   function close() {
     if (options.slide === 'none') {
       $nav.css('opacity', 0);
@@ -65,7 +62,7 @@ $(function(){
       if (options.slide === 'top' || options.slide === 'bottom') {
         $nav.css(options.slide, - navHeight);
       } else {
-        $nav.css('top', 0); // 要検討
+        $nav.css('top', 0); 
         $nav.css(options.slide, - navWidth);
       }
     }
@@ -73,7 +70,7 @@ $(function(){
     $overlay.css('opacity', 0);
     $button.removeClass('close');
   }
-  /* Open */
+
   function open() {
     if (options.slide === 'none') {
       $nav.css('opacity', 1);

@@ -38,7 +38,6 @@ class SignupView(FormView, CreateView):
             user.is_active = False
             user.save()
 
-            # アクティベーションURLの送付
             current_site = get_current_site(self.request)
             domain = current_site.domain
             context = {
@@ -67,11 +66,9 @@ class SignupCompleteView(TemplateView):
         try:
             user_pk = loads(token, max_age=self.timeout_seconds)
 
-        # 期限切れ
         except SignatureExpired:
             return HttpResponseBadRequest()
 
-        # tokenが間違っている
         except BadSignature:
             return HttpResponseBadRequest()
 
@@ -83,7 +80,6 @@ class SignupCompleteView(TemplateView):
                 return HttpResponseBadRequest()
             else:
                 if not user.is_active:
-                    # 問題なければ本登録とする
                     user.is_active = True
                     user.save()
                     return super().get(request, **kwargs)
@@ -112,11 +108,7 @@ class UserChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/user_change.html'
     form_class = UserChangeForm
     success_url = reverse_lazy("adopt_animals:index")
-    # モデルのフィールドの名前
-    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_field = 'username'
-    # urls.pyでのキーワードの名前
-    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_url_kwarg = 'username'
 
 
@@ -126,11 +118,7 @@ class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'accounts/password_change.html'
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('accounts:password_change_done')
-    # モデルのフィールドの名前
-    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_field = 'username'
-    # urls.pyでのキーワードの名前
-    # /accounts/userA/change にアクセスしたときにuserAというusernameの情報をUserモデルから引っ張ってきている
     slug_url_kwarg = 'username'
 
 
@@ -139,7 +127,6 @@ class PasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
 
 
 class PasswordReset(PasswordResetView):
-    # """パスワード変更用URLの送付ページ"""
     subject_template_name = 'accounts/mail_template/password_reset/subject.txt'
     email_template_name = 'accounts/mail_template/password_reset/message.txt'
     template_name = 'accounts/password_reset_form.html'
@@ -160,5 +147,4 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 
 
 class PasswordResetComplete(PasswordResetCompleteView):
-    # """新パスワード設定しましたページ"""
     template_name = 'accounts/password_reset_complete.html'

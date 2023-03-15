@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
-<!-- load widget_tweaksはform-controlを使うために必要 -->
 {% load widget_tweaks %}
 {% block main %}
   <div class="w-100 text-center ml-2 mr-2 each_page_top">
     <h3 class="">Change User Info</h3>
-    <!-- <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle profile-img" /> -->
     <img id="profile-photo" src="https://res.cloudinary.com/dl2blqao5/image/upload/v1624940253/media/images/icon_figure_l1edu5.png" class="rounded-circle profile-img" />
     <form class="col-md-6 offset-md-3" action="" method="POST">
       {% csrf_token %}
-      <!-- {{form.as_p}} -->
       <p>User Name{{ form.username|add_class:"form-control" }}</p>
       <p>Email{{ form.email|add_class:"form-control" }}</p>
       <p>State{{ form.state|add_class:"form-control" }}</p>
@@ -17,8 +14,6 @@
       <p>Phone number{{ form.phone_number|add_class:"form-control" }}</p>
       <button class="btn btn-primary update" type="submit">Update</button>
     </form>
-    <!-- ここでユーザーがGoogleアカウントでログインしている場合、パスワード変更のURLリンクは
-    表示させないようにしている -->
     {% if user.has_usable_password %}
     <a class="btn btn-success col-md-2 col-6 change_password" href="{% url 'accounts:password_change' user.username %}">Change Password</a><br>
     {% endif %}

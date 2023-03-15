@@ -9,7 +9,6 @@
 {% else %}
 <p class="hello w-100 text-right ml-2 mr-2">Hello Guest!</p>
 {% endif %}
-<!-- 検索機能 -->
 <div class="form w-100 text-right ml-2 mr-2">
   <form action="" method="get" class="search-bar">
     <select class="form-control col-md-2 search-index" name="query_category" value="{{ request.GET.query_category }}">
@@ -84,17 +83,12 @@
     <button class="btn btn-warning form-control col-md-2" type="submit">Search</button>
   </form>
 </div>
-<!-- 検索機能ここまで -->
-<!-- 投稿 -->
 {% for post in post_list %}
 <div class="col-md-4">
   <div class="card mb-4 index_card">
     <img src="{{ post.photo.url }}" alt="" class="card-img-top index-img" width="300">
     <div class="card-body index_card_body">
-      <!-- <h2 class="card-title">{{ post.title }} <span class="small"> - {{ post.category }}</span></h2> -->
       <h5 class="card-text w-100 text-center">Name: {{ post.name }}</h5>
-      <!-- <p class="card-text">Age: {{ post.age }}</p>
-      <p class="card-text">Weight: {{ post.weight }}</p> -->
       <p class="card-text">Sex:
         {% if post.sex == 1 %}
         Male
@@ -103,15 +97,11 @@
         {% endif %}
       </p>
       <p class="card-text">State: {{ post.user.state }}</p>
-      <!-- <p class="card-text">Zipcode: {{ post.user.zipcode }}</p>
-      <p class="card-text">Story: {{ post.story|truncatechars:100 }}</p> -->
       <a class="btn btn-primary w-100 text-center" href="{% url 'adopt_animals:post_detail' post.id %}" >Detail</a>
     </div>
-    <!-- いいねボタン -->
     <div class="like-outer w-100 text-center index_card_body">          
       {% include 'adopt_animals/pets/like.html' %}
     </div>
-    <!-- いいねボタンここまで -->
   </div>
 </div>
 {% endfor %}

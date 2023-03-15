@@ -12,39 +12,25 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-# ファイルの存在チェック用モジュール
 import errno
-# environをインポートして読み込む
 import environ
 env = environ.Env()
 env.read_env('.env')
 
-# herokuの環境かどうか
 HEROKU_ENV = env.bool('DJANGO_HEROKU_ENV', default=False)
 
-# herokuの環境でない時は.envファイルを読む
 if not HEROKU_ENV:
     env.read_env('.env')
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DEBUG=env.bool('DEBUG', False)
+DEBUG=env.bool('DEBUG', True)
 
 ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'accounts.User'
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,9 +45,7 @@ INSTALLED_APPS = [
     'social_django', 
     'cloudinary_storage',
     'cloudinary',
-    # 投稿に紐付けされている写真を削除
     'django_cleanup.apps.CleanupConfig',
-    # |add_class:"form-control"を使用できるようにする
     'widget_tweaks',
 ]
 
@@ -90,9 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                'social_django.context_processors.backends',  # これを追加
-                'social_django.context_processors.login_redirect', # これを追加
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect', 
             ],
         },
     },
@@ -100,23 +83,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'animal_project.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # 変更
+        'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'adopt_animals', 
-        'USER': 'root', # パソコンにインストールしたMySQLのユーザー名
-        'PASSWORD': '', # 同上。そのパスワード
-        'PORT': 3306 # はも追記 
+        'USER': 'root', 
+        'PASSWORD': '', 
+        'PORT': 3306 
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -134,9 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -147,22 +119,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
 
-# LoginRequireMixedInはログインしてなければデフォルト/accounts/login にアクセスしようとします。
-# 実際のアプリのログインURLに
-# LOGIN_URL =　の記載を合わせなければいけない。実際のアプリのログインURLは/accounts/login なので下記のように書く
-LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/' # ログイン後のデフォルト遷移ページ
-LOGOUT_REDIRECT_URL = '/accounts/login' # ログアウトした時のログインページへのリダイレクト先
 
-# manage.pyと同じ階層に.envファイルを作り、そちらへ
-# 必要な情報は格納する。そして下記のように呼び出す。
-# SECURITY WARNING: keep the secret key used in production secret!
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/' 
+LOGOUT_REDIRECT_URL = '/accounts/login' 
+
 DEBUG=env.bool('DEBUG', False)
 SECRET_KEY=env("SECRET_KEY")
 EMAIL=env("EMAIL")
@@ -170,7 +133,6 @@ PASSWORD=env("PASSWORD")
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Email setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
@@ -190,17 +152,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# Google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '453129612673-p12fi4v233oi2o8nndsneek062st7lth.apps.googleusercontent.com'  # クライアントID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ycXM_SLQeYHZZVOxeW2YcBS4' # クライアント シークレット
-
-# Facebook
-# SOCIAL_AUTH_FACEBOOK_KEY = '1579134558950637' 
-# SOCIAL_AUTH_FACEBOOK_SECRET = 'a2f785f216164a5c73b26830190cb0a5'  
-
-# Twitter
-# SOCIAL_AUTH_TWITTER_KEY = 'PxtrK2mNfK3kFdFioJg27U2LK'
-# SOCIAL_AUTH_TWITTER_SECRET = 'JAQloWLxYtoAfpTlUXd8MOorT7wVx5Fv9TfB74iSGWPvLXovbR'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '453129612673-p12fi4v233oi2o8nndsneek062st7lth.apps.googleusercontent.com' 
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ycXM_SLQeYHZZVOxeW2YcBS4' 
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dl2blqao5',
@@ -214,10 +167,6 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-
-
-
-# Email setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
@@ -225,6 +174,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = EMAIL
 EMAIL_HOST_PASSWORD = PASSWORD
 
-# アイコンやロゴ表示用
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

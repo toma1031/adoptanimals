@@ -1,8 +1,7 @@
 @charset "utf-8";
-/* CSS Document */
 
 .hamburger-button {
-  display: flex; /* media query時にはflexでもどして */
+  display: flex; 
   justify-content: center;
   align-items: center;
   top: 20px;
@@ -16,8 +15,8 @@
   outline: none;
 }
 .hamburger-button svg {
-  height: 25px; /* autoではなく同じ数字で */
-  width: 25px; /* autoではなく同じ数字で */
+  height: 25px; 
+  width: 25px; 
 }
 .hamburger-button path {
   fill: white;
@@ -41,7 +40,7 @@
   opacity: 0;
   z-index: 1000;
 }
-/* * PC時には非表示 */
+
 .hamburger-button {
   display: none;
 }
@@ -52,7 +51,7 @@
  } 
 }
 
-/* スマホ表示時 */
+
 @media screen and (max-width:480px) {
   .hamburger-button {
     display: flex;

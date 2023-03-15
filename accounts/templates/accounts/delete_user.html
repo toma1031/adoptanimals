@@ -1,19 +1,23 @@
-{% extends 'base.html' %}
-
-{% block main %}
+{% extends 'base.html' %} {% block main %}
 
 <div class="container w-100 text-center ml-2 mr-2 each_page_top">
-  <h1 class="title">
-    Cancel the membership?
-  </h1>
+  <h1 class="title">Cancel the membership?</h1>
 </div>
 
-
-<form role="form" method="post" class="w-100 text-center ml-2 mr-2 each_page_top">
+<form
+  role="form"
+  method="post"
+  class="w-100 text-center ml-2 mr-2 each_page_top"
+>
   {% csrf_token %}
   <p>Are you sure to delete User "{{ user.username }}"</p>
 
-  <button type="submit" class="btn btn-danger ">Yes</button>
-  <a href="javascript:void(0);" onclick="window.history.back();" class="btn btn-primary">Cancel</a>
+  <button type="submit" class="btn btn-danger">Yes</button>
+  <a
+    href="javascript:void(0);"
+    onclick="window.history.back();"
+    class="btn btn-primary"
+    >Cancel</a
+  >
 </form>
 {% endblock %}

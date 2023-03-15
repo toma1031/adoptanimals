@@ -10,8 +10,7 @@ class PostAdmin(admin.ModelAdmin):
 
 class MessageRoomAdmin(admin.ModelAdmin):
     list_display = ['id', 'inquiry_user', 'post_id', 'post_user', 'post']
-
-# obj.post.userのようにすることで、外部キーで参照しているAuthorモデルのフィールドにアクセスできます
+    
     def post_id(self, obj):
         return obj.post.id
 

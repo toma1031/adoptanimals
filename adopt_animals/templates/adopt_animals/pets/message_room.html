@@ -5,25 +5,18 @@
 {% block main %}
 {% if user.is_authenticated %}
 <p class="hello w-100 text-right ml-2 mr-2">Hello {{ user.get_username }}! Send message to 
-    <!-- もしログインしているユーザーがAnimalsの投稿者であれば、inquiry_user（メッセージルーム作成者）の名前を表示させる -->
     {% if message_room.post.user == user %}
         {{ message_room.inquiry_user.username }}!
     {% else %}
-    <!-- その他（ログインしているユーザーがAnimalsの投稿者でない場合は、Animalsの投稿者の名前を表示させる） -->
         {{ message_room.post.user }}!
     {% endif %}
 </p>
 {% endif %}
-
-<!-- チャット -->
 <div class="col-md-10 offset-md-1 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
-<!-- ここで送られたメッセージ回し、表示させていく -->
 {% for message in message_list %}
     <ul class="p-0">
-        <!-- ログインしているユーザーのメッセージ -->
         <li>
             <div class="row comments mb-2">
-                <!-- メッセージのユーザーがログイン中のユーザーと一致すれば右側アイコンのレイアウト -->
                 {% if message.message_user == user %}
                 <div class="col-md-10 col-sm-10 col-10 comment rounded mb-2">
                     <h4 class="m-0">{{ message.message_user }}</a></h4>
@@ -31,16 +24,11 @@
                     <like></like>
                     <p class="mb-0 text-color">{{ message.message }}</p>
                 </div>
-                <!-- .colには、左右にpadding: 15pxが指定されているため、Bootstrapでは.px-0を適用することで左右のpaddingを0pxにできます。 -->
                 <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
-                    <!-- <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle" /> -->
                     <img id="profile-photo" src="https://res.cloudinary.com/dl2blqao5/image/upload/v1624940253/media/images/icon_figure_l1edu5.png" class="rounded-circle" />
                 </div>
-                <!-- ログイン中のユーザーでなければ左側アイコンのレイアウト -->
                 {% else %}
-                <!-- .colには、左右にpadding: 15pxが指定されているため、Bootstrapでは.px-0を適用することで左右のpaddingを0pxにできます。 -->
                 <div class="col-md-2 col-sm-2 col-2 text-center user-img px-0">
-                    <!-- <img id="profile-photo" src="/media/images/icon_figure.png" class="rounded-circle" /> -->
                     <img id="profile-photo" src="https://res.cloudinary.com/dl2blqao5/image/upload/v1624940253/media/images/icon_figure_l1edu5.png" class="rounded-circle" />
                 </div>
                 <div class="col-md-10 col-sm-10 col-10 comment2 rounded mb-2">
@@ -54,7 +42,6 @@
         </li>
     </ul>
 {% endfor %}
-<!-- 送信フォーム -->
     <div class="chat-room-body w-100 text-center">
             <form action="{% url 'adopt_animals:message_room' message_room.id %}" method="POST" class="col-sm-6 offset-sm-3">
                     {% csrf_token %}
@@ -65,7 +52,6 @@
                         </div>
             </form>
     </div>
-<!-- 送信フォーム -->
 </div>
 
 {% endblock main %}
