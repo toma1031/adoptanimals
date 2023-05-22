@@ -1,4 +1,3 @@
-from django.db.models.query_utils import InvalidQuery
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView

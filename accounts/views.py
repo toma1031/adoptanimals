@@ -19,12 +19,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, FormView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-
-
-
 User = get_user_model()
-
-# Create your views here.
 class LoginView(LoginView):
     form_class = LoginForm
     template_name = "accounts/login.html"
@@ -71,8 +66,7 @@ class SignupCompleteView(TemplateView):
 
         except BadSignature:
             return HttpResponseBadRequest()
-
-        # tokenは問題なし
+        
         else:
             try:
                 user = User.objects.get(pk=user_pk)
@@ -135,12 +129,10 @@ class PasswordReset(PasswordResetView):
 
 
 class PasswordResetDone(PasswordResetDoneView):
-    # """パスワード変更用URLを送りましたページ"""
     template_name = 'accounts/password_reset_done.html'
 
 
 class PasswordResetConfirm(PasswordResetConfirmView):
-    # """新パスワード入力ページ"""
     form_class = MySetPasswordForm
     success_url = reverse_lazy('accounts:password_reset_complete')
     template_name = 'accounts/password_reset_confirm.html'

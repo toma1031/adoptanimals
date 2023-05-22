@@ -5,10 +5,10 @@
   <form action="{% url 'login' %}" method="POST" novalidate>
     {% include "accounts/_form.html" with submit_label="Login" %}
   </form>
-  <div class="login_with_socail_media_account">
+  {% comment %} <div class="login_with_socail_media_account">
     <h2>Login with Socail Media Account</h2>
       <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-primary login_with_socail_media_account_btn">Google Account Login</a></li>
-  </div>
+  </div> {% endcomment %}
   <div class="forget_password">
     <h2>Forget Password?</h2>
     <a href="{% url 'accounts:password_reset' %}" class="btn btn-success forget_password_btn" >Reset Password</a>

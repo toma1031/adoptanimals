@@ -54,7 +54,6 @@ class UserChangeForm(ModelForm):
     def __init__(self, username=None, email=None, state=None, city=None, zipcode=None, phone_number=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
-        # ユーザーの更新前情報をフォームに挿入
         if username:
             self.fields['username'].widget.attrs['value'] = username
         if email:
@@ -94,8 +93,6 @@ class MyPasswordChangeForm(PasswordChangeForm):
         ]
 
 class MyPasswordResetForm(PasswordResetForm):
-    # """パスワード忘れたときのフォーム"""
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -103,8 +100,6 @@ class MyPasswordResetForm(PasswordResetForm):
 
 
 class MySetPasswordForm(SetPasswordForm):
-    # """パスワード再設定用フォーム(パスワード忘れて再設定)"""
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
