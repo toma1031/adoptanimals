@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "adoptanimals"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.1"
+environ = "^1.0"
+django-environ = "^0.10.0"
+django-phone-field = "^1.8.1"
+social-auth-app-django = "^5.2.0"
+django-cloudinary-storage = "^0.3.0"
+django-cleanup = "^7.0.0"
+django-widget-tweaks = "^1.4.12"
+mysqlclient = "^2.1.1"
+pillow = "^9.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
